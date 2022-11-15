@@ -1,9 +1,9 @@
 // Compile with -lreadline
 #include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 #include <string.h>
 #include <stdlib.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
 //Program is a simple copycat, whatever is written is copied.
 int	main(void)
