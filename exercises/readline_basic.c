@@ -1,7 +1,7 @@
 // Compile with -lreadline
 #include <stdio.h>
+#include <stdlib.h>
 #include <readline/readline.h>
-#include <readline/history.h>
 
 //Program is a simple copycat, whatever is written is copied.
 int	main(void)
@@ -10,6 +10,7 @@ int	main(void)
 
 	lineread = readline("Write: ");
 	printf("You wrote: \"%s\"\n", lineread);
+	free(lineread);
 	return (0);
 }
 
