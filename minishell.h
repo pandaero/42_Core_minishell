@@ -12,7 +12,11 @@ void	error_cmd_nf(const char *line);
 //Function handles an error in signal action setup.
 void	error_sig(void);
 
-// LINE PARSING
+// MEMORY HANDLING
+
+// EXECUTION
+
+// COMMAND LINE PARSING
 //Function finds the command within a simple command line.
 char	*findcommand(const char *line);
 
