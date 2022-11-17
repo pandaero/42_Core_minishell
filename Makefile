@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile_old                                       :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:31:50 by pandalaf          #+#    #+#              #
-#    Updated: 2022/11/16 22:52:30 by pandalaf         ###   ########.fr        #
+#    Updated: 2022/11/17 16:48:40 by pandalaf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,11 @@ NAME := minishell
 # Compiler options
 CC := cc
 CFLAGS := -Wall -Werror -Wextra
-COPT := -g
+COPT := 
 # Sources to compile
 SRC_DIR := src/
-SRC_FILES := main.c execute.c error.c parser.c list.c memory.c
+SRC_FILES := main.c error.c parser.c signals.c validator.c memory.c commands.c \
+				init.c
 SRCS = $(addprefix $(SRC_DIR), $(SRC_FILES))
 # Libraries to compile
 SYSLIB := -lreadline
@@ -41,7 +42,7 @@ directories: $(OBJ_DIR)
 
 # Make object files
 $(addprefix $(OBJ_DIR), %.o): $(addprefix $(SRC_DIR), %.c) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(SYSLIB) -c -o $@ $^
+	$(CC) $(CFLAGS) -c -o $@ $^
 
 # Make library archive
 $(LIBFT_FULL): $(LIBFT_PATH)
