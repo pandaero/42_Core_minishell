@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 16:46:32 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:48:53 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ char	*findcommand(const char *line);
 int		validline(const char *line, t_minidata *minidata);
 //Function determines whether a command is found within the path.
 int		is_pathcmd(char *cmd, char **env);
-
 
 // SIGNALS
 //Function sets up the sigaction signal handlers
