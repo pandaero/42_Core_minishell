@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 16:07:12 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:46:32 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_minidata(t_minidata *minidata);
 
 // ERROR HANDLING
 //Function handles an "command not found" error.
-void	error_cmd_nf(char *line, t_minidata *minidata);
+void	error_cmd_nf(char *line);
 //Function handles an error in signal action setup.
 void	error_sig(void);
 

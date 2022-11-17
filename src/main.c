@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 16:43:35 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:46:44 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	main_loop(t_minidata *minidata)
 			ft_printf("Command line was valid.\n");
 		}
 		else
-			error_cmd_nf(line, minidata);
+			error_cmd_nf(line);
 		free(line);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:20:41 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 16:41:01 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:46:15 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 //Function handles an "command not found" error.
-void	error_cmd_nf(char *line, t_minidata *minidata)
+void	error_cmd_nf(char *line)
 {
 	char	*cnf;
 
