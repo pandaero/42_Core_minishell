@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validator.c                                        :+:      :+:    :+:   */
+/*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 16:43:48 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 16:43:54 by pandalaf         ###   ########.fr       */
+/*   Created: 2022/11/17 15:17:16 by pandalaf          #+#    #+#             */
+/*   Updated: 2022/11/17 16:07:08 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdlib.h>
 
-//Function checks that an input line contains valid instructions
-int	validline(const char *line, t_minidata *minidata)
+//Function frees a minidata struct.
+void	free_minidata(t_minidata *minidata)
 {
-	char	*cmd;
-	int		i;
+	free_split(minidata->builtincmds);
+}
 
-	cmd = findcommand(line);
+//Function frees a 2D char array made from ft_split.
+void	free_split(char **charr)
+{
+	int	i;
+
 	i = 0;
-	while (minidata->builtincmds[i] != 0)
+	while (charr[i] != 0)
 	{
-		if (ft_strlen(cmd) == ft_strlen(minidata->builtincmds[i]))
-		{
-			if (ft_strncmp(cmd, minidata->builtincmds[i], ft_strlen(cmd)) == 0)
-				return (1);
-		}
+		free(charr[i]);
 		i++;
 	}
-	i = 0;
-	if (is_pathcmd(cmd, minidata->env) == 1)
-		return (1);
-	return (0);
+	free(charr);
 }

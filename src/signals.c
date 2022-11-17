@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:05:41 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/16 18:17:25 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:15:04 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	setup_signal(void)
 	actionquit.sa_flags = SA_RESTART;
 	sigaddset(&actionint.sa_mask, SIGINT);
 	sigaddset(&actionquit.sa_mask, SIGQUIT);
-	if (sigaction(SIGINT, &actionint, 0) == -1 || sigaction(SIGQUIT, &actionquit, 0) == -1)
+	if (sigaction(SIGINT, &actionint, 0) == -1 || \
+		sigaction(SIGQUIT, &actionquit, 0) == -1)
 		error_sig();
 }
