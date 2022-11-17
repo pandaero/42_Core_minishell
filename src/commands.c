@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:34:20 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 16:14:11 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:37:51 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	is_pathcmd(char *cmd, char **env)
 	char	**splitpath;
 	int		i;
 
+	i = 0;
 	while (ft_strncmp(env[i], "PATH=", 5) != 0)
 		i++;
 	fullpath = ft_substr(env[i], 5, ft_strlen(env[i]));
