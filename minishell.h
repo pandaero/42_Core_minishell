@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 16:48:53 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/19 15:29:39 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@
 //Typedef is for a struct containing critical data.
 typedef struct s_minidata
 {
+	char	*args;
 	char	**env;
 	char	**builtincmds;
+	char	**splitpath;
 }			t_minidata;
 
 // INITIALISATION
@@ -51,7 +53,7 @@ char	*findcommand(const char *line);
 //Function checks that an input line contains valid instructions
 int		validline(const char *line, t_minidata *minidata);
 //Function determines whether a command is found within the path.
-int		is_pathcmd(char *cmd, char **env);
+int		is_pathcmd(char *cmd, t_minidata *minidata);
 
 // SIGNALS
 //Function sets up the sigaction signal handlers

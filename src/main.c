@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 16:46:44 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/19 15:52:25 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <readline/history.h>
 #include <readline/readline.h>
 
+// Better to create args variable in struct to line cuz it will be used a lot
 static void	main_loop(t_minidata *minidata)
 {
 	char	*line;
@@ -26,6 +27,11 @@ static void	main_loop(t_minidata *minidata)
 	{
 		setup_signal();
 		line = readline("$>");
+		if (ft_count_quotes(line) == 0)
+		{
+			add_history (line);
+			ft_printf("syntax error: unable to locate closing quotation\n");
+		}
 		if (validline(line, minidata) == 1)
 		{
 			add_history (line);

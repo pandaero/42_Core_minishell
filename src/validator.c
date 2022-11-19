@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validator.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:43:48 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 16:43:54 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/19 15:14:36 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	validline(const char *line, t_minidata *minidata)
 		i++;
 	}
 	i = 0;
-	if (is_pathcmd(cmd, minidata->env) == 1)
+	if (is_pathcmd(cmd, minidata) == 1)
 		return (1);
 	return (0);
 }
