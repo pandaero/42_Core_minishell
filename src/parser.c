@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:27:25 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/16 18:09:59 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/20 01:36:17 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*findcommand(const char *line)
 		free(split[i]);
 		i--;
 	}
-	free(split);
 	cmd = split[0];
+	free(split);
 	return (cmd);
 }
