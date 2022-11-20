@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 16:48:53 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/20 14:27:25 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
+
+# define PROMPT "minishell $>"
 
 //Typedef is for a struct containing critical data.
 typedef struct s_minidata
