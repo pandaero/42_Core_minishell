@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 16:46:44 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/20 03:01:44 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <termios.h>
 #include <readline/history.h>
 #include <readline/readline.h>
 
 static void	main_loop(t_minidata *minidata)
 {
-	char	*line;
+	char			*line;
+	struct termios	termparams;
+	struct termios	newtermparams;
+	int				ret;
 
+	ret = tcgetattr(0, &termparams);
+	newtermparams = termparams;
+	newtermparams.c_lflag &= ~ECHOCTL;
+	ret = tcsetattr(0, 0, &newtermparams);
+	(void) ret;
 	line = (char *) 1;
 	while (line != 0)
 	{
 		setup_signal();
-		line = readline("$>");
+		line = readline(PROMPT);
 		if (validline(line, minidata) == 1)
 		{
 			add_history (line);
