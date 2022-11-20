@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/20 03:01:44 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/20 03:12:49 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <readline/history.h>
 #include <readline/readline.h>
 
+//Function performs the terminal attributes setting and readline initialisation.
 static void	main_loop(t_minidata *minidata)
 {
 	char			*line;
