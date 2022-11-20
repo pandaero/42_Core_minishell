@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/19 15:52:25 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/20 18:48:40 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,29 @@
 // Better to create args variable in struct to line cuz it will be used a lot
 static void	main_loop(t_minidata *minidata)
 {
-	char	*line;
-
-	line = (char *) 1;
-	while (line != 0)
+	minidata->args = (char *) 1;
+	while (minidata->args != 0)
 	{
 		setup_signal();
-		line = readline("$>");
-		if (ft_count_quotes(line) == 0)
+		minidata->args = readline("$>");
+		if (ft_count_quotes(minidata->args) == 0)
 		{
-			add_history (line);
+			add_history (minidata->args);
 			ft_printf("syntax error: unable to locate closing quotation\n");
+			return ;
 		}
-		if (validline(line, minidata) == 1)
+		if (ft_read_token(minidata) == 0)
 		{
-			add_history (line);
+			ft_printf("\n");
+		}
+		if (validline(minidata) == 1)
+		{
+			add_history (minidata->args);
 			ft_printf("Command line was valid.\n");
 		}
 		else
-			error_cmd_nf(line);
-		free(line);
+			error_cmd_nf(minidata->args);
+		free(minidata->args);
 	}
 }
 

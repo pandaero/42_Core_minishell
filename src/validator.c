@@ -6,19 +6,19 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:43:48 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/19 15:14:36 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/20 14:54:59 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 //Function checks that an input line contains valid instructions
-int	validline(const char *line, t_minidata *minidata)
+int	validline(t_minidata *minidata)
 {
 	char	*cmd;
 	int		i;
 
-	cmd = findcommand(line);
+	cmd = findcommand(minidata->args);
 	i = 0;
 	while (minidata->builtincmds[i] != 0)
 	{

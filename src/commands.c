@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:34:20 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/19 15:24:46 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/20 14:42:42 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ int	is_pathcmd(char *cmd, t_minidata *minidata)
 	free(fullpath);
 	if (ispathassist(cmd, minidata) == 1)
 		return (1);
-	free_split(minidata->splitpath);
+	// free_split(minidata->splitpath);
 	return (0);
 }

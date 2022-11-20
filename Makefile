@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:31:50 by pandalaf          #+#    #+#              #
-#    Updated: 2022/11/17 16:48:40 by pandalaf         ###   ########.fr        #
+#    Updated: 2022/11/20 17:40:06 by zyunusov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ COPT :=
 # Sources to compile
 SRC_DIR := src/
 SRC_FILES := main.c error.c parser.c signals.c validator.c memory.c commands.c \
-				init.c
+				init.c ft_quotes.c ft_read_token.c handle_quotes.c \
+				
 SRCS = $(addprefix $(SRC_DIR), $(SRC_FILES))
 # Libraries to compile
 SYSLIB := -lreadline

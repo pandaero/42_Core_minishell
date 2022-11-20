@@ -6,9 +6,11 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:53:06 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/19 15:59:20 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/20 16:21:23 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../minishell.h"
 
 static int ft_find_matching_quotes (char *line, int i, int *num_del, int del)
 {
