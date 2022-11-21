@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 14:59:09 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/20 18:55:27 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/21 07:27:59 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int ft_spaces_skip(char *line, int i)// function to skip separators
     return (j);
 }
 
-static int ft_read_words(int i, char *s)//, t_lexer **lexer_l)// function to read only words(cmds)
+static int ft_read_words(int i, char *s, t_lexer **lexer_l)// function to read only words(cmds)
 {
     int j;
 
@@ -41,7 +41,9 @@ static int ft_read_words(int i, char *s)//, t_lexer **lexer_l)// function to rea
         else
             j++;
     }
-    // need to fill doubly linked list with words(tokens)
+    // need to fill doubly linked list with tokens
+    if (add_unitto_lexer(ft_substr(s, i, j), 0, lexer_l) == 0)
+        return (-1);
     return (j);
 }
 
@@ -55,16 +57,19 @@ int ft_read_token(t_minidata *minidata)// function to read from string, to divid
     {
         j = 0;
         i += ft_spaces_skip(minidata->args, i); //to skip spaces before cmd
-        if (minidata->args[i] == '>' || minidata->args[i] == '|')
-            j += 1;
-        // if(check_token(minidata->args[i])) // need to write function for pipes and redirections
-            // j = ft_handle_token(i, minidata->args, &minidata->lexer_l); // function to hable pipes and redirections
+        // if (minidata->args[i] == '>' || minidata->args[i] == '|')
+        //     j += 1;
+        if(check_token(minidata->args[i])) // need to write function for pipes and redirections
+        {
+            j = handle_token(i, minidata->args, &minidata->lexer_l); // function to hable pipes and redirections
+            // ft_printf("returned = %d\n" , j);
+        }
         else
-            j = ft_read_words(i, minidata->args); //, &minidata->lexer_l); // function to read words
+            j = ft_read_words(i, minidata->args, &minidata->lexer_l); // function to read words
         if (j < 0)
             return (0);
         i += j; // skips read word
-        ft_printf("WORDS CHARS: %d\n", j);
+        // ft_printf("WORDS CHARS: %d\n", j);
     }
     return (1);
 }

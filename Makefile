@@ -6,7 +6,7 @@
 #    By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:31:50 by pandalaf          #+#    #+#              #
-#    Updated: 2022/11/20 17:40:06 by zyunusov         ###   ########.fr        #
+#    Updated: 2022/11/21 06:57:00 by zyunusov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ COPT :=
 # Sources to compile
 SRC_DIR := src/
 SRC_FILES := main.c error.c parser.c signals.c validator.c memory.c commands.c \
-				init.c ft_quotes.c ft_read_token.c handle_quotes.c \
+				init.c ft_quotes.c ft_read_token.c handle_quotes.c lexer_init.c\
+				handle_tokens.c
 				
 SRCS = $(addprefix $(SRC_DIR), $(SRC_FILES))
 # Libraries to compile
