@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:34:20 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 16:37:51 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/23 20:31:36 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,28 @@ int	is_pathcmd(char *cmd, char **env)
 	if (ispathassist(cmd, splitpath) == 1)
 		return (1);
 	free_split(splitpath);
+	return (0);
+}
+
+//Function determines whether a command line calls a built-in command.
+int	is_builtincmd(t_minidata *minidata)
+{
+	char	*cmd;
+
+	cmd = findcommand(minidata->currline);
+	if (ft_strncmp("exit", cmd, 4) == 0 && ft_strlen(cmd) == 4)
+		return (1);
+	if (ft_strncmp("pwd", cmd, 3) == 0 && ft_strlen(cmd) == 3)
+		return (2);
+	if (ft_strncmp("export", cmd, 6) == 0 && ft_strlen(cmd) == 6)
+		return (3);
+	if (ft_strncmp("unset", cmd, 5) == 0 && ft_strlen(cmd) == 5)
+		return (4);
+	if (ft_strncmp("env", cmd, 3) == 0 && ft_strlen(cmd) == 3)
+		return (5);
+	if (ft_strncmp("cd", cmd, 2) == 0 && ft_strlen(cmd) == 2)
+		return (6);
+	if (ft_strncmp("echo", cmd, 4) == 0 && ft_strlen(cmd) == 4)
+		return (7);
 	return (0);
 }
