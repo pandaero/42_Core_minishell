@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
 /*   Updated: 2022/11/23 20:10:20 by pandalaf         ###   ########.fr       */
@@ -45,7 +45,17 @@ static void	main_loop(t_minidata *minidata)
 	{
 		setup_signal();
 		minidata->currline = readline(PROMPT);
-		if (validline(minidata->currline, minidata) == 1)
+    if (ft_count_quotes(minidata->currline) == 0)
+		{
+			add_history (minidata->currline);
+			ft_printf("syntax error: unable to locate closing quotation\n");
+			return ;
+		}
+    if (ft_read_token(minidata) == 0)
+		{
+			ft_printf("\n");
+		}
+		if (validline(minidata) == 1)
 		{
 			add_history(minidata->currline);
 			valid_line(minidata);
