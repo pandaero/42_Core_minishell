@@ -6,7 +6,7 @@
 #    By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:31:50 by pandalaf          #+#    #+#              #
-#    Updated: 2022/11/24 15:41:23 by pandalaf         ###   ########.fr        #
+#    Updated: 2022/11/24 19:27:29 by pandalaf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ CFLAGS	:= -Wall -Werror -Wextra
 COPT	:= -g
 # Sources
 SRC_ROOT		:= src/
-SRC_SUBDIRS		:= main builtin lexer parser error list memory validation
-SRC_RL_FILES	:= main/main.c signal/signals.c			
+SRC_SUBDIRS		:= main builtin lexer parser error list memory validation utils
+SRC_RL_FILES	:= main/main.c signal/signals.c	builtin/builtin_exit.c		
 SRCS_RL			:= $(addprefix $(SRC_ROOT), $(SRC_RL_FILES))
 SRC_DIR			:= $(addprefix $(SRC_ROOT), $(SRC_SUBDIRS))
 SRCS			:= $(foreach subdir, $(SRC_DIR), $(wildcard $(subdir)/*.c))
@@ -58,6 +58,8 @@ $(info $(OBJS_RL))
 $(word 1, $(OBJS_RL)): $(word 1, $(SRCS_RL)) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $^ -o $@ $(SYSLIB_OBJ)
 $(word 2, $(OBJS_RL)): $(word 2, $(SRCS_RL)) | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $^ -o $@ $(SYSLIB_OBJ)
+$(word 3, $(OBJS_RL)): $(word 3, $(SRCS_RL)) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $^ -o $@ $(SYSLIB_OBJ)
 # define make-goal
 # $1: $2 | $(OBJ_DIR)
