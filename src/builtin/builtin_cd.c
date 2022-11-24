@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_export.c                                   :+:      :+:    :+:   */
+/*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 20:21:14 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/23 20:24:19 by pandalaf         ###   ########.fr       */
+/*   Created: 2022/11/23 20:15:34 by pandalaf          #+#    #+#             */
+/*   Updated: 2022/11/24 12:05:13 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-//Function writes to the current shell environment variables (not the global).
-void	builtin_export(t_minidata *minidata)
+//Function changes the current directory where the shell is performing actions.
+void	builtin_cd(t_minidata *minidata)
 {
-	return ;
+	if (minidata)
+		return ;
 }

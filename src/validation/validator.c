@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   validator.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:43:48 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/20 14:54:59 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:53:11 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
+#include <stdlib.h>
 
 //Function checks that an input line contains valid instructions
 int	validline(t_minidata *minidata)
@@ -18,7 +19,7 @@ int	validline(t_minidata *minidata)
 	char	*cmd;
 	int		i;
 
-	cmd = findcommand(minidata->args);
+	cmd = findcommand(minidata->currline);
 	i = 0;
 	while (minidata->builtincmds[i] != 0)
 	{
@@ -31,6 +32,10 @@ int	validline(t_minidata *minidata)
 	}
 	i = 0;
 	if (is_pathcmd(cmd, minidata) == 1)
+	{
+		free(cmd);
 		return (1);
+	}
+	free(cmd);
 	return (0);
 }

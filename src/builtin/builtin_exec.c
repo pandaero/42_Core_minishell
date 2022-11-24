@@ -6,11 +6,11 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:08:57 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/23 20:13:52 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:05:09 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 //Function handles the execution of built-in commands.
 void	builtin_execution(t_minidata *minidata)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/23 20:27:15 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:08:44 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define STDOUT 1
 # define STDERR 2
 
-# define PROMPT "minishell $>"
+# define PROMPT "minishell$"
 
 //Typedef serves to classify redirections and piping.
 typedef enum s_tokens
@@ -31,20 +31,19 @@ typedef enum s_tokens
 } 	t_tokens;
 
 //Typedef(doubly linked list) for words(cmds).
-typedef struct s_lexer
+typedef struct s_word
 {
 	char			*str;
 	t_tokens		token;
 	int 			i;
-	struct s_lexer	*next;
-	struct s_lexer	*prev;
-}					t_lexer;
+	struct s_word	*next;
+	struct s_word	*prev;
+}					t_word;
 
 //Typedef is for a struct containing critical data.
 typedef struct s_minidata
 {
-	t_lexer	*lexer_l;
-	char	*args;
+	t_word	*lexer_l;
 	char	**env;
 	char	*currline;
 	char	**builtincmds;
@@ -54,71 +53,68 @@ typedef struct s_minidata
 
 // INITIALISATION
 //Function initialises the minidata.
-void	init_minidata(t_minidata *minidata);
+void		init_minidata(t_minidata *minidata);
 
 // ERROR HANDLING
 //Function handles an "command not found" error.
-void	error_cmd_nf(char *line);
-// Function handles an "syntax error: while quotes not closed"
-int ft_count_quotes(char *line);
+void		error_cmd_nf(char *line);
+//Function handles an error in signal action setup.
+void		error_sig(void);
 
-// =========== LEXER ======================================
+
+// =================================== LEXER ===================================
 // Function to read from string, to divide to tokens
-int ft_read_token(t_minidata *minidata);
+int			ft_read_token(t_minidata *minidata);
 // Function to read(skip) quotes
-int ft_handle_quotes(int i, char *s, char del);
+int			ft_handle_quotes(int i, char *s, char del);
 // Function to put all tokens in separate container(doubly linked list)
-int add_unitto_lexer(char *s,  t_tokens token, t_lexer **lexer_l);
+int			add_unitto_lexer(char *s,  t_tokens token, t_word **lexer_l);
 // Function that check for pipe and redir only <> returns name of token
-t_tokens check_token(int c);
+t_tokens	check_token(int c);
 // Function that passes to lexer_init - pipes and redirections
-int handle_token(int i, char *s, t_lexer **lexer_l);
+int			handle_token(int i, char *s, t_word **lexer_l);
 // need to write function delone, clear to free list ==== ----
 
-
-//Function handles an error in signal action setup.
-void	error_sig(void);
-
-// MEMORY HANDLING (FREEING)
+// ========================== MEMORY HANDLING (FREEING) ========================
 //Function frees a 2D char array made from ft_split.
-void	free_split(char **charr);
+void		free_split(char **charr);
 //Function frees a minidata struct.
-void	free_minidata(t_minidata *minidata);
+void		free_minidata(t_minidata *minidata);
 
-// EXECUTION - BUILT-INS
+// ============================ EXECUTION - BUILT-INS ==========================
 //Function handles the execution of built-in commands.
-void	builtin_execution(t_minidata *minidata);
+void		builtin_execution(t_minidata *minidata);
 //Function exits the program cleanly.
-void	builtin_exit(t_minidata *minidata);
+void		builtin_exit(t_minidata *minidata);
 //Function prints the current working directory where the shell is acting.
-void	builtin_pwd(t_minidata *minidata);
+void		builtin_pwd(t_minidata *minidata);
 //Function writes to the current shell environment variables (not the global).
-void	builtin_export(t_minidata *minidata);
+void		builtin_export(t_minidata *minidata);
 //Function clears the contents of a local environment variable.
-void	builtin_unset(t_minidata *minidata);
+void		builtin_unset(t_minidata *minidata);
 //Function prints out the environment variables.
-void	builtin_env(t_minidata *minidata);
+void		builtin_env(t_minidata *minidata);
 //Function changes the current directory where the shell is performing actions.
-void	builtin_cd(t_minidata *minidata);
+void		builtin_cd(t_minidata *minidata);
 //Function writes a given string to the terminal. With/out newline.
-void	builtin_echo(t_minidata *minidata);
+void		builtin_echo(t_minidata *minidata);
 
-// COMMAND LINE PARSING
+// ============================ COMMAND LINE PARSING ===========================
 //Function finds the command within a simple command line.
-char	*findcommand(const char *line);
+char		*findcommand(const char *line);
 
-// VALIDATION
+// ================================ VALIDATION =================================
 //Function checks that an input line contains valid instructions
-int		validline(t_minidata *minidata);
+int			validline(t_minidata *minidata);
 //Function determines whether a command is found within the path.
-int		is_pathcmd(char *cmd, t_minidata *minidata);
+int			is_pathcmd(char *cmd, t_minidata *minidata);
 //Function determines whether a command line calls a built-in command.
-int		is_builtincmd(t_minidata *minidata);n
+int			is_builtincmd(t_minidata *minidata);
+// Function handles an "syntax error: while quotes not closed"
+int 		is_valid_quotes(char *line);
 
-// SIGNALS
+// ================================== SIGNALS ==================================
 //Function sets up the sigaction signal handlers
-void	setup_signal(void);
-
-
+void		setup_signal(void);
 
 #endif

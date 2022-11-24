@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 20:19:58 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/23 20:20:32 by pandalaf         ###   ########.fr       */
+/*   Created: 2022/11/17 15:08:30 by pandalaf          #+#    #+#             */
+/*   Updated: 2022/11/24 15:16:01 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
+#include <stdlib.h>
 
-//Function prints the current working directory where the shell is acting.
-void	builtin_pwd(t_minidata *minidata)
+//Function initialises the minidata.
+void	init_minidata(t_minidata *minidata)
 {
-	return ;
+	char	*builtin;
+
+	builtin = ft_strdup("echo.cd.pwd.export.unset.env.exit");
+	minidata->builtincmds = ft_split(builtin, '.');
+	free(builtin);
 }

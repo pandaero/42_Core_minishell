@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 20:15:34 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/23 20:18:05 by pandalaf         ###   ########.fr       */
+/*   Created: 2022/11/23 20:19:01 by pandalaf          #+#    #+#             */
+/*   Updated: 2022/11/24 12:05:10 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-//Function changes the current directory where the shell is performing actions.
-void	builtin_cd(t_minidata *minidata)
+//Function prints out the environment variables.
+void	builtin_env(t_minidata *minidata)
 {
-	return ;
+	if (minidata)
+		return ;
 }
