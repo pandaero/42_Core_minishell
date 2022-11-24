@@ -6,11 +6,11 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:05:41 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/23 17:59:43 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:36:07 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 #include <signal.h>
 #include <stdio.h>
 #include <sys/signal.h>

@@ -3,55 +3,73 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+         #
+#    By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:31:50 by pandalaf          #+#    #+#              #
-#    Updated: 2022/11/23 17:57:48 by pandalaf         ###   ########.fr        #
+#    Updated: 2022/11/24 15:41:23 by pandalaf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Target output
 NAME := minishell
 # Compiler options
-CC := cc
-CFLAGS := -Wall -Werror -Wextra
-COPT := 
-# Sources to compile
-SRC_DIR := src/
-SRC_FILES := main.c error.c parser.c validator.c memory.c commands.c \
-				init.c ft_quotes.c ft_read_token.c handle_quotes.c lexer_init.c\
-				handle_tokens.c
-SRC_RL_FILES := signals.c			
-SRCS = $(addprefix $(SRC_DIR), $(SRC_FILES))
-SRCS_RL = $(addprefix $(SRC_DIR), $(SRC_RL_FILES))
+CC		:= cc
+CFLAGS	:= -Wall -Werror -Wextra
+COPT	:= -g
+# Sources
+SRC_ROOT		:= src/
+SRC_SUBDIRS		:= main builtin lexer parser error list memory validation
+SRC_RL_FILES	:= main/main.c signal/signals.c			
+SRCS_RL			:= $(addprefix $(SRC_ROOT), $(SRC_RL_FILES))
+SRC_DIR			:= $(addprefix $(SRC_ROOT), $(SRC_SUBDIRS))
+SRCS			:= $(foreach subdir, $(SRC_DIR), $(wildcard $(subdir)/*.c))
 # Libraries to compile (if using 42WOB computer, apply fix)
-SYSLIB := -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
-SYSLIB_OBJ := -I $(HOME)/goinfre/.brew/opt/readline/include/
-LIBFT := libft.a
-LIBFT_PATH := libft/
-LIBFT_FULL = $(addprefix $(LIBFT_PATH), $(LIBFT))
+SYSLIB		:= -I $(HOME)/goinfre/.brew/opt/readline/include/ \
+				-L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
+SYSLIB_OBJ	:= -I $(HOME)/goinfre/.brew/opt/readline/include/
+# Libft library
+LIBFT		:= libft.a
+LIBFT_PATH	:= libft/
+LIBFT_FULL	:= $(addprefix $(LIBFT_PATH), $(LIBFT))
 # Objects to compile
-OBJ_DIR := obj/
-OBJS = $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))
-OBJS_RL = $(addprefix $(OBJ_DIR), $(SRC_RL_FILES:.c=.o))
+OBJ_DIR	:= build/
+OBJS_RL	:= $(addprefix $(OBJ_DIR), $(notdir $(SRC_RL_FILES:.c=.o)))
+OBJS	:= $(patsubst %.c, %.o, $(notdir $(SRCS)))
+OBJS	:= $(addprefix $(OBJ_DIR), $(OBJS))
+
+# Look for (.c) files in the following directories if not found elsewhere
+vpath %.c $(SRC_DIR)
 
 # Make desired target
 all: directories $(NAME)
 
 # Make the target executable
 $(NAME): $(OBJS) $(OBJS_RL) $(LIBFT_FULL)
-	$(CC) $(CFLAGS) $(COPT) -o $(NAME) $^ $(LIBFT_FULL) $(SYSLIB)
+	$(CC) $(CFLAGS) $(COPT) $< $(filter-out $<, $^) -o $@ $(LIBFT_FULL) \
+	$(SYSLIB)
 
 # Make required directories
 directories: $(OBJ_DIR)
 
+$(info $(SRCS_RL))
+$(info $(OBJS_RL))
+
 # Make object files that require linker
-$(addprefix $(OBJ_DIR), $(SRC_RL_FILES:.c=.o)): $(SRCS_RL) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c -o $@ $^ $(SYSLIB_OBJ)
+$(word 1, $(OBJS_RL)): $(word 1, $(SRCS_RL)) | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $^ -o $@ $(SYSLIB_OBJ)
+$(word 2, $(OBJS_RL)): $(word 2, $(SRCS_RL)) | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $^ -o $@ $(SYSLIB_OBJ)
+# define make-goal
+# $1: $2 | $(OBJ_DIR)
+# 	$(CC) $(CFLAGS) -c $^ -o $@ $(SYSLIB_OBJ)
+# endef
+
+# $(foreach objrl, $(OBJS_RL), $(eval $(call make-goal, $(objrl))))
+
 
 # Make object files
-$(addprefix $(OBJ_DIR), %.o): $(addprefix $(SRC_DIR), %.c) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c -o $@ $^
+$(addprefix $(OBJ_DIR), %.o): %.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 # Make library archive
 $(LIBFT_FULL): $(LIBFT_PATH)

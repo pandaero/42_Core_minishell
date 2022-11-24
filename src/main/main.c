@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/23 20:10:20 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:45:12 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -45,21 +45,15 @@ static void	main_loop(t_minidata *minidata)
 	{
 		setup_signal();
 		minidata->currline = readline(PROMPT);
-    if (ft_count_quotes(minidata->currline) == 0)
-		{
-			add_history (minidata->currline);
+		add_history (minidata->currline);
+		if (minidata->currline[0] == '\0')
+			continue ;
+		if (is_valid_quotes(minidata->currline) == 0)
 			ft_printf("syntax error: unable to locate closing quotation\n");
-			return ;
-		}
-    if (ft_read_token(minidata) == 0)
-		{
+		if (ft_read_token(minidata) == 0)
 			ft_printf("\n");
-		}
 		if (validline(minidata) == 1)
-		{
-			add_history(minidata->currline);
 			valid_line(minidata);
-		}
 		else
 			error_cmd_nf(minidata->currline);
 		free(minidata->currline);

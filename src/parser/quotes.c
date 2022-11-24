@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_quotes.c                                        :+:      :+:    :+:   */
+/*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:53:06 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/20 16:21:23 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:36:00 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 //Function checks where a matching double or single quote is located.
 static int find_matching_quotes (char *line, int i, int *num_del, int del)
@@ -19,7 +19,7 @@ static int find_matching_quotes (char *line, int i, int *num_del, int del)
 
 	j = i + 1;
 	*num_del += 1;
-	while (line[j] && line[j] != del)
+	while (line[j] != '\0' && line[j] != del)
 		j++;
 	if (line[j] == del)
 		*num_del += 1;
@@ -36,12 +36,12 @@ int is_valid_quotes(char *line)
 	s = 0;
 	d = 0;
 	i = -1;
-	while (line[++i])
+	while (line[++i] != '\0')
 	{
-		if (line[i] == 34) // 34 == "
-			i += ft_find_matching_quotes(line, i, &d, 34);
-		if (line[i] == 39) // 39 == '
-			i += ft_find_matching_quotes(line, i, &s, 39);
+		if (line[i] == '\"')
+			i += find_matching_quotes(line, i, &d, '\"');
+		if (line[i] == '\'')
+			i += find_matching_quotes(line, i, &s, '\'');
 	}
 	if ((d > 0 && d % 2 != 0) || (s > 0 && s % 2 != 0))
 		return (0);

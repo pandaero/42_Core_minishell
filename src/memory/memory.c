@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_echo.c                                     :+:      :+:    :+:   */
+/*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 20:18:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/23 20:18:57 by pandalaf         ###   ########.fr       */
+/*   Created: 2022/11/17 15:17:16 by pandalaf          #+#    #+#             */
+/*   Updated: 2022/11/24 12:35:38 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
+#include <stdlib.h>
 
-//Function writes a given string to the terminal. With/out newline.
-void	builtin_echo(t_minidata *minidata)
+//Function frees a minidata struct.
+void	free_minidata(t_minidata *minidata)
 {
-	return ;
+	free_split(minidata->builtincmds);
+}
+
+//Function frees a 2D char array made from ft_split.
+void	free_split(char **charr)
+{
+	int	i;
+
+	i = 0;
+	while (charr[i] != 0)
+	{
+		free(charr[i]);
+		i++;
+	}
+	free(charr);
 }

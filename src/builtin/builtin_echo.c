@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_exit.c                                     :+:      :+:    :+:   */
+/*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 19:39:06 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/23 20:11:07 by pandalaf         ###   ########.fr       */
+/*   Created: 2022/11/23 20:18:13 by pandalaf          #+#    #+#             */
+/*   Updated: 2022/11/24 12:05:12 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
-#include <stdlib.h>
+#include "../../minishell.h"
 
-//Function exits the program cleanly.
-void	builtin_exit(t_minidata *minidata)
+//Function writes a given string to the terminal. With/out newline.
+void	builtin_echo(t_minidata *minidata)
 {
-	free(minidata->currline);
-	exit(EXIT_SUCCESS);
+	if (minidata)
+		return ;
 }
