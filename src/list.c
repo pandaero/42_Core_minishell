@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 16:27:25 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/20 01:36:17 by pandalaf         ###   ########.fr       */
+/*   Created: 2022/11/15 15:38:06 by pandalaf          #+#    #+#             */
+/*   Updated: 2022/11/20 03:05:48 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <stdlib.h>
 
-//Function finds the command element within a simple command line.
-char	*findcommand(const char *line)
+//Function adds a new node to the end of the list.
+void	list_add_end(t_dlist *list, t_base *new)
 {
-	char	**split;
-	char	*cmd;
-	int		i;
+	t_base	*temp;
 
-	split = ft_split(line, ' ');
-	i = 0;
-	while (split[i] != 0)
-		i++;
-	while (i > 0)
+	if (list->start == 0)
 	{
-		free(split[i]);
-		i--;
+		list->start = new;
+		list->end = new;
 	}
-	cmd = split[0];
-	free(split);
-	return (cmd);
+	else
+	{
+		temp = list->start;
+		while (temp->next != 0)
+			temp = temp->next;
+		temp->next = new;
+		list->end = new;
+		new->prev = temp;
+	}
 }

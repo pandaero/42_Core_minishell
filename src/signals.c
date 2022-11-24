@@ -6,24 +6,30 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:05:41 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 16:15:04 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/20 03:05:25 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <signal.h>
+#include <stdio.h>
 #include <sys/signal.h>
+#include <readline/readline.h>
 
-//Function handles the SIGINT signal.
+//Function handles the SIGINT signal. Redisplay prompt, or send SIGINT to child.
 void	sigint(int sig)
 {
-	ft_printf("You sent SIGINT %d, good on you. :)\n", sig);
+	(void) sig;
+	printf("\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
-//Function handles the SIGQUIT signal.
+//Function handles the SIGQUIT signal. Quit child, or nothing in interactive.
 void	sigquit(int sig)
 {
-	ft_printf("You sent SIGQUIT %d, good on you. :)\n", sig);
+	(void) sig;
 }
 
 //Function sets up the sigaction signal handlers

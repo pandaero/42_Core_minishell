@@ -18,6 +18,9 @@
 # define STDOUT 1
 # define STDERR 2
 
+# define PROMPT "minishell $>"
+
+//Typedef serves to classify redirections and piping.
 typedef enum s_tokens
 {
 	PIPE = 1,
@@ -27,16 +30,15 @@ typedef enum s_tokens
 	LESS_LESS,
 } 	t_tokens;
 
-//Typedef(doubly linked list) for words(cmds)
+//Typedef(doubly linked list) for words(cmds).
 typedef struct s_lexer
 {
-	char	*str;
-	t_tokens token;
-	int i;
+	char			*str;
+	t_tokens		token;
+	int 			i;
 	struct s_lexer	*next;
 	struct s_lexer	*prev;
-}	t_lexer;
-
+}					t_lexer;
 
 //Typedef is for a struct containing critical data.
 typedef struct s_minidata

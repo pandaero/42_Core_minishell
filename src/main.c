@@ -14,17 +14,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <termios.h>
 #include <readline/history.h>
 #include <readline/readline.h>
 
-// Better to create args variable in struct to line cuz it will be used a lot
+//Function performs the terminal attributes setting and readline initialisation.
 static void	main_loop(t_minidata *minidata)
 {
+	struct termios	termparams;
+	struct termios	newtermparams;
+	int				ret;
+
+	ret = tcgetattr(0, &termparams);
+	newtermparams = termparams;
+	newtermparams.c_lflag &= ~ECHOCTL;
+	ret = tcsetattr(0, 0, &newtermparams);
+	(void) ret;
 	minidata->args = (char *) 1;
 	while (minidata->args != 0)
 	{
 		setup_signal();
-		minidata->args = readline("$>");
+		minidata->args = readline(PROMPT);
 		if (ft_count_quotes(minidata->args) == 0)
 		{
 			add_history (minidata->args);
