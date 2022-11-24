@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:34:20 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/24 15:52:18 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/24 20:12:13 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 //Function searches for executable command under path folders.
-static int	ispathassist(char *cmd, t_minidata *minidata)
+static int	is_path_assist(char *cmd, t_minidata *minidata)
 {
 	char	*temp;
 	char	*temp2;
@@ -27,7 +27,7 @@ static int	ispathassist(char *cmd, t_minidata *minidata)
 		temp = ft_strjoin(minidata->splitpath[i], "/");
 		temp2 = ft_strjoin(temp, cmd);
 		free(minidata->splitpath[i]);
-		minidata->splitpath[i] = temp; // cuz later on execution it will be used
+		minidata->splitpath[i] = temp;
 		if (access(temp2, F_OK) == 0)
 		{
 			if (access(temp2, X_OK) == 0)
@@ -54,7 +54,7 @@ int	is_pathcmd(char *cmd, t_minidata *minidata)
 	fullpath = ft_substr(minidata->env[i], 5, ft_strlen(minidata->env[i]));
 	minidata->splitpath = ft_split(fullpath, ':');
 	free(fullpath);
-	if (ispathassist(cmd, minidata) == 1)
+	if (is_path_assist(cmd, minidata) == 1)
 		return (1);
 	free_split(minidata->splitpath);
 	return (0);

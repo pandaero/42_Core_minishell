@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/24 20:00:46 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/24 20:14:10 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char		*findcommand(const char *line);
 
 // ================================ VALIDATION =================================
 //Function checks that an input line contains valid instructions
-int			validline(t_minidata *minidata);
+int			is_validline(t_minidata *minidata);
 //Function determines whether a command is found within the path.
 int			is_pathcmd(char *cmd, t_minidata *minidata);
 //Function determines whether a command line calls a built-in command.
