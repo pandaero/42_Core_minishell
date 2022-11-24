@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/20 18:48:40 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/23 20:10:20 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 #include <termios.h>
 #include <readline/history.h>
 #include <readline/readline.h>
+
+//Function acts when the input command line is a valid one.
+static void	valid_line(t_minidata *minidata)
+{
+	//built-in
+	if (is_builtincmd(minidata) == 1)
+		builtin_execution(minidata);
+	//path (check permissions)
+	//direct (check permissions)
+}
 
 //Function performs the terminal attributes setting and readline initialisation.
 static void	main_loop(t_minidata *minidata)
@@ -30,29 +40,29 @@ static void	main_loop(t_minidata *minidata)
 	newtermparams.c_lflag &= ~ECHOCTL;
 	ret = tcsetattr(0, 0, &newtermparams);
 	(void) ret;
-	minidata->args = (char *) 1;
-	while (minidata->args != 0)
+	minidata->currline = (char *) 1;
+	while (minidata->currline != 0)
 	{
 		setup_signal();
-		minidata->args = readline(PROMPT);
-		if (ft_count_quotes(minidata->args) == 0)
+		minidata->currline = readline(PROMPT);
+    if (ft_count_quotes(minidata->currline) == 0)
 		{
-			add_history (minidata->args);
+			add_history (minidata->currline);
 			ft_printf("syntax error: unable to locate closing quotation\n");
 			return ;
 		}
-		if (ft_read_token(minidata) == 0)
+    if (ft_read_token(minidata) == 0)
 		{
 			ft_printf("\n");
 		}
 		if (validline(minidata) == 1)
 		{
-			add_history (minidata->args);
-			ft_printf("Command line was valid.\n");
+			add_history(minidata->currline);
+			valid_line(minidata);
 		}
 		else
-			error_cmd_nf(minidata->args);
-		free(minidata->args);
+			error_cmd_nf(minidata->currline);
+		free(minidata->currline);
 	}
 }
 
