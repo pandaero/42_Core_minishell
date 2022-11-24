@@ -6,7 +6,7 @@
 #    By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:31:50 by pandalaf          #+#    #+#              #
-#    Updated: 2022/11/21 06:57:00 by zyunusov         ###   ########.fr        #
+#    Updated: 2022/11/23 17:57:48 by pandalaf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,29 +18,36 @@ CFLAGS := -Wall -Werror -Wextra
 COPT := 
 # Sources to compile
 SRC_DIR := src/
-SRC_FILES := main.c error.c parser.c signals.c validator.c memory.c commands.c \
+SRC_FILES := main.c error.c parser.c validator.c memory.c commands.c \
 				init.c ft_quotes.c ft_read_token.c handle_quotes.c lexer_init.c\
 				handle_tokens.c
-				
+SRC_RL_FILES := signals.c			
 SRCS = $(addprefix $(SRC_DIR), $(SRC_FILES))
-# Libraries to compile
-SYSLIB := -lreadline
+SRCS_RL = $(addprefix $(SRC_DIR), $(SRC_RL_FILES))
+# Libraries to compile (if using 42WOB computer, apply fix)
+SYSLIB := -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
+SYSLIB_OBJ := -I $(HOME)/goinfre/.brew/opt/readline/include/
 LIBFT := libft.a
 LIBFT_PATH := libft/
 LIBFT_FULL = $(addprefix $(LIBFT_PATH), $(LIBFT))
 # Objects to compile
 OBJ_DIR := obj/
 OBJS = $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))
+OBJS_RL = $(addprefix $(OBJ_DIR), $(SRC_RL_FILES:.c=.o))
 
 # Make desired target
 all: directories $(NAME)
 
 # Make the target executable
-$(NAME): $(OBJS) $(LIBFT_FULL)
-	$(CC) $(CFLAGS) $(SYSLIB) $(COPT) -o $(NAME) $^ $(LIBFT_FULL)
+$(NAME): $(OBJS) $(OBJS_RL) $(LIBFT_FULL)
+	$(CC) $(CFLAGS) $(COPT) -o $(NAME) $^ $(LIBFT_FULL) $(SYSLIB)
 
 # Make required directories
 directories: $(OBJ_DIR)
+
+# Make object files that require linker
+$(addprefix $(OBJ_DIR), $(SRC_RL_FILES:.c=.o)): $(SRCS_RL) | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c -o $@ $^ $(SYSLIB_OBJ)
 
 # Make object files
 $(addprefix $(OBJ_DIR), %.o): $(addprefix $(SRC_DIR), %.c) | $(OBJ_DIR)
