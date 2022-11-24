@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/20 03:12:49 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/20 18:48:40 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 //Function performs the terminal attributes setting and readline initialisation.
 static void	main_loop(t_minidata *minidata)
 {
-	char			*line;
 	struct termios	termparams;
 	struct termios	newtermparams;
 	int				ret;
@@ -31,19 +30,29 @@ static void	main_loop(t_minidata *minidata)
 	newtermparams.c_lflag &= ~ECHOCTL;
 	ret = tcsetattr(0, 0, &newtermparams);
 	(void) ret;
-	line = (char *) 1;
-	while (line != 0)
+	minidata->args = (char *) 1;
+	while (minidata->args != 0)
 	{
 		setup_signal();
-		line = readline(PROMPT);
-		if (validline(line, minidata) == 1)
+		minidata->args = readline(PROMPT);
+		if (ft_count_quotes(minidata->args) == 0)
 		{
-			add_history (line);
+			add_history (minidata->args);
+			ft_printf("syntax error: unable to locate closing quotation\n");
+			return ;
+		}
+		if (ft_read_token(minidata) == 0)
+		{
+			ft_printf("\n");
+		}
+		if (validline(minidata) == 1)
+		{
+			add_history (minidata->args);
 			ft_printf("Command line was valid.\n");
 		}
 		else
-			error_cmd_nf(line);
-		free(line);
+			error_cmd_nf(minidata->args);
+		free(minidata->args);
 	}
 }
 
