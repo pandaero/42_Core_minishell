@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:31:50 by pandalaf          #+#    #+#              #
 #    Updated: 2022/11/23 17:57:48 by pandalaf         ###   ########.fr        #
@@ -18,8 +18,10 @@ CFLAGS := -Wall -Werror -Wextra
 COPT := 
 # Sources to compile
 SRC_DIR := src/
-SRC_FILES := main.c error.c parser.c validator.c memory.c commands.c init.c
-SRC_RL_FILES := signals.c
+SRC_FILES := main.c error.c parser.c validator.c memory.c commands.c \
+				init.c ft_quotes.c ft_read_token.c handle_quotes.c lexer_init.c\
+				handle_tokens.c
+SRC_RL_FILES := signals.c			
 SRCS = $(addprefix $(SRC_DIR), $(SRC_FILES))
 SRCS_RL = $(addprefix $(SRC_DIR), $(SRC_RL_FILES))
 # Libraries to compile (if using 42WOB computer, apply fix)
