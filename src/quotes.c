@@ -12,7 +12,8 @@
 
 #include "../minishell.h"
 
-static int ft_find_matching_quotes (char *line, int i, int *num_del, int del)
+//Function checks where a matching double or single quote is located.
+static int find_matching_quotes (char *line, int i, int *num_del, int del)
 {
 	int j;
 
@@ -25,7 +26,8 @@ static int ft_find_matching_quotes (char *line, int i, int *num_del, int del)
 	return (j - i);
 }
 
-int ft_count_quotes(char *line)
+//Function checks whether there are valid quote expressions in the line.
+int is_valid_quotes(char *line)
 {
 	int i;
 	int s;
