@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:53:06 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/24 12:36:00 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/25 14:35:33 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 //Function checks where a matching double or single quote is located.
-static int find_matching_quotes (char *line, int i, int *num_del, int del)
+static int	find_matching_quotes(char *line, int i, int *num_del, int del)
 {
-	int j;
+	int	j;
 
 	j = i + 1;
 	*num_del += 1;
@@ -27,11 +27,11 @@ static int find_matching_quotes (char *line, int i, int *num_del, int del)
 }
 
 //Function checks whether there are valid quote expressions in the line.
-int is_valid_quotes(char *line)
+int	is_valid_quotes(char *line)
 {
-	int i;
-	int s;
-	int d;
+	int	i;
+	int	s;
+	int	d;
 
 	s = 0;
 	d = 0;

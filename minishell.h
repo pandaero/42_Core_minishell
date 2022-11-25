@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/24 20:14:10 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/25 13:54:13 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_minidata
 	char	*currline;
 	char	**builtincmds;
 	char	**splitpath;
+	int		num_pipes;
 }			t_minidata;
 
 // INITIALISATION
@@ -100,6 +101,12 @@ void		builtin_echo(t_minidata *minidata);
 // ============================ COMMAND LINE PARSING ===========================
 //Function finds the command within a simple command line.
 char		*findcommand(const char *line);
+
+// Function that will start parsing
+int			start_parser(t_minidata *minidata);
+
+//Function for counting pipes
+void		count_pipes(t_word *lexer_l, t_minidata *minidata);
 
 // ================================ VALIDATION =================================
 //Function checks that an input line contains valid instructions
