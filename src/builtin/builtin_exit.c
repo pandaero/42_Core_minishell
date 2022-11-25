@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:39:06 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/25 16:27:58 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/25 17:28:47 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void	builtin_exit(t_minidata *minidata)
 		free_exit(exitno, splitline, minidata);
 	}
 	error_exit(2, 0);
+	free_split(splitline);
 	rl_on_new_line();
 }
