@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/24 20:49:21 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/25 13:40:44 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	main_loop(t_minidata *minidata)
 			ft_printf("syntax error: unable to locate closing quotation\n");
 		if (ft_read_token(minidata) == 0)
 			ft_printf("\n");
+		start_parser(minidata);
 		if (is_validline(minidata) == 1)
 			valid_line(minidata);
 		else

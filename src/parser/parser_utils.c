@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_quotes.c                                    :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 16:20:32 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/25 14:44:29 by zyunusov         ###   ########.fr       */
+/*   Created: 2022/11/25 13:44:26 by zyunusov          #+#    #+#             */
+/*   Updated: 2022/11/25 14:36:18 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	ft_handle_quotes(int i, char *s, char del)
+void	count_pipes(t_word *lexer_l, t_minidata *minidata)
 {
-	int	j;
+	t_word	*tmp;
 
-	j = 0;
-	if (s[i + j] == del)
+	tmp = lexer_l;
+	minidata->num_pipes = 0;
+	while (tmp != NULL)
 	{
-		j++;
-		while (s[i + j] != del && s[i + j] != '\0')
-			j++;
-		j++;
+		if (tmp->token == PIPE)
+			minidata->num_pipes++;
+		tmp = tmp->next;
 	}
-	return (j);
 }
