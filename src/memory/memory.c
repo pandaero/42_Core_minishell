@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:17:16 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/24 12:35:38 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:27:49 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 void	free_minidata(t_minidata *minidata)
 {
 	free_split(minidata->builtincmds);
+	free(minidata->currline);
+	free(minidata);
 }
 
 //Function frees a 2D char array made from ft_split.

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/25 13:40:44 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/25 17:27:37 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,11 @@
 #include <readline/history.h>
 #include <readline/readline.h>
 
-//Function acts when the input command line is a valid one.
-static void	valid_line(t_minidata *minidata)
+//Function exits the program cleanly.
+static void	cleanexit(t_minidata *minidata)
 {
-	//built-in
-	if (is_builtincmd(minidata) > 0)
-		builtin_execution(minidata);
-	//path (check permissions)
-	//direct (check permissions)
+	free_minidata(minidata);
+	exit(EXIT_SUCCESS);
 }
 
 //Function performs the terminal attributes setting and readline initialisation.
@@ -45,18 +42,12 @@ static void	main_loop(t_minidata *minidata)
 	{
 		setup_signal();
 		minidata->currline = readline(PROMPT);
+		if (minidata->currline == 0)
+			cleanexit(minidata);
 		add_history (minidata->currline);
 		if (minidata->currline[0] == '\0')
 			continue ;
-		if (is_valid_quotes(minidata->currline) == 0)
-			ft_printf("syntax error: unable to locate closing quotation\n");
-		if (ft_read_token(minidata) == 0)
-			ft_printf("\n");
-		start_parser(minidata);
-		if (is_validline(minidata) == 1)
-			valid_line(minidata);
-		else
-			error_cmd_nf(minidata->currline);
+		parser(minidata);
 		free(minidata->currline);
 	}
 }

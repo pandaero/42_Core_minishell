@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/25 13:54:13 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:42:45 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ typedef struct s_minidata
 	int		num_pipes;
 }			t_minidata;
 
-// INITIALISATION
-//Function initialises the minidata.
+// =============================== INITIALISATION ==============================
+//Function initialises the minidata structure.
 void		init_minidata(t_minidata *minidata);
 
-// ERROR HANDLING
+// =============================== ERROR HANDLING ==============================
 //Function handles an "command not found" error.
 void		error_cmd_nf(char *line);
 //Function handles an error in signal action setup.
@@ -104,6 +104,8 @@ char		*findcommand(const char *line);
 
 // Function that will start parsing
 int			start_parser(t_minidata *minidata);
+//Function performs the parsing of a command line.
+void		parser(t_minidata *minidata);
 
 //Function for counting pipes
 void		count_pipes(t_word *lexer_l, t_minidata *minidata);
