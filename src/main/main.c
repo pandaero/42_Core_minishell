@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/24 15:45:12 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/24 20:49:21 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 static void	valid_line(t_minidata *minidata)
 {
 	//built-in
-	if (is_builtincmd(minidata) == 1)
+	if (is_builtincmd(minidata) > 0)
 		builtin_execution(minidata);
 	//path (check permissions)
 	//direct (check permissions)
@@ -52,7 +52,7 @@ static void	main_loop(t_minidata *minidata)
 			ft_printf("syntax error: unable to locate closing quotation\n");
 		if (ft_read_token(minidata) == 0)
 			ft_printf("\n");
-		if (validline(minidata) == 1)
+		if (is_validline(minidata) == 1)
 			valid_line(minidata);
 		else
 			error_cmd_nf(minidata->currline);

@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:43:48 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/24 15:53:11 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/24 20:14:53 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 
 //Function checks that an input line contains valid instructions
-int	validline(t_minidata *minidata)
+int	is_validline(t_minidata *minidata)
 {
 	char	*cmd;
 	int		i;
@@ -26,7 +26,10 @@ int	validline(t_minidata *minidata)
 		if (ft_strlen(cmd) == ft_strlen(minidata->builtincmds[i]))
 		{
 			if (ft_strncmp(cmd, minidata->builtincmds[i], ft_strlen(cmd)) == 0)
+			{
+				free(cmd);
 				return (1);
+			}
 		}
 		i++;
 	}
