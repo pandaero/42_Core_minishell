@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/24 16:08:44 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/24 20:14:10 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define STDOUT 1
 # define STDERR 2
 
-# define PROMPT "minishell$"
+# define PROMPT "minishell$ "
 
 //Typedef serves to classify redirections and piping.
 typedef enum s_tokens
@@ -28,14 +28,14 @@ typedef enum s_tokens
 	GREAT_GREAT,
 	LESS,
 	LESS_LESS,
-} 	t_tokens;
+}	t_tokens;
 
 //Typedef(doubly linked list) for words(cmds).
 typedef struct s_word
 {
 	char			*str;
 	t_tokens		token;
-	int 			i;
+	int				i;
 	struct s_word	*next;
 	struct s_word	*prev;
 }					t_word;
@@ -50,7 +50,6 @@ typedef struct s_minidata
 	char	**splitpath;
 }			t_minidata;
 
-
 // INITIALISATION
 //Function initialises the minidata.
 void		init_minidata(t_minidata *minidata);
@@ -61,14 +60,13 @@ void		error_cmd_nf(char *line);
 //Function handles an error in signal action setup.
 void		error_sig(void);
 
-
 // =================================== LEXER ===================================
 // Function to read from string, to divide to tokens
 int			ft_read_token(t_minidata *minidata);
 // Function to read(skip) quotes
 int			ft_handle_quotes(int i, char *s, char del);
 // Function to put all tokens in separate container(doubly linked list)
-int			add_unitto_lexer(char *s,  t_tokens token, t_word **lexer_l);
+int			add_unitto_lexer(char *s, t_tokens token, t_word **lexer_l);
 // Function that check for pipe and redir only <> returns name of token
 t_tokens	check_token(int c);
 // Function that passes to lexer_init - pipes and redirections
@@ -105,16 +103,28 @@ char		*findcommand(const char *line);
 
 // ================================ VALIDATION =================================
 //Function checks that an input line contains valid instructions
-int			validline(t_minidata *minidata);
+int			is_validline(t_minidata *minidata);
 //Function determines whether a command is found within the path.
 int			is_pathcmd(char *cmd, t_minidata *minidata);
 //Function determines whether a command line calls a built-in command.
 int			is_builtincmd(t_minidata *minidata);
 // Function handles an "syntax error: while quotes not closed"
-int 		is_valid_quotes(char *line);
+int			is_valid_quotes(char *line);
 
 // ================================== SIGNALS ==================================
 //Function sets up the sigaction signal handlers
 void		setup_signal(void);
+
+// =================================== UTILS ===================================
+//Function returns the size of a ft_split-created array.
+int			split_size(char **str);
+//Function checks whether a character is a numeric one.
+int			is_numeric(char ch);
+//Function checks whether a string contains a valid signed numeric declaration.
+int			is_validnum(char *str);
+//Function returns a long int with the value contained in the given char string.
+long		ft_atol(char *str);
+//Function returns a long long int with the value from the given char string.
+long long	ft_atoll(char *str);
 
 #endif
