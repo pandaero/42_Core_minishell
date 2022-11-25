@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:39:06 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/24 19:57:38 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:27:58 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ static int	error_exit(int err, char *arg)
 static void	free_exit(int ret, char **splitline, t_minidata *minidata)
 {
 	free_split(splitline);
-	free_split(minidata->builtincmds);
-	free(minidata->currline);
-	free(minidata);
+	free_minidata(minidata);
 	exit(ret);
 }
 
