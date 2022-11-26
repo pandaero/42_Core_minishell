@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/26 06:47:58 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/26 20:28:12 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_minidata
 
 // =============================== INITIALISATION ==============================
 //Function initialises the minidata structure.
-void		init_minidata(t_minidata *minidata);
+t_minidata	*init_minidata(char **env);
 //Function initialises an empty environment variable linked list.
 t_env		*new_env_list(void);
 //Function initialises an empty environment variable node.
@@ -137,8 +137,8 @@ void		parser(t_minidata *minidata);
 void		count_pipes(t_word *lexer_l, t_minidata *minidata);
 
 // ================================ VALIDATION =================================
-//Function checks that an input line contains valid instructions
-int			is_validline(t_minidata *minidata);
+//Function checks that an input command line contains executable commands.
+int			is_validcmdline(t_minidata *minidata);
 //Function determines whether a command is found within the path.
 int			is_pathcmd(char *cmd, t_minidata *minidata);
 //Function determines whether a command line calls a built-in command.

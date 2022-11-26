@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:08:30 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/26 04:31:03 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/26 20:13:23 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,19 @@
 #include <stdlib.h>
 
 //Function initialises the minidata.
-void	init_minidata(t_minidata *minidata)
+t_minidata	*init_minidata(char **env)
 {
-	char	*builtin;
+	char		*builtin;
+	t_minidata	*new;
 
+	new = (t_minidata *)malloc(sizeof(t_minidata));
+	new->env = env;
+	new->envlist = new_env_list();
+	fill_env(new->envlist, env);
 	builtin = ft_strdup("echo.cd.pwd.export.unset.env.exit");
-	minidata->builtincmds = ft_split(builtin, '.');
+	new->builtincmds = ft_split(builtin, '.');
 	free(builtin);
+	return (new);
 }
 
 //Function initialises an empty environment variable linked list.
