@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/25 17:27:37 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/26 20:05:04 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,10 @@ int	main(int argc, char **argv, char **env)
 
 	if (argv && argc == 1)
 	{
-		minidata = (t_minidata *)malloc(sizeof(t_minidata));
-		minidata->env = env;
-		init_minidata(minidata);
+		minidata = init_minidata(env);
 		main_loop(minidata);
 	}
 	else
-		write(STDERR, "No arguments are required", 25);
+		ft_putstr_fd("No arguments are required", STDERR);
 	return (0);
 }
