@@ -6,15 +6,15 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:43:48 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/24 20:14:53 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/26 20:33:03 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include <stdlib.h>
 
-//Function checks that an input line contains valid instructions
-int	is_validline(t_minidata *minidata)
+//Function checks that an input command line contains executable commands.
+int	is_validcmdline(t_minidata *minidata)
 {
 	char	*cmd;
 	int		i;
