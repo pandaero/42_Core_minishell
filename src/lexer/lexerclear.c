@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_parsing.c                                    :+:      :+:    :+:   */
+/*   lexerclear.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 13:40:14 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/26 16:14:47 by zyunusov         ###   ########.fr       */
+/*   Created: 2022/11/26 16:19:08 by zyunusov          #+#    #+#             */
+/*   Updated: 2022/11/26 16:27:45 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+#include <stdlib.h>
 
-int	start_parser(t_minidata *minidata)
+void	lexer_clear(t_word **lst)
 {
-	count_pipes(minidata->lexer_l, minidata);
-	if (minidata->lexer_l->token == PIPE)
-		return (parser_token_error(minidata, minidata->lexer_l,
-				minidata->lexer_l->token));
-	return (1);
+	t_word	*tmp;
+
+	if (!*lst)
+		return ;
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		if ((*lst)->str)
+			free((*lst)->str);
+		free(*lst);
+		*lst = tmp;
+	}
+	*lst = NULL;
 }

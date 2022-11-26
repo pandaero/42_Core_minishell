@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/25 16:42:45 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/26 16:25:23 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void		init_minidata(t_minidata *minidata);
 void		error_cmd_nf(char *line);
 //Function handles an error in signal action setup.
 void		error_sig(void);
+//Function prints out a syntax error message.
+int	parser_token_error(t_minidata *minidata, t_word *lexer_l, t_tokens token)
 
 // =================================== LEXER ===================================
 // Function to read from string, to divide to tokens
@@ -73,6 +75,7 @@ t_tokens	check_token(int c);
 // Function that passes to lexer_init - pipes and redirections
 int			handle_token(int i, char *s, t_word **lexer_l);
 // need to write function delone, clear to free list ==== ----
+void	lexer_clear(t_word **lst);
 
 // ========================== MEMORY HANDLING (FREEING) ========================
 //Function frees a 2D char array made from ft_split.

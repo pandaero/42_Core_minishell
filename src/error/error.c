@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:20:41 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/25 16:59:10 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/26 16:20:15 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,15 @@ void	error_sig(void)
 }
 
 //Function prints out a syntax error message.
-void	error_syntax(int type)
+int	parser_token_error(t_minidata *minidata, t_word *lexer_l, t_tokens token)
 {
-	write(STDERR, "minishell: syntax error near unexpected token ", 46);
-	if (type == 1)
+	ft_putstr_fd("minishell: syntax error near unexpected token ",
+		STDERR_FILENO);
+	if (token == PIPE)
 		write(STDERR, "`|'", 3);
 	else
 		write(STDERR, "`newline'", 9);
 	ft_putchar_fd('\n', STDERR);
+	lexer_clear(&lexer_l);
+	return (EXIT_FAILURE);
 }
