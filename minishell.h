@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/25 16:42:45 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/26 06:47:58 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,31 @@ typedef struct s_word
 	struct s_word	*prev;
 }					t_word;
 
+//Typedef is for an environment variable.
+typedef struct s_envvar
+{
+	int				index;
+	char			*var;
+	char			*value;
+	char			*whole;
+	struct s_envvar	*prev;
+	struct s_envvar	*next;
+}					t_envvar;
+
+//Typedef is for the (doubly-linked) list of environment variables.
+typedef struct s_env
+{
+	int			size;
+	t_envvar	*first;
+	t_envvar	*last;
+}				t_env;
+
 //Typedef is for a struct containing critical data.
 typedef struct s_minidata
 {
 	t_word	*lexer_l;
 	char	**env;
+	t_env	*envlist;
 	char	*currline;
 	char	**builtincmds;
 	char	**splitpath;
@@ -54,6 +74,10 @@ typedef struct s_minidata
 // =============================== INITIALISATION ==============================
 //Function initialises the minidata structure.
 void		init_minidata(t_minidata *minidata);
+//Function initialises an empty environment variable linked list.
+t_env		*new_env_list(void);
+//Function initialises an empty environment variable node.
+t_envvar	*new_env_var(void);
 
 // =============================== ERROR HANDLING ==============================
 //Function handles an "command not found" error.
@@ -79,6 +103,8 @@ int			handle_token(int i, char *s, t_word **lexer_l);
 void		free_split(char **charr);
 //Function frees a minidata struct.
 void		free_minidata(t_minidata *minidata);
+//Function frees an environment variable linked list.
+void		free_env(t_env *list);
 
 // ============================ EXECUTION - BUILT-INS ==========================
 //Function handles the execution of built-in commands.
@@ -121,12 +147,14 @@ int			is_builtincmd(t_minidata *minidata);
 int			is_valid_quotes(char *line);
 
 // ================================== SIGNALS ==================================
-//Function sets up the sigaction signal handlers
+//Function sets up the sigaction signal handlers.
 void		setup_signal(void);
 
 // =================================== UTILS ===================================
 //Function returns the size of a ft_split-created array.
 int			split_size(char **str);
+//Function returns the size of a 2D char array.
+int			nonsplit_size(char **str);
 //Function checks whether a character is a numeric one.
 int			is_numeric(char ch);
 //Function checks whether a string contains a valid signed numeric declaration.
@@ -135,5 +163,37 @@ int			is_validnum(char *str);
 long		ft_atol(char *str);
 //Function returns a long long int with the value from the given char string.
 long long	ft_atoll(char *str);
+//Function compares two strings and returns the difference at the first point.
+int			ft_strcmp(const char *str1, const char *str2);
+
+// ===================== UTILS - ENVIRONMENT VARIABLE LIST =====================
+//Function gets the current working directory from the environment vector.
+char		*get_cwd(char **env);
+//Function gets an environment variable's value from the environment vector.
+char		*get_env_var(char **env, char *var);
+//Function finds the pointer to the environment variable from the list.
+int			ind_env_var_indx(char **env, char *var);
+//Function finds the pointer to environment variable element from the vector.
+char		*find_env_var(char **env, char *var);
+//Function looks for an environment variable in the linked list.
+t_envvar	*find_env_var_list(t_minidata *minidata, char *var);
+//Function sets an environment variable's value in the env variable list.
+void		set_env_var(t_minidata *minidata, char *var, char *value);
+//Function fills the environment variable list from the vector.
+void		fill_env(t_env *envlist, char **env);
+//Function copies a node element to a new one.
+t_envvar	*env_var_cpy(t_envvar *var);
+//Function adds a node to an environment variable linked list.
+void		add_env_var(t_env *envlist, t_envvar *envvar);
+//Function removes a node from an environment variable linked list.
+void		rem_env_var(t_env *envlist, t_envvar *envvar);
+//Function orders the environment variable list alphabetically.
+void		env_list_order(t_env *list);
+//Function adds the data from the environment vector element to the envvar node.
+void		get_env_var_data(char *env_el, t_envvar *node);
+//Function swaps two nodes in the environment variable list.
+void		env_var_swap(t_envvar *var1, t_envvar *var2, t_env *list);
+//Function determines whether the environment variable list is ordered.
+int			is_env_list_ordered(t_env *list);
 
 #endif
