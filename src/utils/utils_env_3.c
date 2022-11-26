@@ -6,11 +6,12 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 23:17:28 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/26 06:47:23 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/26 20:04:04 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+#include <stdlib.h>
 
 //Function determines whether the environment variable list is ordered.
 int	is_env_list_ordered(t_env *list)
@@ -35,7 +36,6 @@ void	env_var_swap(t_envvar *var1, t_envvar *var2, t_env *list)
 	t_envvar	*temp;
 
 	temp = env_var_cpy(var1);
-	var1->index = var2->index;
 	if (var1->prev != 0)
 		var1->prev->next = var2;
 	else
@@ -46,7 +46,6 @@ void	env_var_swap(t_envvar *var1, t_envvar *var2, t_env *list)
 		var2->next->prev = var1;
 	else
 		list->last = var1;
-	var2->index = temp->index;
 	var2->prev = temp->prev;
 	var2->next = var1;
 	free(temp->var);
@@ -82,6 +81,7 @@ t_envvar	*find_env_var_list(t_minidata *minidata, char *var)
 	int			i;
 
 	node = minidata->envlist->first;
+	i = 0;
 	while (i <= minidata->envlist->size)
 	{
 		if (ft_strcmp(node->var, var) == 0)

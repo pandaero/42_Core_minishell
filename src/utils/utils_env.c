@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 19:04:58 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/26 06:40:12 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/26 19:59:21 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ char	*get_env_var(char **env, char *var)
 	int		i;
 	char	**split;
 	char	*tempsearch;
-	char	*var;
 
 	tempsearch = ft_strjoin(var, "=");
 	i = 0;

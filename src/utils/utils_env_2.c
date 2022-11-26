@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 19:58:30 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/26 06:16:58 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/26 20:11:04 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,11 @@ void	rem_env_var(t_env *envlist, t_envvar *envvar)
 //Function adds a node to an environment variable linked list.
 void	add_env_var(t_env *envlist, t_envvar *envvar)
 {
-	if (envlist->last == 0)
+	if (envlist->size == 0)
 	{
 		envvar->prev = 0;
 		envvar->next = 0;
 		envlist->first = envvar;
-		envlist->last = envvar;
 	}
 	else
 	{
@@ -96,6 +95,7 @@ void	add_env_var(t_env *envlist, t_envvar *envvar)
 		envvar->next = 0;
 		envlist->last->next = envvar;
 	}
+	envvar->index = envlist->size;
 	envlist->last = envvar;
 	envlist->size++;
 }
