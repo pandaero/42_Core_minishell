@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 23:17:28 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/26 20:04:04 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/27 01:19:24 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void	set_env_var(t_minidata *minidata, char *var, char *value)
 	char		*declaration;
 	char		*whole;
 	t_envvar	*curr;
-	t_envvar	*write;
 
 	declaration = ft_strjoin(var, "=");
 	whole = ft_strjoin(declaration, value);
@@ -106,16 +105,17 @@ void	set_env_var(t_minidata *minidata, char *var, char *value)
 	curr = find_env_var_list(minidata, var);
 	if (curr == 0)
 	{
-		write = new_env_var();
-		write->whole = whole;
-		write->var = ft_strdup(var);
-		write->value = ft_strdup(value);
-		add_env_var(minidata->envlist, write);
+		curr = new_env_var();
+		curr->whole = ft_strdup(whole);
+		curr->var = ft_strdup(var);
+		curr->value = ft_strdup(value);
+		add_env_var(minidata->envlist, curr);
 	}
 	else
 	{
 		free(curr->value);
 		curr->value = ft_strdup(value);
+		curr->whole = ft_strdup(whole);
 	}
 	free(whole);
 }

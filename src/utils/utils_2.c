@@ -6,11 +6,12 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 21:14:40 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/26 03:16:57 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/27 01:07:02 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+#include <stdlib.h>
 
 //Function returns the size of a 2D char array.
 int	nonsplit_size(char **str)
