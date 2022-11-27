@@ -1,4 +1,4 @@
-// Tests for the functions in /utils/utils.c
+// Tests for the functions in /utils/utils_env_2.c
 #include "../minishell.h"
 #include <stdio.h>
 
