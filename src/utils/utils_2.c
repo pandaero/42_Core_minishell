@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 21:14:40 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/27 01:07:02 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/27 01:32:03 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,18 @@ int	ft_strcmp(const char *str1, const char *str2)
 	if (str1[i] != str2[i] && n != 0)
 		return ((unsigned char) str1[i] - (unsigned char) str2[i]);
 	return (0);
+}
+
+//Function updates the last return shell variable.
+void	update_return(t_minidata *minidata, int ret)
+{
+	free(minidata->last_return);
+	minidata->last_return = ft_itoa(ret);
+}
+
+//Function updates the dollar shell variable.
+void	update_dollar(t_minidata *minidata, int doll)
+{
+	free(minidata->dollar);
+	minidata->dollar = ft_itoa(ret);
 }

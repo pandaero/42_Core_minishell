@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:17:16 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/26 22:48:51 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/27 01:27:28 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	free_minidata(t_minidata *minidata)
 	free_split(minidata->builtincmds);
 	free_env(minidata->envlist);
 	free(minidata->currline);
+	free(minidata->dollar);
+	free(minidata->last_return);
 	free(minidata);
 }
 

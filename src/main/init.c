@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:08:30 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/26 20:13:23 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/27 01:27:48 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_minidata	*init_minidata(char **env)
 	fill_env(new->envlist, env);
 	builtin = ft_strdup("echo.cd.pwd.export.unset.env.exit");
 	new->builtincmds = ft_split(builtin, '.');
+	new->last_return = ft_itoa(0);
+	new->dollar = ft_itoa(0);
 	free(builtin);
 	return (new);
 }

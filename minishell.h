@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/27 01:16:40 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/27 01:32:48 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,10 @@ char		*expand_var(t_minidata *minidata, char *str, int i);
 int			is_var(char ch);
 //Function determines if there are variables present in an expression.
 int			contains_variables(const char *str);
+//Function updates the dollar shell variable.
+void		update_dollar(t_minidata *minidata, int doll);
+//Function updates the last return shell variable.
+void		update_return(t_minidata *minidata, int ret);
 
 // ===================== UTILS - ENVIRONMENT VARIABLE LIST =====================
 //Function gets the current working directory from the environment vector.
