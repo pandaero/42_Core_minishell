@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/26 20:28:12 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/27 01:16:40 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@
 # define STDERR 2
 
 # define PROMPT "minishell$ "
+
+//Typedef declares a struct used to shorten an expansion function.
+typedef struct s_expand
+{
+	char	*pre;
+	char	*post;
+	char	*var;
+	char	*new;
+	char	*newnew;
+}			t_expand;
 
 //Typedef serves to classify redirections and piping.
 typedef enum s_tokens
@@ -68,6 +78,8 @@ typedef struct s_minidata
 	char	*currline;
 	char	**builtincmds;
 	char	**splitpath;
+	char	*last_return;
+	char	*dollar;
 	int		num_pipes;
 }			t_minidata;
 
@@ -165,6 +177,14 @@ long		ft_atol(char *str);
 long long	ft_atoll(char *str);
 //Function compares two strings and returns the difference at the first point.
 int			ft_strcmp(const char *str1, const char *str2);
+//Function expands variables if present in an expression.
+char		*var_expansion(t_minidata *minidata, const char *expression);
+//Function expands a variable within an expression, given a starting point.
+char		*expand_var(t_minidata *minidata, char *str, int i);
+//Function checks whether the input character is valid for an environment var.
+int			is_var(char ch);
+//Function determines if there are variables present in an expression.
+int			contains_variables(const char *str);
 
 // ===================== UTILS - ENVIRONMENT VARIABLE LIST =====================
 //Function gets the current working directory from the environment vector.
