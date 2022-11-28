@@ -6,13 +6,14 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/28 03:41:24 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/28 15:04:05 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "libft/libft.h"
+# include <stdbool.h>
 
 # define STDIN 0
 # define STDOUT 1
@@ -49,7 +50,13 @@ typedef struct s_minidata
 	char	**builtincmds;
 	char	**splitpath;
 	int		num_pipes;
+	bool	reset;
 }			t_minidata;
+
+
+int reset_tools(t_minidata *minidata);
+
+int	main_loop(t_minidata *minidata);
 
 // =============================== INITIALISATION ==============================
 //Function initialises the minidata structure.
@@ -62,6 +69,8 @@ void		error_cmd_nf(char *line);
 void		error_sig(void);
 //Function prints out a syntax error message.
 int	parser_token_error(t_word *lexer_l, t_tokens token);
+
+int allerrors(int error, t_minidata *minidata);
 
 // =================================== LEXER ===================================
 // Function to read from string, to divide to tokens
@@ -109,7 +118,7 @@ char		*findcommand(const char *line);
 // Function that will start parsing
 int			start_parser(t_minidata *minidata);
 //Function performs the parsing of a command line.
-void		parser(t_minidata *minidata);
+int		parser(t_minidata *minidata);
 
 //Function for counting pipes
 void		count_pipes(t_word *lexer_l, t_minidata *minidata);

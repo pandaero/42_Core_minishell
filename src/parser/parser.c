@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:27:25 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/28 03:35:11 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/28 15:05:21 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,17 @@ static void	execution(t_minidata *minidata)
 }
 
 //Function performs the parsing of a command line.
-void	parser(t_minidata *minidata)
+int	parser(t_minidata *minidata)
 {
 	if (is_valid_quotes(minidata->currline) == 0)
-		ft_printf("syntax error: unable to locate closing quotation\n");
+		return (allerrors(0, minidata));
 	if (ft_read_token(minidata) == 0)
-		ft_printf("\n");
-	start_parser(minidata);
+		return (allerrors(1, minidata));
+	if (start_parser(minidata) == 0)
+		return (EXIT_FAILURE);
 	if (is_validline(minidata) == 1)
 		execution(minidata);
 	else
 		error_cmd_nf(minidata->currline);
+	return (EXIT_SUCCESS);
 }
