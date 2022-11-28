@@ -6,13 +6,14 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:15:34 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/27 00:54:42 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 15:31:22 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 
 //Function prints out an error message for when the home variable is not set.
 void	error_cd_home(void)
@@ -21,18 +22,29 @@ void	error_cd_home(void)
 }
 
 //Function changes the environment variables to implement a change of directory.
-void	cd(t_minidata *minidata, char *dir)
+void	cd(t_minidata *minidata, char *dirstr)
 {
 	char	*temp;
+	char	*dirwd;
 
-	if (chdir(dir) == -1)
-		ft_putstr_fd("chdir error\n", STDERR);
+	dirwd = (char *)malloc(500 * sizeof(char));
+	if (chdir(dirstr) == -1)
+		perror("minishell: ");
 	else
 	{
-		temp = ft_strdup(find_env_var_list(minidata, "PWD")->value);
-		set_env_var(minidata, "PWD", dir);
-		set_env_var(minidata, "OLDPWD", temp);
-		free(temp);
+		if (getcwd(dirwd, 500) == 0)
+		{
+			free(dirwd);
+			perror("minishell: ");
+		}
+		else
+		{
+			temp = ft_strdup(find_env_var_list(minidata, "PWD")->value);
+			set_env_var(minidata, "PWD", dirwd);
+			set_env_var(minidata, "OLDPWD", temp);
+			free(temp);
+			free(dirwd);
+		}
 	}
 }
 
