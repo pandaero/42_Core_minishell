@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 21:14:40 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/27 01:32:03 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 14:09:02 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,5 @@ void	update_return(t_minidata *minidata, int ret)
 void	update_dollar(t_minidata *minidata, int doll)
 {
 	free(minidata->dollar);
-	minidata->dollar = ft_itoa(ret);
+	minidata->dollar = ft_itoa(doll);
 }
