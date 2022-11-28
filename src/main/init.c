@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:08:30 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/27 01:27:48 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 20:13:23 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 //Function initialises the minidata.
 t_minidata	*init_minidata(char **env)
 {
+	int			lvl;
+	char		*alvl;
 	char		*builtin;
 	t_minidata	*new;
 
@@ -23,6 +25,10 @@ t_minidata	*init_minidata(char **env)
 	new->env = env;
 	new->envlist = new_env_list();
 	fill_env(new->envlist, env);
+	lvl = ft_atoi(find_env_var_list(new, "SHLVL")->value) + 1;
+	alvl = ft_itoa(lvl);
+	set_env_var(new, "SHLVL", alvl);
+	free(alvl);
 	builtin = ft_strdup("echo.cd.pwd.export.unset.env.exit");
 	new->builtincmds = ft_split(builtin, '.');
 	new->last_return = ft_itoa(0);
