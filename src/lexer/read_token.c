@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 14:59:09 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/25 14:40:18 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/28 03:15:22 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_read_words(int i, char *s, t_word **lexer_l)
 	int	j;
 
 	j = 0;
-	while (s[i + j])
+	while (s[i + j] && (!check_token(s[i + j])))
 	{
 		j += ft_handle_quotes(i + j, s, 34);
 		j += ft_handle_quotes(i + j, s, 39);

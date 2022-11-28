@@ -6,26 +6,77 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:19:08 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/26 16:27:45 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/28 03:40:49 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include <stdlib.h>
 
-void	lexer_clear(t_word **lst)
+t_word	*lexerclear_one(t_word **lst)
 {
-	t_word	*tmp;
+	if ((*lst)->str)
+	{
+		free((*lst)->str);
+		(*lst)->str = NULL;
+	}
+	free(*lst);
+	*lst = NULL;
+	return (NULL);
+}
+
+void	lexerdel_first(t_word **lst)
+{
+	t_word	*node;
+
+	node = *lst;
+	*lst = node->next;
+	lexerclear_one(&node);
+	if (*lst)
+		(*lst)->prev = NULL;
+}
+
+void	lexerdelone(t_word **lst, int key)
+{
+	t_word	*node;
+	t_word	*prev;
+	t_word	*start;
+
+	start = *lst;
+	node = start;
+	if ((*lst)->i == key)
+	{
+		lexerdel_first(lst);
+		return ;
+	}
+		while (node && node->i != key)
+	{
+		prev = node;
+		node = node->next;
+	}
+	if (node)
+		prev->next = node->next;
+	else
+		prev->next = NULL;
+	if (prev->next)
+		prev->next->prev = prev;
+	lexerclear_one(&node);
+	*lst = start;
+}
+
+void	lexerclear(t_word **lst)
+{
+	t_word	*temp;
 
 	if (!*lst)
 		return ;
 	while (*lst)
 	{
-		tmp = (*lst)->next;
+		temp = (*lst)->next;
 		if ((*lst)->str)
 			free((*lst)->str);
 		free(*lst);
-		*lst = tmp;
+		*lst = temp;
 	}
 	*lst = NULL;
 }

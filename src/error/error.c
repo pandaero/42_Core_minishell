@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:20:41 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/26 16:20:15 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/28 03:42:26 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,25 @@ void	error_sig(void)
 }
 
 //Function prints out a syntax error message.
-int	parser_token_error(t_minidata *minidata, t_word *lexer_l, t_tokens token)
+int	parser_token_error(t_word *lexer_l, t_tokens token)
 {
+	int i;
 	ft_putstr_fd("minishell: syntax error near unexpected token ",
 		STDERR_FILENO);
-	if (token == PIPE)
-		write(STDERR, "`|'", 3);
+	if (token == GREAT)
+		ft_putstr_fd("'>'\n", STDERR_FILENO);
+	else if (token == GREAT_GREAT)
+		ft_putstr_fd("'>>'\n", STDERR_FILENO);
+	else if (token == LESS)
+		ft_putstr_fd("'<'\n", STDERR_FILENO);
+	else if (token == LESS_LESS)
+		ft_putstr_fd("'<<'\n", STDERR_FILENO);
+	else if (token == PIPE)
+		ft_putstr_fd("'|'\n", STDERR_FILENO);
 	else
-		write(STDERR, "`newline'", 9);
-	ft_putchar_fd('\n', STDERR);
-	lexer_clear(&lexer_l);
+		ft_putstr_fd("\n", STDERR_FILENO);
+	if (lexer_l)
+		i = 1;
+	lexerclear(&lexer_l);
 	return (EXIT_FAILURE);
 }
