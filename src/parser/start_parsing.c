@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:40:14 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/28 03:41:58 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/28 16:51:07 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,12 @@ static int	handle_pipe_errors(t_minidata *minidata, t_tokens token)
 {
 	if (token == PIPE)
 	{
-		parser_token_error(minidata->lexer_l, minidata->lexer_l->token);
+		parser_token_error(minidata, minidata->lexer_l, minidata->lexer_l->token);
 		return (EXIT_FAILURE);
 	}
 	if (!minidata->lexer_l)
 	{
-		lexerclear(&minidata->lexer_l);
-		ft_putstr_fd("syntax error near unexpected token 'newline'\n", STDERR_FILENO);
+		parser_error(2, minidata, minidata->lexer_l);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
@@ -33,9 +32,8 @@ static int	handle_pipe_errors(t_minidata *minidata, t_tokens token)
 int	start_parser(t_minidata *minidata)
 {
 	count_pipes(minidata->lexer_l, minidata);
-	ft_printf("%d\n", minidata->lexer_l->token);
 	if (minidata->lexer_l->token == PIPE)
-		return (parser_token_error(minidata->lexer_l, minidata->lexer_l->token));
+		return (parser_token_error(minidata, minidata->lexer_l, minidata->lexer_l->token));
 	while (minidata->lexer_l)
 	{
 		if (minidata->lexer_l && minidata->lexer_l->token == PIPE)

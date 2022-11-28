@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/28 15:04:05 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/28 16:56:10 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,11 @@ void		error_cmd_nf(char *line);
 //Function handles an error in signal action setup.
 void		error_sig(void);
 //Function prints out a syntax error message.
-int	parser_token_error(t_word *lexer_l, t_tokens token);
+int	parser_token_error(t_minidata *minidata, t_word *lexer_l, t_tokens token);
 
 int allerrors(int error, t_minidata *minidata);
+
+void	parser_error(int error, t_minidata *minidata, t_word *lexer_l);
 
 // =================================== LEXER ===================================
 // Function to read from string, to divide to tokens

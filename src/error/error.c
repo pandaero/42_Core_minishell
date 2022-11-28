@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:20:41 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/28 03:42:26 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/28 16:48:38 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,8 @@ void	error_sig(void)
 }
 
 //Function prints out a syntax error message.
-int	parser_token_error(t_word *lexer_l, t_tokens token)
+int	parser_token_error(t_minidata *minidata, t_word *lexer_l, t_tokens token)
 {
-	int i;
 	ft_putstr_fd("minishell: syntax error near unexpected token ",
 		STDERR_FILENO);
 	if (token == GREAT)
@@ -63,8 +62,13 @@ int	parser_token_error(t_word *lexer_l, t_tokens token)
 		ft_putstr_fd("'|'\n", STDERR_FILENO);
 	else
 		ft_putstr_fd("\n", STDERR_FILENO);
-	if (lexer_l)
-		i = 1;
 	lexerclear(&lexer_l);
+	reset_tools(minidata);
 	return (EXIT_FAILURE);
+}
+
+void	parser_error(int error, t_minidata *minidata, t_word *lexer_l)
+{
+	lexerclear(&lexer_l);
+	allerrors(error, minidata);
 }

@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/28 14:54:08 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/28 17:02:57 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main_loop(t_minidata *minidata)
 	struct termios	termparams;
 	struct termios	newtermparams;
 	int				ret;
+	char			*tmp;
 
 	ret = tcgetattr(0, &termparams);
 	newtermparams = termparams;
@@ -38,6 +39,9 @@ int	main_loop(t_minidata *minidata)
 	ret = tcsetattr(0, 0, &newtermparams);
 	(void) ret;
 	minidata->currline = readline(PROMPT);
+	tmp = ft_strtrim(minidata->currline, " ");
+	free(minidata->currline);
+	minidata->currline = tmp;
 	if (minidata->currline == 0)
 		cleanexit(minidata);
 	if (minidata->currline[0] == '\0')
