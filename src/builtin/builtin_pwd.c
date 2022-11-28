@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:19:58 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/24 20:29:08 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/27 00:57:40 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,5 @@
 //Function prints the current working directory where the shell is acting.
 void	builtin_pwd(t_minidata *minidata)
 {
-	char	*pwd;
-	int		i;
-
-	i = 0;
-	while (ft_strncmp(minidata->env[i], "PWD=", 4) != 0)
-		i++;
-	pwd = ft_substr(minidata->env[i], 4, ft_strlen(minidata->env[i]));
-	ft_printf("%s\n", pwd);
-	free(pwd);
+	ft_printf("%s\n", find_env_var_list(minidata, "PWD")->value);
 }
