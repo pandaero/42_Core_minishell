@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:21:14 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/28 22:14:57 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 22:23:10 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 
 //Function orders the environment variables in alphabetical order and displays.
-void	display_env_alph(t_minidata *minidata)
+static void	display_env_alph(t_minidata *minidata)
 {
 	t_envvar	*curr;
 
