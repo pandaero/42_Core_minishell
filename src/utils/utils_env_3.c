@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 23:17:28 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/27 01:19:24 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/28 20:16:08 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,13 @@ void	env_list_order(t_env *list)
 t_envvar	*find_env_var_list(t_minidata *minidata, char *var)
 {
 	t_envvar	*node;
-	int			i;
 
 	node = minidata->envlist->first;
-	i = 0;
-	while (i <= minidata->envlist->size)
+	while (node != 0)
 	{
 		if (ft_strcmp(node->var, var) == 0)
 			return (node);
 		node = node->next;
-		i++;
 	}
 	return (0);
 }
