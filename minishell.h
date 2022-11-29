@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/27 01:32:48 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/30 00:33:29 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,5 +219,16 @@ void		get_env_var_data(char *env_el, t_envvar *node);
 void		env_var_swap(t_envvar *var1, t_envvar *var2, t_env *list);
 //Function determines whether the environment variable list is ordered.
 int			is_env_list_ordered(t_env *list);
+
+// =========================== UTILS - EXPANSION ===============================
+//Function determines the number of double quotes in a string.
+int			count_dquotes(const char *str);
+//Function cleans double quotes from a string. Frees input string.
+char		*clean_dquotes(char *str);
+//Function determines the number of single quotes in a string.
+int			count_squotes(const char *str);
+//Function cleans single quotes from a string. Frees input string.
+char		*clean_squotes(char *str);
+
 
 #endif
