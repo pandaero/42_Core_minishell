@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/29 21:46:57 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/29 22:14:43 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_minidata
 	char					**splitpath;
 	int						num_pipes;
 	bool					reset;
+	int						*pid;
 	struct s_simple_cmds	*simple_cmds;
 }			t_minidata;
 

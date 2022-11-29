@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reset_tools.c                                      :+:      :+:    :+:   */
+/*   prepare_executor.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 14:48:49 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/29 22:17:25 by zyunusov         ###   ########.fr       */
+/*   Created: 2022/11/29 22:09:30 by zyunusov          #+#    #+#             */
+/*   Updated: 2022/11/29 22:19:53 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include <stdlib.h>
 
-int reset_tools(t_minidata *minidata)
+int	prepare_executor(t_minidata *minidata)
 {
-    simple_cmdsclear(&minidata->simple_cmds);
-    free(minidata->currline);
-    if (minidata->pid)
-        free(minidata->pid);
-    setup_signal();
-    minidata->reset = true;
-    main_loop(minidata);
-    return (1);
+	if (minidata->num_pipes == 0)
+		single_cmd(minidata->simple_cmds, minidata);
+	else
+	{
+		minidata->pid = ft_calloc(sizeof(int), minidata->num_pipes + 2);
+		if (!minidata->pid)
+			return (allerrors(1, minidata));
+		start_executor(minidata);
+	}
+	return (EXIT_SUCCESS);
 }
