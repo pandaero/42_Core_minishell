@@ -6,7 +6,7 @@
 #    By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:31:50 by pandalaf          #+#    #+#              #
-#    Updated: 2022/11/24 19:27:29 by pandalaf         ###   ########.fr        #
+#    Updated: 2022/11/29 03:38:36 by pandalaf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,11 @@ vpath %.c $(SRC_DIR)
 # Make desired target
 all: directories $(NAME)
 
+ifeq ($(shell uname -s), Linux)
+SYSLIB := -lreadline
+SYSLIB_OBJ := -lreadline
+endif
+
 # Make the target executable
 $(NAME): $(OBJS) $(OBJS_RL) $(LIBFT_FULL)
 	$(CC) $(CFLAGS) $(COPT) $< $(filter-out $<, $^) -o $@ $(LIBFT_FULL) \
@@ -51,9 +56,6 @@ $(NAME): $(OBJS) $(OBJS_RL) $(LIBFT_FULL)
 # Make required directories
 directories: $(OBJ_DIR)
 
-$(info $(SRCS_RL))
-$(info $(OBJS_RL))
-
 # Make object files that require linker
 $(word 1, $(OBJS_RL)): $(word 1, $(SRCS_RL)) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $^ -o $@ $(SYSLIB_OBJ)
@@ -61,13 +63,6 @@ $(word 2, $(OBJS_RL)): $(word 2, $(SRCS_RL)) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $^ -o $@ $(SYSLIB_OBJ)
 $(word 3, $(OBJS_RL)): $(word 3, $(SRCS_RL)) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $^ -o $@ $(SYSLIB_OBJ)
-# define make-goal
-# $1: $2 | $(OBJ_DIR)
-# 	$(CC) $(CFLAGS) -c $^ -o $@ $(SYSLIB_OBJ)
-# endef
-
-# $(foreach objrl, $(OBJS_RL), $(eval $(call make-goal, $(objrl))))
-
 
 # Make object files
 $(addprefix $(OBJ_DIR), %.o): %.c | $(OBJ_DIR)

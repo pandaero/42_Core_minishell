@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 19:58:30 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/26 20:11:04 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/29 03:37:03 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	get_env_var_data(char *env_el, t_envvar *node)
 
 	split = ft_split(env_el, '=');
 	node->var = ft_strdup(split[0]);
-	node->value = ft_strdup(split[1]);
+	if (split[1] != 0)
+		node->value = ft_strdup(split[1]);
 	node->whole = ft_strdup(env_el);
 	free_split(split);
 }
