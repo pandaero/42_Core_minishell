@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/28 16:56:10 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/29 21:46:57 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,35 @@ typedef struct s_word
 //Typedef is for a struct containing critical data.
 typedef struct s_minidata
 {
-	t_word	*lexer_l;
-	char	**env;
-	char	*currline;
-	char	**builtincmds;
-	char	**splitpath;
-	int		num_pipes;
-	bool	reset;
+	t_word					*lexer_l;
+	char					**env;
+	char					*currline;
+	char					**builtincmds;
+	char					**splitpath;
+	int						num_pipes;
+	bool					reset;
+	struct s_simple_cmds	*simple_cmds;
 }			t_minidata;
 
+typedef struct s_parse_tools
+{
+	t_word				*lexer_l;
+	t_word				*redirections;
+	int					num_red;
+	struct s_minidata	*minidata;
+}	t_parser_tools;
 
-int reset_tools(t_minidata *minidata);
+typedef struct s_simple_cmds
+{
+	char					**str;
+	int						num_redirections;
+	char					*hd_file_name;
+	t_word					*redirections;
+	struct s_simple_cmds	*next;
+	struct s_simple_cmds	*prev;
+}	t_simple_cmds;
+
+int	reset_tools(t_minidata *minidata);
 
 int	main_loop(t_minidata *minidata);
 
@@ -88,6 +106,10 @@ int			handle_token(int i, char *s, t_word **lexer_l);
 // need to write function delone, clear to free list ==== ----
 void	lexerclear(t_word **lst);
 void	lexerdelone(t_word **lst, int key);
+//Function to add elem to list
+t_word	*newlex(char *s, int token);
+//Function to add element back of the list
+void	add_back_lex(t_word **lst, t_word *new);
 
 // ========================== MEMORY HANDLING (FREEING) ========================
 //Function frees a 2D char array made from ft_split.
@@ -116,7 +138,17 @@ void		builtin_echo(t_minidata *minidata);
 // ============================ COMMAND LINE PARSING ===========================
 //Function finds the command within a simple command line.
 char		*findcommand(const char *line);
+// Function that creates list of rediractions
+void	rm_redirections(t_parser_tools *parser_tools);
+// Function to count arguments
+int	count_args(t_word *lexer_l);
 
+t_parser_tools	init_parser_tools(t_word *lexer_l, t_minidata *minidata);
+// Function 
+t_simple_cmds	*simple_cmdnew(char **str, int num_red, t_word *red);
+void	simple_cmdsadd_back(t_simple_cmds **lst, t_simple_cmds *new);
+void	simple_cmdsclear(t_simple_cmds **lst);
+t_simple_cmds	*simple_cmdsfirst(t_simple_cmds *map);
 // Function that will start parsing
 int			start_parser(t_minidata *minidata);
 //Function performs the parsing of a command line.
