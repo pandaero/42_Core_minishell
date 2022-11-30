@@ -6,13 +6,14 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:40:14 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/30 04:41:05 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/30 08:40:59 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 
 static t_simple_cmds	*init_cmd(t_parser_tools *parser_tools)
 {
@@ -65,7 +66,7 @@ int	start_parser(t_minidata *minidata)
 
 	minidata->simple_cmds = NULL;
 	count_pipes(minidata->lexer_l, minidata);
-	if (minidata->lexer_l->token == PIPE)
+	if (minidata->lexer_l->token >= PIPE)
 		return (parser_token_error(minidata, minidata->lexer_l,
 				minidata->lexer_l->token));
 	while (minidata->lexer_l)

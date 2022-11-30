@@ -6,13 +6,14 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:20:41 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/29 16:31:44 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/30 08:30:04 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 //Function handles an "command not found" error.
 void	error_cmd_nf(char *line)
@@ -63,6 +64,7 @@ int	parser_token_error(t_minidata *minidata, t_word *lexer_l, t_tokens token)
 	else
 		ft_putstr_fd("\n", STDERR_FILENO);
 	lexerclear(&lexer_l);
+	printf("HELLLLLLLL\n");
 	reset_tools(minidata);
 	return (EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/30 04:37:16 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/30 07:19:02 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct s_simple_cmds
 int	reset_tools(t_minidata *minidata);
 
 int	main_loop(t_minidata *minidata);
+
+char	*strtrim(char const *s1, char const *set);
 
 // =============================== INITIALISATION ==============================
 //Function initialises the minidata structure.
