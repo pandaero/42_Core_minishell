@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:18:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/30 00:33:51 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:59:22 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,53 +20,83 @@ void	error_inv_input(void)
 	ft_putstr_fd("minishell: invalid input\n", STDERR_FILENO);
 }
 
-//Function writes a given string to the terminal. With/out newline.
-void	builtin_echo(t_minidata *minidata)
+//Function checks what type of expansion to perform and performs it.
+static void	echo_inner(t_minidata *minidata, t_echo *echo, int i)
 {
-	char	**splitline;
-	char	*str;
-	char	*out;
-	int		i;
-
-	splitline = ft_split(minidata->currline, ' ');
-	i = 1;
-	while (splitline[i])
+	if (echo->splitline[i][0] == '\"')
 	{
-		if (ft_strncmp(splitline[i], "-n", 3) == 0)
+		if (count_dquotes(echo->splitline[i]) % 2 == 0)
+		{
+			echo->str = var_expansion(minidata, echo->splitline[i]);
+			echo->str = clean_dquotes(echo->str);
+		}
+		else
+			error_inv_input();
+	}
+	else if (echo->splitline[i][0] == '\'')
+	{
+		if (count_squotes(echo->splitline[i]) % 2 == 0)
+		{
+			echo->str = ft_strdup(echo->splitline[i]);
+			echo->str = clean_squotes(echo->str);
+		}
+		else
+			error_inv_input();
+	}
+	else
+		echo->str = var_expansion(minidata, echo->splitline[i]);
+}
+
+//Function performs the interpretation for echo.
+static void	echo_main(t_minidata *minidata, t_echo *echo, int i)
+{
+	char	*temp;
+
+	while (echo->splitline[i])
+	{
+		if (ft_strncmp(echo->splitline[i], "-n", 3) == 0)
 		{
 			i++;
 			continue ;
 		}
-		if (splitline[i][0] == '\"')
+		echo_inner(minidata, echo, i);
+		if (echo->preout)
 		{
-			if (count_dquotes(splitline[i]) % 2 == 0)
-			{
-				str = var_expansion(minidata, splitline[i]);
-				str = clean_dquotes(str);
-			}
-			else
-				error_inv_input();
-		}
-		else if (splitline[i][0] == '\'')
-		{
-			if (count_squotes(splitline[i]) % 2 == 0)
-			{
-				str = ft_strdup(splitline[i]);
-				str = clean_squotes(str);
-			}
-			else
-				error_inv_input();
+			temp = ft_strjoin(" ", echo->str);
+			echo->preout = ft_strjoin(echo->preout, temp);
+			free(temp);
 		}
 		else
-			str = var_expansion(minidata, splitline[i]);
+			echo->preout = ft_strdup(echo->str);
+		free(echo->str);
 		i++;
 	}
-	free_split(splitline);
-	if (ft_strncmp(splitline[1], "-n", 3) == 0)
-		out = ft_strdup(str);
-	else 
-		out = ft_strjoin(str, "\n");
-	free(str);
-	ft_putstr_fd(out, 1);
-	free(out);
+}
+
+//Function writes a given string to the terminal. With/out newline.
+void	builtin_echo(t_minidata *minidata)
+{
+	t_echo	*func;
+	int		i;
+
+	func = (t_echo *)malloc(sizeof(t_echo));
+	func->splitline = ft_split(minidata->currline, ' ');
+	func->preout = NULL;
+	i = 1;
+	if (split_size(func->splitline) == 1 || \
+		(split_size(func->splitline) == 2 && \
+		ft_strncmp(func->splitline[1], "-n", 3) == 0))
+		func->preout = ft_strdup("");
+	else
+		echo_main(minidata, func, i);
+	if (split_size(func->splitline) > 1 && \
+		ft_strncmp(func->splitline[1], "-n", 3) == 0)
+		func->finalout = ft_strdup(func->preout);
+	else
+		func->finalout = ft_strjoin(func->preout, "\n");
+	free_split(func->splitline);
+	free(func->preout);
+	ft_putstr_fd(func->finalout, 1);
+	free(func->finalout);
+	free(func);
 }
