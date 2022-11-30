@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:15:34 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/28 15:31:22 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:41:55 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 //Function prints out an error message for when the home variable is not set.
 void	error_cd_home(void)
 {
-	ft_putstr_fd("minishell: cd: HOME not set\n", STDERR);
+	ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
 }
 
 //Function changes the environment variables to implement a change of directory.
