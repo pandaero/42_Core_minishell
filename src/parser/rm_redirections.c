@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:18:06 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/30 04:39:40 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/30 10:36:20 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	add_new_redirection(t_word *tmp, t_parser_tools *parser_tools)
 	parser_tools->num_red++;
 	return (0);
 }
+
 // Function that checks for redirections
 void	rm_redirections(t_parser_tools *parser_tools)
 {

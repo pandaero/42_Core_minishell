@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:19:08 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/28 03:40:49 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/30 10:37:55 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	lexerdelone(t_word **lst, int key)
 		lexerdel_first(lst);
 		return ;
 	}
-		while (node && node->i != key)
+	while (node && node->i != key)
 	{
 		prev = node;
 		node = node->next;

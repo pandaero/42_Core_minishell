@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:40:14 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/30 08:40:59 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/30 10:36:10 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static t_simple_cmds	*init_cmd(t_parser_tools *parser_tools)
 	return (simple_cmdnew(str,
 			parser_tools->num_red, parser_tools->redirections));
 }
+
 // Function to check pipe errors
 static int	handle_pipe_errors(t_minidata *minidata, t_tokens token)
 {
