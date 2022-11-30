@@ -4,11 +4,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-/*Test for var_expansion. cc -Wall -Werror -Wextra utils_expansion_main.c ../src/utils/utils_expansion.c ../src/utils/utils_expansion_2.c ../src/utils/utils_2.c ../src/utils/utils_env_2.c ../src/utils/utils_env_3.c ../src/memory/memory.c ../src/main/init.c ../libft/libft.a
+//*Test for var_expansion. cc -Wall -Werror -Wextra utils_expansion_main.c ../src/utils/utils_expansion.c ../src/utils/utils_expansion_2.c ../src/utils/utils_2.c ../src/utils/utils_env_2.c ../src/utils/utils_env_3.c ../src/memory/memory.c ../src/main/init.c ../libft/libft.a
 int	main(int argc, char **argv, char **env)
 {
 	t_minidata	*minidata = (t_minidata *)malloc(sizeof(t_minidata));
-	char		*expr = ft_strdup("hello/$HOME/he$$re/$HOME/aga$?i$$$$n");
+	char		*expr = ft_strdup("$HOMEhello/hello/$HOME/he$$re/$HOME/aga$?i$$$$n");
 	char		*expanded;
 
 	if (argc && argv)
