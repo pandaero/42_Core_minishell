@@ -6,17 +6,13 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/30 00:33:29 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:17:58 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "libft/libft.h"
-
-# define STDIN 0
-# define STDOUT 1
-# define STDERR 2
 
 # define PROMPT "minishell$ "
 
@@ -67,6 +63,7 @@ typedef struct s_env
 	int			size;
 	t_envvar	*first;
 	t_envvar	*last;
+	t_envvar	*null;
 }				t_env;
 
 //Typedef is for a struct containing critical data.
