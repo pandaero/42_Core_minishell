@@ -6,12 +6,12 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:44:26 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/30 04:22:32 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/30 04:42:04 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
+// Function to intialize parser_tools
 t_parser_tools	init_parser_tools(t_word *lexer_l, t_minidata *minidata)
 {
 	t_parser_tools	parser_tools;
@@ -36,7 +36,7 @@ void	count_pipes(t_word *lexer_l, t_minidata *minidata)
 		tmp = tmp->next;
 	}
 }
-// Function to count arguments in currline
+// Function to count arguments until pipe 
 int	count_args(t_word *lexer_l)
 {
 	t_word	*tmp;

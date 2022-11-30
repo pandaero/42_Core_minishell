@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/30 04:19:29 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/30 04:37:16 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_minidata
 	int						*pid;
 	struct s_simple_cmds	*simple_cmds;
 }			t_minidata;
-
+// typedef for refering easily in parser
 typedef struct s_parse_tools
 {
 	t_word				*lexer_l;
@@ -62,7 +62,7 @@ typedef struct s_parse_tools
 	int					num_red;
 	struct s_minidata	*minidata;
 }	t_parser_tools;
-
+// typedef for redirections and cmds after parsing
 typedef struct s_simple_cmds
 {
 	char					**str;
@@ -143,20 +143,20 @@ char		*findcommand(const char *line);
 void	rm_redirections(t_parser_tools *parser_tools);
 // Function to count arguments
 int	count_args(t_word *lexer_l);
-
+// Function to just initialize for parser_tools
 t_parser_tools	init_parser_tools(t_word *lexer_l, t_minidata *minidata);
-// Function 
+// Function to add to list cmds
 t_simple_cmds	*simple_cmdnew(char **str, int num_red, t_word *red);
 void	simple_cmdsadd_back(t_simple_cmds **lst, t_simple_cmds *new);
-void	simple_cmdsclear(t_simple_cmds **lst);
 t_simple_cmds	*simple_cmdsfirst(t_simple_cmds *map);
+// Function to clear simple_cmds
+void	simple_cmdsclear(t_simple_cmds **lst);
 // Function that will start parsing
 int			start_parser(t_minidata *minidata);
 //Function performs the parsing of a command line.
 int		parser(t_minidata *minidata);
-
 //Function for counting pipes
-void		count_pipes(t_word *lexer_l, t_minidata *minidata);
+void	count_pipes(t_word *lexer_l, t_minidata *minidata);
 
 // ================================ VALIDATION =================================
 //Function checks that an input line contains valid instructions
