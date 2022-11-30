@@ -56,13 +56,11 @@ int	main(int argc, char **argv, char **env)
 
 	if (argv && argc == 1)
 	{
-		minidata = (t_minidata *)malloc(sizeof(t_minidata));
-		minidata->env = env;
-		init_minidata(minidata);
+		minidata = init_minidata(env);
 		setup_signal();
 		main_loop(minidata);
 	}
 	else
-		write(STDERR, "No arguments are required", 25);
+		ft_putstr_fd("No arguments are required", STDERR);
 	return (0);
 }
