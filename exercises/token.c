@@ -46,7 +46,6 @@ static int ft_read_words(int i, char *s)
     return (j);
 }
 
-
 int ft_read_token(char *line)
 {
     int i;
@@ -68,6 +67,7 @@ int ft_read_token(char *line)
     }
     return (1);
 }
+
 int main(void)
 {
     char *k = "pwd >file | echo Hello";

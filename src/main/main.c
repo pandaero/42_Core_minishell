@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/26 20:05:04 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/30 10:37:28 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	cleanexit(t_minidata *minidata)
 }
 
 //Function performs the terminal attributes setting and readline initialisation.
-static void	main_loop(t_minidata *minidata)
+int	main_loop(t_minidata *minidata)
 {
 	struct termios	termparams;
 	struct termios	newtermparams;
@@ -37,19 +37,16 @@ static void	main_loop(t_minidata *minidata)
 	newtermparams.c_lflag &= ~ECHOCTL;
 	ret = tcsetattr(0, 0, &newtermparams);
 	(void) ret;
-	minidata->currline = (char *) 1;
-	while (minidata->currline != 0)
-	{
-		setup_signal();
-		minidata->currline = readline(PROMPT);
-		if (minidata->currline == 0)
-			cleanexit(minidata);
-		add_history (minidata->currline);
-		if (minidata->currline[0] == '\0')
-			continue ;
-		parser(minidata);
-		free(minidata->currline);
-	}
+	minidata->currline = readline(PROMPT);
+	if (minidata->currline == 0)
+		cleanexit(minidata);
+	if (minidata->currline[0] == '\0')
+		return (reset_tools(minidata));
+	add_history (minidata->currline);
+	parser(minidata);
+	prepare_executor(minidata);
+	reset_tools(minidata);
+	return (1);
 }
 
 //Program is an interactive shell.
@@ -60,6 +57,7 @@ int	main(int argc, char **argv, char **env)
 	if (argv && argc == 1)
 	{
 		minidata = init_minidata(env);
+		setup_signal();
 		main_loop(minidata);
 	}
 	else
