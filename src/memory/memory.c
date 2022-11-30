@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:17:16 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/27 01:27:28 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:34:34 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,9 @@ void	free_env(t_env *list)
 {
 	while (list->size > 0)
 		rem_env_var(list, list->last);
+	free(list->null->var);
+	free(list->null->value);
+	free(list->null->whole);
+	free(list->null);
 	free(list);
 }
