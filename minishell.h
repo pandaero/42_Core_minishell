@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/29 22:14:43 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/30 04:19:29 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ void		error_cmd_nf(char *line);
 void		error_sig(void);
 //Function prints out a syntax error message.
 int	parser_token_error(t_minidata *minidata, t_word *lexer_l, t_tokens token);
-
+// Function for all the errors that we will have
 int allerrors(int error, t_minidata *minidata);
-
+// Function for parser error to free list if there is an error
 void	parser_error(int error, t_minidata *minidata, t_word *lexer_l);
 
 // =================================== LEXER ===================================

@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:44:26 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/29 16:45:19 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/30 04:22:32 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_parser_tools	init_parser_tools(t_word *lexer_l, t_minidata *minidata)
 	parser_tools.minidata = minidata;
 	return (parser_tools);
 }
-
+// Function to count pipes in currline
 void	count_pipes(t_word *lexer_l, t_minidata *minidata)
 {
 	t_word	*tmp;
@@ -36,7 +36,7 @@ void	count_pipes(t_word *lexer_l, t_minidata *minidata)
 		tmp = tmp->next;
 	}
 }
-
+// Function to count arguments in currline
 int	count_args(t_word *lexer_l)
 {
 	t_word	*tmp;
