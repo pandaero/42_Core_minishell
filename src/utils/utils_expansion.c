@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 01:05:49 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/27 01:18:22 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/30 14:21:53 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,17 @@ char	*expand_var(t_minidata *minidata, char *str, int i)
 	t_expand	expand;
 	int			j;
 
-	expand.pre = ft_substr(str, 0, i);
+	if (i == 0)
+		expand.pre = ft_strdup("");
+	else
+		expand.pre = ft_substr(str, 0, i);
 	j = i + 1;
 	if (str[j] == '$' || str[j] == '?')
 		return (expand_extra(minidata, str, expand.pre, str[j]));
 	while (str[j] != '\0' && is_var(str[j]) == 1)
 		j++;
 	if (str[j] == '\0')
-		expand.post = NULL;
+		expand.post = ft_strdup("");
 	else
 		expand.post = ft_substr(str, j, ft_strlen(str));
 	expand.var = ft_substr(str, i + 1, j - i - 1);

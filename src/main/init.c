@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:08:30 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/28 20:13:23 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:30:26 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ t_env	*new_env_list(void)
 	new->size = 0;
 	new->first = 0;
 	new->last = 0;
+	new->null = new_env_var();
+	new->null->var = ft_strdup("");
+	new->null->value = ft_strdup("");
+	new->null->whole = ft_strdup("");
 	return (new);
 }
 

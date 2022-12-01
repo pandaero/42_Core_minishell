@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 23:17:28 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/28 20:16:08 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:14:42 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_envvar	*find_env_var_list(t_minidata *minidata, char *var)
 			return (node);
 		node = node->next;
 	}
-	return (0);
+	return (minidata->envlist->null);
 }
 
 //Function sets an environment variable's value in the env variable list.
