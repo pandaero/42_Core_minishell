@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:31:50 by pandalaf          #+#    #+#              #
-#    Updated: 2022/11/29 03:38:36 by pandalaf         ###   ########.fr        #
+#    Updated: 2022/11/29 14:19:08 by zyunusov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
