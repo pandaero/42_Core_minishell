@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/30 10:37:28 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:41:24 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ int	main(int argc, char **argv, char **env)
 		main_loop(minidata);
 	}
 	else
-		ft_putstr_fd("No arguments are required", STDERR);
+		ft_putstr_fd("No arguments are required", STDERR_FILENO);
 	return (0);
 }

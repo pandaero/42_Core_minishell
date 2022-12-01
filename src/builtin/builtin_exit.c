@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:39:06 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/25 17:28:47 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:42:50 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@
 //Function writes out the "too many arguments" error to standard error.
 static int	error_exit(int err, char *arg)
 {
-	write(STDERR, "minishell: exit: ", 17);
+	write(STDERR_FILENO, "minishell: exit: ", 17);
 	if (err == 1)
 	{
-		write(STDERR, arg, ft_strlen(arg));
-		write(STDERR, ": numeric argument required", 27);
+		write(STDERR_FILENO, arg, ft_strlen(arg));
+		write(STDERR_FILENO, ": numeric argument required", 27);
 	}
 	else
-		write(STDERR, "too many arguments", 18);
-	write(STDERR, "\n", 1);
+		write(STDERR_FILENO, "too many arguments", 18);
+	write(STDERR_FILENO, "\n", 1);
 	return (255);
 }
 

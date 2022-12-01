@@ -4,11 +4,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-/*Test for var_expansion. cc -Wall -Werror -Wextra utils_expansion_main.c ../src/utils/utils_expansion.c ../src/utils/utils_expansion_2.c ../src/utils/utils_2.c ../src/utils/utils_env_2.c ../src/utils/utils_env_3.c ../src/memory/memory.c ../src/main/init.c ../libft/libft.a
+//*Test for var_expansion. cc -Wall -Werror -Wextra utils_expansion_main.c ../src/utils/utils_expansion.c ../src/utils/utils_expansion_2.c ../src/utils/utils_2.c ../src/utils/utils_env_2.c ../src/utils/utils_env_3.c ../src/memory/memory.c ../src/main/init.c ../libft/libft.a
 int	main(int argc, char **argv, char **env)
 {
 	t_minidata	*minidata = (t_minidata *)malloc(sizeof(t_minidata));
-	char		*expr = ft_strdup("hello/$HOME/he$$re/$HOME/aga$?i$$$$n");
+	char		*expr = ft_strdup("$HOME");
 	char		*expanded;
 
 	if (argc && argv)
@@ -19,7 +19,7 @@ int	main(int argc, char **argv, char **env)
 	printf("Before: %s\n", expr);
 	expanded = var_expansion(minidata, expr);
 	free(expr);
-	printf("After:  %s\n", expanded);
+	printf("After: %s\n", expanded);
 	free_env(minidata->envlist);
 	free(minidata->last_return);
 	free(minidata->dollar);

@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/30 09:39:08 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:03:05 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,9 @@
 # include "libft/libft.h"
 # include <stdbool.h>
 
-# define STDIN 0
-# define STDOUT 1
-# define STDERR 2
-
 # define PROMPT "minishell$ "
 
+// ============================= FUNCTION REFACTORING ==========================
 //Typedef declares a struct used to shorten an expansion function.
 typedef struct s_expand
 {
@@ -31,8 +28,18 @@ typedef struct s_expand
 	char	*newnew;
 }			t_expand;
 
+//Typedef declares a struct used to shorten the echo builtin.
+typedef struct s_echo
+{
+	char	**splitline;
+	char	*str;
+	char	*preout;
+	char	*finalout;
+}			t_echo;
+
+// ================================= TOKEN LIST ================================
 //Typedef serves to classify redirections and piping.
-typedef enum s_tokens
+typedef enum tokens
 {
 	PIPE = 1,
 	GREAT = 2,
@@ -51,6 +58,7 @@ typedef struct s_word
 	struct s_word	*prev;
 }					t_word;
 
+// ========================== ENVIRONMENT VARIABLE LIST ========================
 //Typedef is for an environment variable.
 typedef struct s_envvar
 {
@@ -68,8 +76,10 @@ typedef struct s_env
 	int			size;
 	t_envvar	*first;
 	t_envvar	*last;
+	t_envvar	*null;
 }				t_env;
 
+// =================================== MAIN ====================================
 //Typedef is for a struct containing critical data.
 typedef struct s_minidata
 {
@@ -268,5 +278,15 @@ void		get_env_var_data(char *env_el, t_envvar *node);
 void		env_var_swap(t_envvar *var1, t_envvar *var2, t_env *list);
 //Function determines whether the environment variable list is ordered.
 int			is_env_list_ordered(t_env *list);
+
+// =========================== UTILS - EXPANSION ===============================
+//Function determines the number of double quotes in a string.
+int			count_dquotes(const char *str);
+//Function cleans double quotes from a string. Frees input string.
+char		*clean_dquotes(char *str);
+//Function determines the number of single quotes in a string.
+int			count_squotes(const char *str);
+//Function cleans single quotes from a string. Frees input string.
+char		*clean_squotes(char *str);
 
 #endif
