@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 14:57:59 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/30 10:42:17 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/02 17:08:11 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	allerrors(int error, t_minidata *minidata)
 	else if (error == 2)
 		ft_putstr_fd("syntax error near unexpected token 'newline'\n",
 			STDERR_FILENO);
+	else if (error == 3)
+		ft_putstr_fd("Failed to fork\n", STDERR_FILENO);
 	reset_tools(minidata);
 	return (EXIT_FAILURE);
 }
