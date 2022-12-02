@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:27:25 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/28 15:05:21 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/02 14:09:23 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	parser(t_minidata *minidata)
 		return (allerrors(1, minidata));
 	if (start_parser(minidata) == 0)
 		return (EXIT_FAILURE);
-	if (is_validline(minidata) == 1)
+	if (is_validcmdline(minidata) == 1)
 		execution(minidata);
 	else
 		error_cmd_nf(minidata->currline);
