@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:27:25 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/02 14:09:23 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/04 16:49:48 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	parser(t_minidata *minidata)
 		return (allerrors(0, minidata));
 	if (ft_read_token(minidata) == 0)
 		return (allerrors(1, minidata));
-	if (start_parser(minidata) == 0)
+	if (start_parser(minidata) == 1)
 		return (EXIT_FAILURE);
 	if (is_validcmdline(minidata) == 1)
 		execution(minidata);

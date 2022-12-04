@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:18:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/30 15:59:22 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/04 21:40:16 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ void	builtin_echo(t_minidata *minidata)
 	int		i;
 
 	func = (t_echo *)malloc(sizeof(t_echo));
-	func->splitline = ft_split(minidata->currline, ' ');
+	func->splitline = minidata->simple_cmds->str;
 	func->preout = NULL;
 	i = 1;
-	if (split_size(func->splitline) == 1 || \
+	if (minidata->simple_cmds->num_elements == 1 || \
 		(split_size(func->splitline) == 2 && \
 		ft_strncmp(func->splitline[1], "-n", 3) == 0))
 		func->preout = ft_strdup("");
@@ -94,7 +94,6 @@ void	builtin_echo(t_minidata *minidata)
 		func->finalout = ft_strdup(func->preout);
 	else
 		func->finalout = ft_strjoin(func->preout, "\n");
-	free_split(func->splitline);
 	free(func->preout);
 	ft_putstr_fd(func->finalout, 1);
 	free(func->finalout);

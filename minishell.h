@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/02 14:08:59 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/04 16:22:21 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,25 +79,9 @@ typedef struct s_env
 	t_envvar	*null;
 }				t_env;
 
-// =================================== MAIN ====================================
-//Typedef is for a struct containing critical data.
-typedef struct s_minidata
-{
-	t_word					*lexer_l;
-	char					**env;
-	t_env					*envlist;
-	char					*currline;
-	char					**builtincmds;
-	char					**splitpath;
-	char					*last_return;
-	char					*dollar;
-	int						num_pipes;
-	bool					reset;
-	int						*pid;
-	struct s_simple_cmds	*simple_cmds;
-}			t_minidata;
+// =================================== PARSER ==================================
 // typedef for refering easily in parser
-typedef struct s_parse_tools
+typedef struct s_parser_tools
 {
 	t_word				*lexer_l;
 	t_word				*redirections;
@@ -108,6 +92,7 @@ typedef struct s_parse_tools
 typedef struct s_simple_cmds
 {
 	char					**str;
+	int						num_elements;
 	int						num_redirections;
 	char					*hd_file_name;
 	t_word					*redirections;
@@ -115,6 +100,25 @@ typedef struct s_simple_cmds
 	struct s_simple_cmds	*prev;
 }	t_simple_cmds;
 
+// =================================== MAIN ====================================
+//Typedef is for a struct containing critical data.
+typedef struct s_minidata
+{
+	t_word			*lexer_l;
+	char			**env;
+	t_env			*envlist;
+	char			*currline;
+	char			**builtincmds;
+	char			**splitpath;
+	char			*last_return;
+	char			*dollar;
+	int				num_pipes;
+	bool			reset;
+	int				*pid;
+	t_simple_cmds	*simple_cmds;
+}					t_minidata;
+
+//NEED CATEGORY
 int	reset_tools(t_minidata *minidata);
 
 int	main_loop(t_minidata *minidata);
@@ -194,7 +198,8 @@ int	count_args(t_word *lexer_l);
 // Function to just initialize for parser_tools
 t_parser_tools	init_parser_tools(t_word *lexer_l, t_minidata *minidata);
 // Function to add to list cmds
-t_simple_cmds	*simple_cmdnew(char **str, int num_red, t_word *red);
+t_simple_cmds	*simple_cmdnew(char **str, int num_elm, \
+								int num_red, t_word *red)
 void	simple_cmdsadd_back(t_simple_cmds **lst, t_simple_cmds *new);
 t_simple_cmds	*simple_cmdsfirst(t_simple_cmds *map);
 // Function to clear simple_cmds

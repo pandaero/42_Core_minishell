@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:34:20 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/24 20:37:22 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/04 17:09:10 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,32 +60,25 @@ int	is_pathcmd(char *cmd, t_minidata *minidata)
 	return (0);
 }
 
-//Function is a shortcut to free a pointer with given return value.
-static int	freewithreturn(char *ptr, int ret)
-{
-	free(ptr);
-	return (ret);
-}
-
 //Function determines whether a command line calls a built-in command.
 int	is_builtincmd(t_minidata *minidata)
 {
 	char	*cmd;
 
-	cmd = findcommand(minidata->currline);
+	cmd = minidata->simple_cmds->str[0];
 	if (ft_strncmp("exit", cmd, 4) == 0 && ft_strlen(cmd) == 4)
-		return (freewithreturn(cmd, 1));
+		return (1);
 	if (ft_strncmp("pwd", cmd, 3) == 0 && ft_strlen(cmd) == 3)
-		return (freewithreturn(cmd, 2));
+		return (2);
 	if (ft_strncmp("export", cmd, 6) == 0 && ft_strlen(cmd) == 6)
-		return (freewithreturn(cmd, 3));
+		return (3);
 	if (ft_strncmp("unset", cmd, 5) == 0 && ft_strlen(cmd) == 5)
-		return (freewithreturn(cmd, 4));
+		return (4);
 	if (ft_strncmp("env", cmd, 3) == 0 && ft_strlen(cmd) == 3)
-		return (freewithreturn(cmd, 5));
+		return (5);
 	if (ft_strncmp("cd", cmd, 2) == 0 && ft_strlen(cmd) == 2)
-		return (freewithreturn(cmd, 6));
+		return (6);
 	if (ft_strncmp("echo", cmd, 4) == 0 && ft_strlen(cmd) == 4)
-		return (freewithreturn(cmd, 7));
-	return (freewithreturn(cmd, 0));
+		return (7);
+	return (0);
 }
