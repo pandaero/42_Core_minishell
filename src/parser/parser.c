@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:27:25 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/02 14:09:23 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/04 19:45:51 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ char	*findcommand(const char *line)
 }
 
 //Function acts when the input command line is a valid one.
-static void	execution(t_minidata *minidata)
-{
-	if (is_builtincmd(minidata) > 0)
-		builtin_execution(minidata);
-	//path (check permissions)
-	//direct (check permissions)
-}
+// static void	execution(t_minidata *minidata)
+// {
+// 	if (is_builtincmd(minidata) > 0)
+// 		builtin_execution(minidata);
+// 	//path (check permissions)
+// 	//direct (check permissions)
+// }
 
 //Function performs the parsing of a command line.
 int	parser(t_minidata *minidata)
@@ -50,11 +50,11 @@ int	parser(t_minidata *minidata)
 		return (allerrors(0, minidata));
 	if (ft_read_token(minidata) == 0)
 		return (allerrors(1, minidata));
-	if (start_parser(minidata) == 0)
+	if (start_parser(minidata) != 0)
 		return (EXIT_FAILURE);
-	if (is_validcmdline(minidata) == 1)
-		execution(minidata);
-	else
-		error_cmd_nf(minidata->currline);
+	// if (is_validcmdline(minidata) == 1)
+	// 	execution(minidata);
+	// else
+	// 	error_cmd_nf(minidata->currline);
 	return (EXIT_SUCCESS);
 }

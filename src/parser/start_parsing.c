@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:40:14 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/30 10:36:10 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/04 19:52:36 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	start_parser(t_minidata *minidata)
 
 	minidata->simple_cmds = NULL;
 	count_pipes(minidata->lexer_l, minidata);
-	if (minidata->lexer_l->token >= PIPE)
+	if (minidata->lexer_l->token == PIPE)
 		return (parser_token_error(minidata, minidata->lexer_l,
 				minidata->lexer_l->token));
 	while (minidata->lexer_l)

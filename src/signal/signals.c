@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:05:41 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/24 12:36:07 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/04 21:38:13 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	sigint(int sig)
 	rl_on_new_line();
 	rl_redisplay();
 }
+
 
 //Function sets up the sigaction signal handlers
 void	setup_signal(void)

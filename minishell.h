@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/02 14:08:59 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/04 23:46:24 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,13 @@ typedef struct s_simple_cmds
 	struct s_simple_cmds	*prev;
 }	t_simple_cmds;
 
+typedef struct s_global
+{
+	int error_num;
+}	t_global;
+
+extern t_global	g_global;
+
 int	reset_tools(t_minidata *minidata);
 
 int	main_loop(t_minidata *minidata);
@@ -122,10 +129,14 @@ int	main_loop(t_minidata *minidata);
 // =============================== INITIALISATION ==============================
 //Function initialises the minidata structure.
 t_minidata	*init_minidata(char **env);
+
+int	ft_init_minidata(t_minidata *minidata);
 //Function initialises an empty environment variable linked list.
 t_env		*new_env_list(void);
 //Function initialises an empty environment variable node.
 t_envvar	*new_env_var(void);
+//Function that gets path
+int	parse_envp(t_minidata *minidata);
 
 // =============================== ERROR HANDLING ==============================
 //Function handles an "command not found" error.
@@ -183,6 +194,20 @@ void		builtin_env(t_minidata *minidata);
 void		builtin_cd(t_minidata *minidata);
 //Function writes a given string to the terminal. With/out newline.
 void		builtin_echo(t_minidata *minidata);
+
+int	prepare_executor(t_minidata *minidata);
+
+int start_executor(t_minidata *minidata);
+
+int forking(t_minidata *minidata, int end[2],int fd_in, t_simple_cmds *cmd);
+
+int ft_pipe_wait(int *pid, int amount,t_minidata *minidata);
+
+void    ft_dup_cmd(t_simple_cmds *cmd, t_minidata *minidata, int end[2], int fd_in);
+
+char	**resplit_str(char **double_arr);
+
+int check_redirections(t_simple_cmds *cmd);
 
 // ============================ COMMAND LINE PARSING ===========================
 //Function finds the command within a simple command line.
