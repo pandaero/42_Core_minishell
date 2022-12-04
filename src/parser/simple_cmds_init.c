@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmds_init.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 21:22:12 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/29 21:44:41 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/04 16:18:05 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include "stdlib.h"
 
-t_simple_cmds	*simple_cmdnew(char **str, int num_red, t_word *red)
+t_simple_cmds	*simple_cmdnew(char **str, int num_elm, \
+								int num_red, t_word *red)
 {
 	t_simple_cmds	*new_elem;
 
@@ -23,6 +24,7 @@ t_simple_cmds	*simple_cmdnew(char **str, int num_red, t_word *red)
 	new_elem->str = str;
 	new_elem->hd_file_name = NULL;
 	new_elem->num_redirections = num_red;
+	new_elem->num_elements = num_elm;
 	new_elem->redirections = red;
 	new_elem->next = NULL;
 	new_elem->prev = NULL;

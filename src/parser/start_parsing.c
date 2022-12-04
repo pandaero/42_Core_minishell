@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:40:14 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/30 10:36:10 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/04 16:22:29 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,18 @@ static t_simple_cmds	*init_cmd(t_parser_tools *parser_tools)
 	char	**str;
 	int		i;
 	int		arg_size;
+	int		dec;
 	t_word	*tmp;
 
 	i = 0;
 	rm_redirections(parser_tools);
 	arg_size = count_args(parser_tools->lexer_l);
+	dec = arg_size;
 	str = ft_calloc(arg_size + 1, sizeof(char *));
 	if (!str)
 		parser_error(1, parser_tools->minidata, parser_tools->lexer_l);
 	tmp = parser_tools->lexer_l;
-	while (arg_size > 0)
+	while (dec > 0)
 	{
 		if (tmp->str)
 		{
@@ -37,9 +39,9 @@ static t_simple_cmds	*init_cmd(t_parser_tools *parser_tools)
 			lexerdelone(&parser_tools->lexer_l, tmp->i);
 			tmp = parser_tools->lexer_l;
 		}
-		arg_size--;
+		dec--;
 	}
-	return (simple_cmdnew(str,
+	return (simple_cmdnew(str, arg_size, \
 			parser_tools->num_red, parser_tools->redirections));
 }
 
