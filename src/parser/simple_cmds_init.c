@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 21:22:12 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/04 16:18:05 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/04 16:58:46 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	simple_cmdsclear(t_simple_cmds **lst)
 		temp = (*lst)->next;
 		redirections_temp = (*lst)->redirections;
 		lexerclear(&redirections_temp);
-		if ((*lst)->str)
-			free_split((*lst)->str);
+		// if ((*lst)->str)
+		// 	free_split((*lst)->str);
 		if ((*lst)->hd_file_name)
 			free((*lst)->hd_file_name);
 		free(*lst);
