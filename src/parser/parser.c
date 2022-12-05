@@ -6,9 +6,10 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:27:25 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/04 19:45:51 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/05 01:23:59 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../minishell.h"
 #include <stdlib.h>
