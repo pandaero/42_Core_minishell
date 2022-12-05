@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:20:41 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 22:00:39 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 22:59:13 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	parser_error(int error, t_minidata *minidata, t_word *lexer_l)
 	ft_printf("Parser error\n");
 	(void) error;
 	(void) minidata;
-	//allerrors(error, minidata);
 }
 
 //Function prints out a syntax error message.
