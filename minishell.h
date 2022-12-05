@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/30 16:03:05 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:16:20 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,22 @@ typedef struct s_echo
 }			t_echo;
 
 // ================================= TOKEN LIST ================================
-//Typedef serves to classify redirections and piping.
-typedef enum tokens
+//Typedef classifies redirections and pipes.
+typedef enum token
 {
 	PIPE = 1,
-	GREAT,
-	GREAT_GREAT,
-	LESS,
-	LESS_LESS,
-}	t_tokens;
+	GREAT = 2,
+	GREAT_GREAT = 3,
+	LESS = 4,
+	LESS_LESS = 5,
+}	t_token;
 
-//Typedef(doubly linked list) for words(cmds).
+//Typedef declares a node in the lexer doubly-linked list for words (commands).
 typedef struct s_word
 {
-	char			*str;
-	t_tokens		token;
 	int				i;
+	char			*str;
+	t_token			token;
 	struct s_word	*next;
 	struct s_word	*prev;
 }					t_word;

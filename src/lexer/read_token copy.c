@@ -3,54 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   read_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 14:59:09 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/25 14:40:18 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/05 19:57:15 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-// check for word separator
-static int	ft_is_space(char c)
-{
-	return (c == ' ' || (c > 8 && c < 14));
-}
-
-// function to skip separators
-static int	ft_spaces_skip(char *line, int i)
+//Function navigates to a closing delimiter (from a starting location).
+int	handle_quotes(int i, char *str, char del)
 {
 	int	j;
 
 	j = 0;
-	while (ft_is_space(line[i + j]))
+	if (str[i + j] == del)
+	{
 		j++;
+		while (str[i + j] != del && str[i + j] != '\0')
+			j++;
+		j++;
+	}
 	return (j);
 }
 
-// function to read only words(cmds)
-static int	ft_read_words(int i, char *s, t_word **lexer_l)
+//Function determines the command units in non-token command line. Adds to list.
+static int	read_simple(int i, char *str, t_word **lexer_l)
 {
 	int	j;
 
 	j = 0;
-	while (s[i + j])
+	while (str[i + j])
 	{
-		j += ft_handle_quotes(i + j, s, 34);
-		j += ft_handle_quotes(i + j, s, 39);
-		if (ft_is_space(s[i + j]))
+		j += handle_quotes(i + j, str, '\"');
+		j += handle_quotes(i + j, str, '\'');
+		if (ft_is_space(str[i + j]))
 			break ;
 		else
 			j++;
 	}
-	if (add_unitto_lexer(ft_substr(s, i, j), 0, lexer_l) == 0)
+	if (add_unitto_lexer(ft_substr(str, i, j), 0, lexer_l) == 0)
 		return (-1);
 	return (j);
 }
 
-// function to read from string, to divide to tokens
-int	ft_read_token(t_minidata *minidata)
+//Function fills the lexer linked list with command units from the command line.
+int	read_token(t_minidata *minidata)
 {
 	int	i;
 	int	j;
@@ -59,12 +58,12 @@ int	ft_read_token(t_minidata *minidata)
 	while (minidata->currline[i])
 	{
 		j = 0;
-		i += ft_spaces_skip(minidata->currline, i);
-		if (check_token(minidata->currline[i]))
+		i += skip_spaces(minidata->currline, i);
+		if (check_token(minidata->currline[i]) == 0)
 			j = handle_token(i, minidata->currline, &minidata->lexer_l);
 		else
-			j = ft_read_words(i, minidata->currline, &minidata->lexer_l);
-		if (j < 0)
+			j = read_simple(i, minidata->currline, &minidata->lexer_l);
+		if (j == -1)
 			return (0);
 		i += j;
 	}
