@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 21:50:50 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 21:54:52 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 22:58:53 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,3 @@ int	count_args(t_word *lexer_l)
 	}
 	return (i);
 }
-

@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 20:53:42 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 21:02:42 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 22:58:38 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_space(char ch)
 }
 
 //Function skips spacing characters (within a char string).
-int skip_spaces(char *line, int i)
+int	skip_spaces(char *line, int i)
 {
 	int	j;
 
