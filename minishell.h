@@ -6,13 +6,14 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 20:33:18 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 21:10:44 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "libft/libft.h"
+# include <stdbool.h>
 
 # define PROMPT "minishell$ "
 
@@ -36,7 +37,7 @@ typedef struct s_echo
 	char	*finalout;
 }			t_echo;
 
-// ================================= TOKEN LIST ================================
+// =============================== WORD/TOKEN LIST =============================
 //Typedef classifies redirections and pipes.
 typedef enum token
 {
@@ -78,6 +79,35 @@ typedef struct s_env
 	t_envvar	*null;
 }				t_env;
 
+// ================================== PARSER LISTS =============================
+//Typedef is for a node in the parser list
+typedef struct s_parser
+{
+	t_word				*lexer_list;
+	t_word				*redirections;
+	int					num_reds;
+	struct s_minidata	*minidata;
+}						t_parser_tools;
+
+//Typedef is for a node in the commands list
+typedef struct s_simple_cmds
+{
+	char					**str;
+	int						num_elements;
+	int						num_redirections;
+	char					*hd_file_name;
+	t_word					*redirections;
+	struct s_simple_cmds	*prev;
+	struct s_simple_cmds	*next;
+}							t_simple_cmds;
+
+// ================================ GLOBAL VARIABLE ============================
+//Typedef is for the global variable of the program: a persistent error number.
+typedef struct s_global
+{
+	int	error_num;
+}		t_global;
+
 // =================================== MAIN ====================================
 //Typedef is for a struct containing critical data.
 typedef struct s_minidata
@@ -112,13 +142,13 @@ void		error_sig(void);
 
 // =================================== LEXER ===================================
 // Function to read from string, to divide to tokens
-int			ft_read_token(t_minidata *minidata);
+int			read_token(t_minidata *minidata);
 // Function to read(skip) quotes
-int			ft_handle_quotes(int i, char *s, char del);
+int			handle_quotes(int i, char *str, char del);
 // Function to put all tokens in separate container(doubly linked list)
-int			add_unitto_lexer(char *s, t_tokens token, t_word **lexer_l);
+int			add_lexer_node(char *s, t_token token, t_word **lexer_l);
 // Function that check for pipe and redir only <> returns name of token
-t_tokens	check_token(int c);
+t_token		check_token(char ch);
 // Function that passes to lexer_init - pipes and redirections
 int			handle_token(int i, char *s, t_word **lexer_l);
 // need to write function delone, clear to free list ==== ----
@@ -152,12 +182,10 @@ void		builtin_echo(t_minidata *minidata);
 // ============================ COMMAND LINE PARSING ===========================
 //Function finds the command within a simple command line.
 char		*findcommand(const char *line);
-
 // Function that will start parsing
 int			start_parser(t_minidata *minidata);
 //Function performs the parsing of a command line.
 void		parser(t_minidata *minidata);
-
 //Function for counting pipes
 void		count_pipes(t_word *lexer_l, t_minidata *minidata);
 
@@ -180,10 +208,6 @@ void		setup_signal(void);
 int			split_size(char **str);
 //Function returns the size of a 2D char array.
 int			nonsplit_size(char **str);
-//Function checks whether a character is a numeric one.
-int			is_numeric(char ch);
-//Function checks whether a string contains a valid signed numeric declaration.
-int			is_validnum(char *str);
 //Function returns a long int with the value contained in the given char string.
 long		ft_atol(char *str);
 //Function returns a long long int with the value from the given char string.
@@ -194,14 +218,24 @@ int			ft_strcmp(const char *str1, const char *str2);
 char		*var_expansion(t_minidata *minidata, const char *expression);
 //Function expands a variable within an expression, given a starting point.
 char		*expand_var(t_minidata *minidata, char *str, int i);
-//Function checks whether the input character is valid for an environment var.
-int			is_var(char ch);
-//Function determines if there are variables present in an expression.
-int			contains_variables(const char *str);
 //Function updates the dollar shell variable.
 void		update_dollar(t_minidata *minidata, int doll);
 //Function updates the last return shell variable.
 void		update_return(t_minidata *minidata, int ret);
+//Function skips spacing characters (within a char string).
+int			skip_spaces(char *line, int i);
+
+// =============================== UTILS - BOOLEAN =============================
+//Function checks whether a character is a spacing character.
+int			is_space(char ch);
+//Function checks whether a character is a numeric one.
+int			is_numeric(char ch);
+//Function checks whether a string contains a valid signed numeric declaration.
+int			is_validnum(char *str);
+//Function checks whether the input character is valid for an environment var.
+int			is_var(char ch);
+//Function determines if there are variables present in an expression.
+int			contains_variables(const char *str);
 
 // ===================== UTILS - ENVIRONMENT VARIABLE LIST =====================
 //Function gets the current working directory from the environment vector.
@@ -232,6 +266,8 @@ void		get_env_var_data(char *env_el, t_envvar *node);
 void		env_var_swap(t_envvar *var1, t_envvar *var2, t_env *list);
 //Function determines whether the environment variable list is ordered.
 int			is_env_list_ordered(t_env *list);
+//Function appends a forward slash to the PATH elements to create splitpath.
+void		working_path(t_minidata *minidata);
 
 // =========================== UTILS - EXPANSION ===============================
 //Function determines the number of double quotes in a string.

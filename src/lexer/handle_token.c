@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_tokens.c                                    :+:      :+:    :+:   */
+/*   handle_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 02:01:05 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/05 19:22:34 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 21:10:35 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@ int	handle_token(int i, char *s, t_word **lexer_l)
 	token = check_token(s[i]);
 	if (token == GREAT && check_token(s[i + 1]) == GREAT)
 	{
-		if (!add_unitto_lexer(NULL, GREAT_GREAT, lexer_l))
+		if (!add_lexer_node(NULL, GREAT_GREAT, lexer_l))
 			return (-1);
 		return (2);
 	}
 	else if (token == LESS && check_token(s[i + 1]) == LESS)
 	{
-		if (!add_unitto_lexer(NULL, LESS_LESS, lexer_l))
+		if (!add_lexer_node(NULL, LESS_LESS, lexer_l))
 			return (-1);
 		return (2);
 	}
 	else if (token)
 	{
-		if (!add_unitto_lexer(NULL, token, lexer_l))
+		if (!add_lexer_node(NULL, token, lexer_l))
 			return (-1);
 		return (1);
 	}

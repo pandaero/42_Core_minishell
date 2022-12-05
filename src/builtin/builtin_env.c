@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:19:01 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/28 20:22:53 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:48:45 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ void	builtin_env(t_minidata *minidata)
 	int			ind;
 
 	ind = 0;
-	while (ind < minidata->envlist->size)
+	while (ind < minidata->env_list->size)
 	{
-		curr = minidata->envlist->first;
+		curr = minidata->env_list->first;
 		while (curr->index != ind)
 		{
 			if (curr->next == 0 && curr->index != ind)
 			{
 				ind++;
-				curr = minidata->envlist->first;
+				curr = minidata->env_list->first;
 				break ;
 			}
 			curr = curr->next;

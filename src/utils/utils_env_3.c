@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 23:17:28 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 20:27:06 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 21:03:09 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,14 @@ t_envvar	*find_env_var_list(t_minidata *minidata, char *var)
 {
 	t_envvar	*node;
 
-	node = minidata->envlist->first;
+	node = minidata->env_list->first;
 	while (node != 0)
 	{
 		if (ft_strcmp(node->var, var) == 0)
 			return (node);
 		node = node->next;
 	}
-	return (minidata->envlist->null);
+	return (minidata->env_list->null);
 }
 
 //Function sets an environment variable's value in the env variable list.
@@ -106,7 +106,7 @@ void	set_env_var(t_minidata *minidata, char *var, char *value)
 		curr->whole = ft_strdup(whole);
 		curr->var = ft_strdup(var);
 		curr->value = ft_strdup(value);
-		add_env_var(minidata->envlist, curr);
+		add_env_var(minidata->env_list, curr);
 	}
 	else
 	{
