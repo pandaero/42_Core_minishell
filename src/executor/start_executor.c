@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_executor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 14:11:31 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/05 14:19:01 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/05 15:25:46 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	start_executor(t_minidata *minidata)
 	int	fd_in;
 
 	fd_in = STDIN_FILENO;
+	end[0] = 0;
+	end[1] = 0;
 	while (minidata->simple_cmds)
 	{
 		// minidata->simple_cmds = ft_call_expansion(minidata, minidata->simple_cmds);
