@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:34:53 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/05 14:20:50 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:13:57 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ static int find_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 	{
 		mycmd = ft_strjoin(minidata->splitpath[i], cmd->str[0]);
 		if (!access(mycmd, F_OK))
+		{	
 			execve(mycmd, cmd->str, minidata->env);
+		}
 		free(mycmd);
 		i++;
 	}

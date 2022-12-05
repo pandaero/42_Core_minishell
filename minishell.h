@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 14:30:35 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:03:55 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,8 @@ void    ft_dup_cmd(t_simple_cmds *cmd, t_minidata *minidata, int end[2], int fd_
 char	**resplit_str(char **double_arr);
 
 int check_redirections(t_simple_cmds *cmd);
+
+int check_fd_heredoc(int end[2]);
 
 // ============================ COMMAND LINE PARSING ===========================
 //Function finds the command within a simple command line.
