@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 23:17:28 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/30 13:14:42 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:27:06 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,6 @@ void	set_env_var(t_minidata *minidata, char *var, char *value)
 		curr->whole = ft_strdup(whole);
 	}
 	free(whole);
+	if (ft_strncmp(var, "PATH", 5) == 0)
+		working_path(minidata);
 }
