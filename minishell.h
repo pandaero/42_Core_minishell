@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 21:10:44 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 21:59:35 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,25 +133,44 @@ t_minidata	*init_minidata(char **env);
 t_env		*new_env_list(void);
 //Function initialises an empty environment variable node.
 t_envvar	*new_env_var(void);
+//Function to intialise parser_tools.
+t_parser_tools	init_parser_tools(t_word *lexer_l, t_minidata *minidata);
+//Function to inialise the command list.
+t_simple_cmds	*simple_cmdnew(char **str, int num_elm, \
+								int num_red, t_word *red);
 
 // =============================== ERROR HANDLING ==============================
 //Function handles an "command not found" error.
 void		error_cmd_nf(char *line);
 //Function handles an error in signal action setup.
 void		error_sig(void);
+//Function prints out a syntax error message.
+int			parser_token_error(t_minidata *minidata, t_word *lexer_l, \
+								t_token token);
+//Function displays the "parser error" message.
+void		parser_error(int error, t_minidata *minidata, t_word *lexer_l);
 
 // =================================== LEXER ===================================
 // Function to read from string, to divide to tokens
 int			read_token(t_minidata *minidata);
 // Function to read(skip) quotes
 int			handle_quotes(int i, char *str, char del);
+//Function adds a node to back of the lexer linked list.
+void		add_back_lex(t_word **lst, t_word *new);
 // Function to put all tokens in separate container(doubly linked list)
 int			add_lexer_node(char *s, t_token token, t_word **lexer_l);
 // Function that check for pipe and redir only <> returns name of token
 t_token		check_token(char ch);
 // Function that passes to lexer_init - pipes and redirections
 int			handle_token(int i, char *s, t_word **lexer_l);
-// need to write function delone, clear to free list ==== ----
+//Function creates a new element of the lexer list with the stated data.
+t_word		*newlex(char *s, int token);
+//Function deletes a node in the lexer list according to its i value.
+void		lexerdelone(t_word **lst, int key);
+
+// ================================ PARSING ====================================
+//Function checks for redirections.
+void	rm_redirections(t_parser_tools *parser_tools);
 
 // ========================== MEMORY HANDLING (FREEING) ========================
 //Function frees a 2D char array made from ft_split.
@@ -160,6 +179,10 @@ void		free_split(char **charr);
 void		free_minidata(t_minidata *minidata);
 //Function frees an environment variable linked list.
 void		free_env(t_env *list);
+//Function frees an entire lexer linked list.
+void		free_lexer(t_word **lst);
+//Function performs the clearing of memory that takes place every loop.
+void		loop_reset(t_minidata *minidata);
 
 // ============================ EXECUTION - BUILT-INS ==========================
 //Function handles the execution of built-in commands.
@@ -224,6 +247,12 @@ void		update_dollar(t_minidata *minidata, int doll);
 void		update_return(t_minidata *minidata, int ret);
 //Function skips spacing characters (within a char string).
 int			skip_spaces(char *line, int i);
+//Function to count the number of arguments within a pipe. 
+int			count_args(t_word *lexer_l);
+
+// =============================== UTILS - COMMANDS LIST =======================
+//Function adds a command node to the back of a list.
+void	simple_cmdsadd_back(t_simple_cmds **lst, t_simple_cmds *new);
 
 // =============================== UTILS - BOOLEAN =============================
 //Function checks whether a character is a spacing character.

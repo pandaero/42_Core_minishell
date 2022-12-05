@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   reset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 13:44:26 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/25 14:36:18 by zyunusov         ###   ########.fr       */
+/*   Created: 2022/12/05 21:16:56 by pandalaf          #+#    #+#             */
+/*   Updated: 2022/12/05 21:20:50 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+#include <stdlib.h>
 
-void	count_pipes(t_word *lexer_l, t_minidata *minidata)
+//Function performs the clearing of memory that takes place every loop.
+void	loop_reset(t_minidata *minidata)
 {
-	t_word	*tmp;
-
-	tmp = lexer_l;
-	minidata->num_pipes = 0;
-	while (tmp != NULL)
-	{
-		if (tmp->token == PIPE)
-			minidata->num_pipes++;
-		tmp = tmp->next;
-	}
+	free(minidata->currline);
 }

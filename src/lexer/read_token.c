@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 14:59:09 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/05 21:10:21 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 22:31:31 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	read_simple(int i, char *str, t_word **lexer_l)
 	int	j;
 
 	j = 0;
-	while (str[i + j])
+	while (str[i + j] && (!check_token(str[i + j])))
 	{
 		j += handle_quotes(i + j, str, '\"');
 		j += handle_quotes(i + j, str, '\'');
@@ -59,7 +59,7 @@ int	read_token(t_minidata *minidata)
 	{
 		j = 0;
 		i += skip_spaces(minidata->currline, i);
-		if (check_token(minidata->currline[i]) == 0)
+		if (check_token(minidata->currline[i]))
 			j = handle_token(i, minidata->currline, &minidata->lexer_list);
 		else
 			j = read_simple(i, minidata->currline, &minidata->lexer_list);

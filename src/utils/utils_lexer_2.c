@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_lexer.c                                      :+:      :+:    :+:   */
+/*   utils_lexer_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:19:08 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/05 19:19:18 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 21:45:47 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	lexerdel_first(t_word **lst)
 		(*lst)->prev = NULL;
 }
 
+//Function deletes a node in the lexer list according to its i value.
 void	lexerdelone(t_word **lst, int key)
 {
 	t_word	*node;
