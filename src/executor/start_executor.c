@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 14:11:31 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/05 15:25:46 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 17:46:04 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,14 @@ int forking(t_minidata *minidata, int end[2],int fd_in, t_simple_cmds *cmd)
 	}
 	minidata->pid[i] = fork();
 	if (minidata->pid[i] < 0)
+	{
 		allerrors(3, minidata);
+	}
 	if (minidata->pid[i] == 0)
+	{
+		setup_child_signal();
 		ft_dup_cmd(cmd, minidata, end, fd_in);
+	}
 	i++;
 	return (EXIT_SUCCESS);
 }

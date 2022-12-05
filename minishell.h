@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 14:30:35 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/05 17:14:06 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,8 @@ int			is_valid_quotes(char *line);
 // ================================== SIGNALS ==================================
 //Function sets up the sigaction signal handlers.
 void		setup_signal(void);
+//Function sets up the sigaction signal handlers for child processes.
+void	setup_child_signal(void);
 
 // =================================== UTILS ===================================
 //Function returns the size of a ft_split-created array.
