@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 01:24:19 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/05 14:30:35 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ typedef struct s_minidata
 }					t_minidata;
 
 //NEED CATEGORY
->>>>>>> c892221318a9ff1bc862fa7f56b371c5170df046
 int	reset_tools(t_minidata *minidata);
 
 int	main_loop(t_minidata *minidata);
@@ -227,7 +226,7 @@ int	count_args(t_word *lexer_l);
 t_parser_tools	init_parser_tools(t_word *lexer_l, t_minidata *minidata);
 // Function to add to list cmds
 t_simple_cmds	*simple_cmdnew(char **str, int num_elm, \
-								int num_red, t_word *red)
+								int num_red, t_word *red);
 void	simple_cmdsadd_back(t_simple_cmds **lst, t_simple_cmds *new);
 t_simple_cmds	*simple_cmdsfirst(t_simple_cmds *map);
 // Function to clear simple_cmds
