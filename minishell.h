@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 20:16:20 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:33:18 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,19 @@ typedef struct s_env
 //Typedef is for a struct containing critical data.
 typedef struct s_minidata
 {
-	t_word	*lexer_l;
-	char	**env;
-	t_env	*envlist;
-	char	*currline;
-	char	**builtincmds;
-	char	**splitpath;
-	char	*last_return;
-	char	*dollar;
-	int		num_pipes;
-}			t_minidata;
+	t_simple_cmds	*simple_cmds;
+	t_word			*lexer_list;
+	t_env			*env_list;
+	char			**env;
+	char			*currline;
+	char			**builtincmds;
+	char			**splitpath;
+	char			*last_return;
+	char			*dollar;
+	int				num_pipes;
+	bool			reset;
+	int				*pid;
+}					t_minidata;
 
 // =============================== INITIALISATION ==============================
 //Function initialises the minidata structure.
