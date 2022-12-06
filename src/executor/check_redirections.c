@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 18:01:01 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/05 14:53:32 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:14:22 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,8 @@ static int	check_append_outfile(t_word *redirections)
 		fd = open(redirections->str,
 				O_CREAT | O_RDWR | O_APPEND, 0644);
 	else
-	{
 		fd = open(redirections->str,
 				O_CREAT | O_RDWR | O_TRUNC, 0777);
-		ft_printf("%d\n", fd);	
-	}
-	ft_printf("HELLO FROM OPEN\n");
 	return (fd);
 }
 
@@ -58,7 +54,6 @@ int	handle_outfile(t_word *redirection)
 	int	fd;
 
 	fd = check_append_outfile(redirection);
-	ft_printf("%d\n", fd);
 	if (fd < 0)
 	{
 		ft_putstr_fd("minishell: outfile: Error\n", STDERR_FILENO);
@@ -79,8 +74,6 @@ int	check_redirections(t_simple_cmds *cmd)
 	t_word	*start;
 
 	start = cmd->redirections;
-	ft_printf(" RED_TOKEN: %d\n", cmd->redirections->token);
-	ft_printf(" RED: %s\n", cmd->redirections->str);
 	while (cmd->redirections)
 	{
 		if (cmd->redirections->token == LESS)
