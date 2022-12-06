@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/06 16:54:54 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/06 22:30:50 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,9 @@ typedef struct s_minidata
 	bool			reset;
 	int				*pid;
 	t_simple_cmds	*simple_cmds;
+	int				stop_heredoc;
+	int				in_heredoc;
+	bool			heredoc;
 }					t_minidata;
 
 //NEED CATEGORY
@@ -216,6 +219,14 @@ char	**resplit_str(char **double_arr);
 int check_redirections(t_simple_cmds *cmd);
 
 int check_fd_heredoc(int end[2]);
+
+char	*delete_quotes(char *str, char c);
+
+int	send_heredoc(t_minidata *minidata, t_simple_cmds *cmd);
+
+char	*generate_heredoc_filename(void);
+
+int	heredoc(t_minidata *minidata, t_word *heredoc, char *file_name);
 
 // ============================ COMMAND LINE PARSING ===========================
 //Function finds the command within a simple command line.

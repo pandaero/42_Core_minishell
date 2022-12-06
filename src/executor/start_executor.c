@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 14:11:31 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/05 20:13:45 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/06 17:15:14 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	start_executor(t_minidata *minidata)
 		// minidata->simple_cmds = ft_call_expansion(minidata, minidata->simple_cmds);
 		if (minidata->simple_cmds->next)
 			pipe(end);
-		// send_heredoc(minidata, minidata->simple_cmds);
+		send_heredoc(minidata, minidata->simple_cmds);
 		forking(minidata, end, fd_in, minidata->simple_cmds);
 		close(end[1]);
 		if (minidata->simple_cmds->prev)
@@ -102,7 +102,7 @@ int	start_executor(t_minidata *minidata)
 		if (minidata->simple_cmds->next)
 			minidata->simple_cmds = minidata->simple_cmds->next;
 		else
-			break;
+			break ;
 	}
 	ft_pipe_wait(minidata->pid, minidata->num_pipes, minidata);
 	minidata->simple_cmds = simple_cmdsfirst(minidata->simple_cmds);
