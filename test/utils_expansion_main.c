@@ -8,19 +8,19 @@
 int	main(int argc, char **argv, char **env)
 {
 	t_minidata	*minidata = (t_minidata *)malloc(sizeof(t_minidata));
-	char		*expr = ft_strdup("$HOME");
+	char		*expr = ft_strdup("why aren't we $HOME");
 	char		*expanded;
 
 	if (argc && argv)
-		minidata->envlist = new_env_list();
-	fill_env(minidata->envlist, env);
+		minidata->env_list = new_env_list();
+	fill_env(minidata->env_list, env);
 	minidata->last_return = ft_itoa(55);
 	minidata->dollar = ft_itoa(23452);
 	printf("Before: %s\n", expr);
 	expanded = var_expansion(minidata, expr);
 	free(expr);
 	printf("After: %s\n", expanded);
-	free_env(minidata->envlist);
+	free_env(minidata->env_list);
 	free(minidata->last_return);
 	free(minidata->dollar);
 	free(expanded);

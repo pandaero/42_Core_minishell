@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/30 13:41:24 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 21:28:46 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,21 @@
 #include <readline/history.h>
 #include <readline/readline.h>
 
+//Function handles permanent settings of the terminal.
+void	terminal_setup(void)
+{
+	struct termios	termparams;
+	struct termios	newtermparams;
+	int				ret;
+
+	setup_signal();
+	ret = tcgetattr(0, &termparams);
+	newtermparams = termparams;
+	newtermparams.c_lflag &= ~ECHOCTL;
+	ret = tcsetattr(0, 0, &newtermparams);
+	(void) ret;
+}
+
 //Function exits the program cleanly.
 static void	cleanexit(t_minidata *minidata)
 {
@@ -28,19 +43,10 @@ static void	cleanexit(t_minidata *minidata)
 //Function performs the terminal attributes setting and readline initialisation.
 static void	main_loop(t_minidata *minidata)
 {
-	struct termios	termparams;
-	struct termios	newtermparams;
-	int				ret;
-
-	ret = tcgetattr(0, &termparams);
-	newtermparams = termparams;
-	newtermparams.c_lflag &= ~ECHOCTL;
-	ret = tcsetattr(0, 0, &newtermparams);
-	(void) ret;
+	terminal_setup();
 	minidata->currline = (char *) 1;
 	while (minidata->currline != 0)
 	{
-		setup_signal();
 		minidata->currline = readline(PROMPT);
 		if (minidata->currline == 0)
 			cleanexit(minidata);
@@ -48,7 +54,7 @@ static void	main_loop(t_minidata *minidata)
 		if (minidata->currline[0] == '\0')
 			continue ;
 		parser(minidata);
-		free(minidata->currline);
+		loop_reset(minidata);
 	}
 }
 

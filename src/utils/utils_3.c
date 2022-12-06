@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_quotes.c                                    :+:      :+:    :+:   */
+/*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 16:20:32 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/25 14:44:29 by zyunusov         ###   ########.fr       */
+/*   Created: 2022/12/05 20:53:42 by pandalaf          #+#    #+#             */
+/*   Updated: 2022/12/05 22:58:38 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	ft_handle_quotes(int i, char *s, char del)
+//Function checks whether a character is a spacing character.
+int	is_space(char ch)
+{
+	if (ch == ' ' || (ch > 8 && ch < 14))
+		return (1);
+	return (0);
+}
+
+//Function skips spacing characters (within a char string).
+int	skip_spaces(char *line, int i)
 {
 	int	j;
 
 	j = 0;
-	if (s[i + j] == del)
-	{
+	while (is_space(line[i + j]))
 		j++;
-		while (s[i + j] != del && s[i + j] != '\0')
-			j++;
-		j++;
-	}
 	return (j);
 }

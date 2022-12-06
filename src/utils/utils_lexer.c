@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_init.c                                       :+:      :+:    :+:   */
+/*   utils_lexer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 02:01:44 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/25 14:42:30 by zyunusov         ###   ########.fr       */
+/*   Created: 2022/11/26 16:19:08 by zyunusov          #+#    #+#             */
+/*   Updated: 2022/12/05 19:53:21 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include <stdlib.h>
 
-// Function to create a new element of the list and init data of elem
+//Function creates a new element of the lexer list with the stated data.
 t_word	*newlex(char *s, int token)
 {
 	t_word		*new_elem;
-	static int	i = 0;
+	static int	i;
 
 	new_elem = (t_word *)malloc(sizeof(t_word));
 	if (new_elem == 0)
@@ -30,7 +30,7 @@ t_word	*newlex(char *s, int token)
 	return (new_elem);
 }
 
-// Function to add element back of the list
+//Function adds a node to back of the lexer linked list.
 void	add_back_lex(t_word **lst, t_word *new)
 {
 	t_word	*tmp;
@@ -47,8 +47,8 @@ void	add_back_lex(t_word **lst, t_word *new)
 	new->prev = tmp;
 }
 
-// Function to put all tokens in separate container(doubly linked list)
-int	add_unitto_lexer(char *s, t_tokens token, t_word **lexer_l)
+//Function to add a new filled node to the lexer linked list.
+int	add_lexer_node(char *s, t_token token, t_word **lexer_l)
 {
 	t_word	*word;
 

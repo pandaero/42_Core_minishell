@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:21:14 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/28 22:23:10 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:49:00 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	display_env_alph(t_minidata *minidata)
 {
 	t_envvar	*curr;
 
-	env_list_order(minidata->envlist);
-	curr = minidata->envlist->first;
+	env_list_order(minidata->env_list);
+	curr = minidata->env_list->first;
 	while (curr != 0)
 	{
 		ft_printf("declare -x %s=\"%s\"\n", curr->var, curr->value);

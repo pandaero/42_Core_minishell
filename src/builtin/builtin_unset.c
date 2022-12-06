@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:24:26 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/28 20:14:58 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:49:14 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	builtin_unset(t_minidata *minidata)
 	free_split(splitline);
 	var = find_env_var_list(minidata, search);
 	if (var)
-		rem_env_var(minidata->envlist, var);
+		rem_env_var(minidata->env_list, var);
 	free(search);
 }

@@ -6,12 +6,13 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:08:30 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/30 13:30:26 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:34:01 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include <stdlib.h>
+#include <stdbool.h>
 
 //Function initialises the minidata.
 t_minidata	*init_minidata(char **env)
@@ -23,8 +24,9 @@ t_minidata	*init_minidata(char **env)
 
 	new = (t_minidata *)malloc(sizeof(t_minidata));
 	new->env = env;
-	new->envlist = new_env_list();
-	fill_env(new->envlist, env);
+	new->env_list = new_env_list();
+	fill_env(new->env_list, env);
+	working_path(new);
 	lvl = ft_atoi(find_env_var_list(new, "SHLVL")->value) + 1;
 	alvl = ft_itoa(lvl);
 	set_env_var(new, "SHLVL", alvl);
@@ -33,6 +35,10 @@ t_minidata	*init_minidata(char **env)
 	new->builtincmds = ft_split(builtin, '.');
 	new->last_return = ft_itoa(0);
 	new->dollar = ft_itoa(0);
+	new->simple_cmds = NULL;
+	new->lexer_list = NULL;
+	new->reset = false;
+	new->pid = NULL;
 	free(builtin);
 	return (new);
 }
