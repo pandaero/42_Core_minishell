@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:18:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/04 21:40:16 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/06 19:55:16 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,5 @@ void	builtin_echo(t_minidata *minidata)
 	ft_putstr_fd(func->finalout, 1);
 	free(func->finalout);
 	free(func);
+	update_return(minidata, 0);
 }
