@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_executor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 14:11:31 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/05 17:46:04 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/05 20:13:45 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ int ft_pipe_wait(int *pid, int amount,t_minidata *minidata)
 	return (EXIT_SUCCESS);
 }
 
+int check_fd_heredoc(int end[2])//, t_simple_cmds *cmd)t_minidata *minidata, 
+{
+	int fd_in;
+
+	fd_in = end[0];
+	return (fd_in);
+}
+
 int	start_executor(t_minidata *minidata)
 {
 	int	end[2];
@@ -90,7 +98,7 @@ int	start_executor(t_minidata *minidata)
 		close(end[1]);
 		if (minidata->simple_cmds->prev)
 			close(fd_in);
-		// fd_in = ft_check_fd_heredoc(minidata, end, minidata->simple_cmds);
+		fd_in = check_fd_heredoc(end);
 		if (minidata->simple_cmds->next)
 			minidata->simple_cmds = minidata->simple_cmds->next;
 		else
