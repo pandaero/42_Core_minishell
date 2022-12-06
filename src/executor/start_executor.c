@@ -43,9 +43,14 @@ int forking(t_minidata *minidata, int end[2],int fd_in, t_simple_cmds *cmd)
 	}
 	minidata->pid[i] = fork();
 	if (minidata->pid[i] < 0)
+	{
 		allerrors(3, minidata);
+	}
 	if (minidata->pid[i] == 0)
+	{
+		setup_child_signal();
 		ft_dup_cmd(cmd, minidata, end, fd_in);
+	}
 	i++;
 	return (EXIT_SUCCESS);
 }
