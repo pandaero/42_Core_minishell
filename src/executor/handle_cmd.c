@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:34:53 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/05 20:13:57 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/06 19:39:28 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ static void handle_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 
 	exit_code = 0;
 	if (cmd->redirections)
+	{
 		if (check_redirections(cmd))
 			exit(1);
+	}
 	// if (builtins)
 	// {
 	//     exit_code = builtinsfunct;
