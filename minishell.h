@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 20:03:55 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/06 19:05:28 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define MINISHELL_H
 # include "libft/libft.h"
 # include <stdbool.h>
+# include <sys/types.h>
 
 # define PROMPT "minishell$ "
 
@@ -123,7 +124,8 @@ typedef struct s_minidata
 	char			*dollar;
 	int				num_pipes;
 	bool			reset;
-	int				*pid;
+	char			*runningcmdline;
+	pid_t			*pid;
 	t_simple_cmds	*simple_cmds;
 }					t_minidata;
 
@@ -185,7 +187,7 @@ void		free_env(t_env *list);
 
 // ============================ EXECUTION - BUILT-INS ==========================
 //Function handles the execution of built-in commands.
-void		builtin_execution(t_minidata *minidata);
+void		builtin_execution(t_minidata *minidata, int builtin);
 //Function exits the program cleanly.
 void		builtin_exit(t_minidata *minidata);
 //Function prints the current working directory where the shell is acting.
@@ -246,7 +248,7 @@ int			is_validcmdline(t_minidata *minidata);
 //Function determines whether a command is found within the path.
 int			is_pathcmd(char *cmd, t_minidata *minidata);
 //Function determines whether a command line calls a built-in command.
-int			is_builtincmd(t_minidata *minidata);
+int			is_builtincmd(char *cmd);
 // Function handles an "syntax error: while quotes not closed"
 int			is_valid_quotes(char *line);
 
@@ -254,9 +256,21 @@ int			is_valid_quotes(char *line);
 //Function sets up the sigaction signal handlers.
 void		setup_signal(void);
 //Function sets up the sigaction signal handlers for child processes.
-void	setup_child_signal(void);
+void		setup_child_signal(void);
+//Function sets up the sigaction signal handlers for the parent process.
+void		setup_parent_signal(void);
+//Function handles the SIGINT signal. Redisplay prompt.
+void		sigint(int sig);
+//Function handles the SIGINT signal for the child. Take SIGINT.
+void		sigint_ch(int sig);
+//Function handles the SIGQUIT signal for the child. Take SIGQUIT.
+void		sigqt_ch(int sig);
+//Function handles the SIGQUIT signal for the parent. Display program stopped.
+void		sigqt_par(int sig);
 
 // =================================== UTILS ===================================
+//Function reinserts a delimiter to a split-created 2D char array.
+char		*unsplit(char **strarr, char delim);
 //Function returns the size of a ft_split-created array.
 int			split_size(char **str);
 //Function returns the size of a 2D char array.
