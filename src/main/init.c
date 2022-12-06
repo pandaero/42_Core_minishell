@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:08:30 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/30 13:30:26 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/06 19:48:53 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ t_minidata	*init_minidata(char **env)
 	lvl = ft_atoi(find_env_var_list(new, "SHLVL")->value) + 1;
 	alvl = ft_itoa(lvl);
 	set_env_var(new, "SHLVL", alvl);
+	new->runningcmdline = NULL;
 	free(alvl);
 	builtin = ft_strdup("echo.cd.pwd.export.unset.env.exit");
 	new->builtincmds = ft_split(builtin, '.');
+	free(builtin);
 	new->last_return = ft_itoa(0);
 	new->dollar = ft_itoa(0);
-	free(builtin);
 	return (new);
 }
 
