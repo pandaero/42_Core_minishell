@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 20:03:55 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/06 16:54:54 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ int	parse_envp(t_minidata *minidata);
 
 // =============================== ERROR HANDLING ==============================
 //Function handles an "command not found" error.
-void		error_cmd_nf(char *line);
+int		error_cmd_nf(char *line);
 //Function handles an error in signal action setup.
 void		error_sig(void);
 //Function prints out a syntax error message.

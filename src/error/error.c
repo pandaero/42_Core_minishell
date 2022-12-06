@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:20:41 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/04 19:17:24 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/06 16:54:46 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdio.h>
 
 //Function handles an "command not found" error.
-void	error_cmd_nf(char *line)
+int	error_cmd_nf(char *line)
 {
 	char	*cnf;
 
@@ -25,7 +25,7 @@ void	error_cmd_nf(char *line)
 	write(STDERR_FILENO, cnf, ft_strlen(cnf));
 	write(STDERR_FILENO, "\n", 1);
 	free(cnf);
-	// return (127);
+	return (127);
 }
 
 //Function handles an "no permission cmd" error.
