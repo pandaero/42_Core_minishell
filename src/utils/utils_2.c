@@ -6,12 +6,50 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 21:14:40 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/28 14:09:02 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/06 18:47:07 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include <stdlib.h>
+
+//Function reinserts a delimiter to a split-created 2D char array.
+char	*unsplit(char **strarr, char delim)
+{
+	int		i;
+	int		j;
+	int		k;
+	int		len;
+	char	*str;
+
+	len = 0;
+	i = 0;
+	while (strarr[i])
+	{
+		len += ft_strlen(strarr[i]);
+		i++;
+	}
+	str = (char *)malloc((len + 1) * sizeof(char));
+	k = 0;
+	i = 0;
+	while (strarr[i])
+	{
+		j = 0;
+		while (strarr[i][j] != '\0')
+		{
+			str[k] = strarr[i][j];
+			j++;
+			k++;
+		}
+		if (strarr[i + 1] == NULL)
+			break ;
+		str[k] = delim;
+		k++;
+		i++;
+	}
+	str[k] = '\0';
+	return (str);
+}
 
 //Function returns the size of a 2D char array.
 int	nonsplit_size(char **str)

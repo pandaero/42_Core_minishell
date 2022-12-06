@@ -4,6 +4,21 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+/* Test for unsplit. cc -Wall -Werror -Wextra test/utils_2_main.c src/utils/utils_2.c src/utils/utils_env_2.c src/utils/utils_env_3.c src/main/init.c src/memory/memory.c libft/libft.a
+int	main(void)
+{
+	char	str[] = "hello there we have spaces in between";
+	char	**strarr = ft_split(str, ' ');
+	char	*reconstruct = unsplit(strarr, ' ');
+
+	ft_printf("Before: %s\n", str);
+	ft_printf("*** split ***\n");
+	ft_printf("After : %s\n", reconstruct);
+	free_split(strarr);
+	free(reconstruct);
+}
+//*/
+
 /*Test for var_expansion. cc -Wall -Werror -Wextra utils_2_main.c ../src/utils/utils_2.c ../src/utils/utils_env_2.c ../src/utils/utils_env_3.c ../src/memory/memory.c ../src/main/init.c ../libft/libft.a
 int	main(int argc, char **argv, char **env)
 {
