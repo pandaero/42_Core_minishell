@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/04 23:46:32 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/07 11:53:41 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int	main(int argc, char **argv, char **env)
 		main_loop(minidata);
 	}
 	else
-		ft_putstr_fd("No arguments are required", STDERR_FILENO);
+		error_args(argc, argv);
 	return (0);
 }
