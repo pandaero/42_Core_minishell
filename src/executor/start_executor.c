@@ -165,7 +165,7 @@ int	start_executor(t_minidata *minidata)
 		if (minidata->simple_cmds->next)
 			minidata->simple_cmds = minidata->simple_cmds->next;
 		else
-			break;
+			break ;
 	}
 	minidata->simple_cmds = simple_cmdsfirst(minidata->simple_cmds);
 	return (0);

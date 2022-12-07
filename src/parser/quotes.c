@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:53:06 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/25 14:35:33 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/06 22:25:16 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,25 @@ int	is_valid_quotes(char *line)
 	if ((d > 0 && d % 2 != 0) || (s > 0 && s % 2 != 0))
 		return (0);
 	return (1);
+}
+
+char	*delete_quotes(char *str, char c)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+		{
+			j = 0;
+			while (str[i + j] == c)
+				j++;
+			ft_strlcpy(&str[i], &str[i + j], ft_strlen(str) - i);
+		}
+		i++;
+	}
+	return (str);
 }
