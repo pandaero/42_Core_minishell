@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 14:11:31 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/06 19:47:45 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/07 11:28:45 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,9 @@ int forking(t_minidata *minidata, int end[2], int fd_in, t_simple_cmds *cmd)
 		minidata->reset = false;
 	}
 	minidata->pid[i] = fork();
-	ft_printf("but here\n");
 	if ((int) minidata->pid[i] > 0)
 	{
 		setup_parent_signal();
-		ft_printf("there\n");
 		minidata->runningcmdline = unsplit(cmd->str, ' ');
 		ret = waitpid(minidata->pid[i], &status, WUNTRACED);
 		if (ret == -1)
@@ -105,7 +103,6 @@ int forking(t_minidata *minidata, int end[2], int fd_in, t_simple_cmds *cmd)
 	if (minidata->pid[i] == 0)
 	{
 		setup_child_signal();
-		ft_printf("here\n");
 		ft_dup_cmd(cmd, minidata, end, fd_in);
 	}
 	i++;

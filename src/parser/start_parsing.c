@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:40:14 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/06 17:05:00 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/07 11:31:02 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_simple_cmds	*init_cmd(t_parser_tools *parser_tools)
 		if (tmp->str)
 		{
 			str[i++] = ft_strdup(tmp->str);
-			ft_printf("%d =%s\n",i, tmp->str);
+			//ft_printf("%d =%s\n",i, tmp->str);
 			lexerdelone(&parser_tools->lexer_l, tmp->i);
 			tmp = parser_tools->lexer_l;
 		}
