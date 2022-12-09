@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:21:13 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/09 19:25:47 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/09 20:54:04 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int forking(t_minidata *minidata, int end[2], int fd_in, t_simple_cmds *cmd)
         i = 0;
         minidata->reset = false;
     }
-    ft_printf("sacasc = %d\n", i);
     minidata->pid[i] = fork();
     if (minidata->pid[i] < 0)
         allerrors(3, minidata);
@@ -50,12 +49,18 @@ int pipe_wait(int *pid, int amount, t_minidata *minidata)
     return (EXIT_SUCCESS);
 }
 
-int check_fd(int end[2])
+int check_fd(t_minidata *minidata, int end[2], t_simple_cmds *cmd)
 {
     int fd_in;
-    
-    fd_in = end[0];
-    return (fd_in);
+	
+	if (minidata->heredoc)
+	{
+		close(end[0]);
+		fd_in = open(cmd->hd_file_name, O_RDONLY);
+	}
+	else
+		fd_in = end[0];
+	return (fd_in);
 }
 
 int start_executor(t_minidata *minidata)
@@ -66,24 +71,22 @@ int start_executor(t_minidata *minidata)
     fd_in = STDIN_FILENO;
     while (minidata->simple_cmds)
     {
-        ft_printf("HERE1\n");
+        // ft_printf("HERE1\n");
         if (minidata->simple_cmds->next)
             pipe(end);
-        ft_printf("HERE2\n");
+        if (send_heredoc(minidata, minidata->simple_cmds))
+            return (EXIT_FAILURE);
         forking(minidata, end, fd_in, minidata->simple_cmds);
         close(end[1]);
         if (minidata->simple_cmds->prev)
             close(fd_in);
-        ft_printf("HERE3\n");
-        fd_in = check_fd(end);
+        fd_in = check_fd(minidata, end, minidata->simple_cmds);
         if (minidata->simple_cmds->next)
             minidata->simple_cmds = minidata->simple_cmds->next;
         else
             break;
-        ft_printf("HERE5\n");
     }
     pipe_wait(minidata->pid, minidata->num_pipes, minidata);
     minidata->simple_cmds = simple_cmdsfirst(minidata->simple_cmds);
-    ft_printf("HERE6\n");
     return (0);
 }

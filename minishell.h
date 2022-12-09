@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/09 19:05:42 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/09 20:52:07 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,9 @@ typedef struct s_minidata
 	bool			reset;
 	int				*pid;
 	int				exit_prog;
+	int				stop_heredoc;
+	int				in_heredoc;
+	bool			heredoc;
 }					t_minidata;
 
 // =============================== INITIALISATION ==============================
@@ -142,7 +145,7 @@ t_simple_cmds	*simple_cmdnew(char **str, int num_elm, \
 
 // =============================== ERROR HANDLING ==============================
 //Function handles an "command not found" error.
-void		error_cmd_nf(char *line);
+int	error_cmd_nf(char *line);
 //Function handles an error in signal action setup.
 void		error_sig(void);
 //Function prints out a syntax error message.
@@ -216,6 +219,12 @@ int start_executor(t_minidata *minidata);
 void dup_cmd(t_simple_cmds *cmd, t_minidata *minidata, int end[2], int fd_in);
 //Function to resplit cmd
 char	**resplit_str(char **double_arr);
+//Function for heredoc
+int	send_heredoc(t_minidata *minidata, t_simple_cmds *cmd);
+//Function that check for redirections
+int	check_redirections(t_simple_cmds *cmd);
+//Function that will delete qoutes for heredoc
+char	*delete_quotes(char *str, char c);
 
 // ============================ COMMAND LINE PARSING ===========================
 //Function finds the command within a simple command line.

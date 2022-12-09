@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:20:41 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 22:59:13 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/09 20:52:20 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,12 @@
 #include <stdlib.h>
 
 //Function handles an "command not found" error.
-void	error_cmd_nf(char *line)
+int	error_cmd_nf(char *line)
 {
-	char	*cnf;
-
 	write(STDERR_FILENO, "minishell: command not found: ", 30);
-	cnf = findcommand(line);
-	write(STDERR_FILENO, cnf, ft_strlen(cnf));
+	write(STDERR_FILENO, line, ft_strlen(line));
 	write(STDERR_FILENO, "\n", 1);
-	free(cnf);
+	return (127);
 }
 
 //Function handles an "no permission cmd" error.

@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:31:49 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/09 17:02:04 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/09 20:51:27 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int find_cmd(t_simple_cmds *cmd, t_minidata *minidata)
         free(mycmd);
         i++;
     }
-    return(127);
+    return(error_cmd_nf(cmd->str[0]));
 }
 
 static void handle_cmd(t_simple_cmds *cmd, t_minidata *minidata)
@@ -39,6 +39,11 @@ static void handle_cmd(t_simple_cmds *cmd, t_minidata *minidata)
     int exit_code;
     
     exit_code = 0;
+    if (cmd->redirections)
+	{
+	    if (check_redirections(cmd))
+		    exit(1);
+	}
     if (cmd->str[0][0] != '\0')
         exit_code = find_cmd(cmd, minidata);
     exit(exit_code);
@@ -46,10 +51,10 @@ static void handle_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 
 void dup_cmd(t_simple_cmds *cmd, t_minidata *minidata, int end[2], int fd_in)
 {
-    if (dup2(fd_in, STDIN_FILENO) < 0 && cmd->prev)
+    if (cmd->prev && dup2(fd_in, STDIN_FILENO) < 0)
 		allerrors(4, minidata);
     close(end[0]);
-	if (dup2(end[1], STDOUT_FILENO) < 0 && cmd->next)
+	if (cmd->next && dup2(end[1], STDOUT_FILENO) < 0)
 		allerrors(4, minidata);
 	close(end[1]);
 	if (cmd->prev)
