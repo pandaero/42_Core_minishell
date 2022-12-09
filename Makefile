@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:31:50 by pandalaf          #+#    #+#              #
-#    Updated: 2022/11/29 03:38:36 by pandalaf         ###   ########.fr        #
+#    Updated: 2022/12/09 15:00:58 by zyunusov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS	:= -Wall -Werror -Wextra
 COPT	:= -g
 # Sources
 SRC_ROOT		:= src/
-SRC_SUBDIRS		:= main builtin lexer parser error list memory validation utils
+SRC_SUBDIRS		:= main builtin lexer parser error list memory validation utils executor
 SRC_RL_FILES	:= main/main.c signal/signals.c	builtin/builtin_exit.c		
 SRCS_RL			:= $(addprefix $(SRC_ROOT), $(SRC_RL_FILES))
 SRC_DIR			:= $(addprefix $(SRC_ROOT), $(SRC_SUBDIRS))

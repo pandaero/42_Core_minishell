@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:27:25 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 23:00:07 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/09 14:09:59 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	execution(t_minidata *minidata)
 void	parser(t_minidata *minidata)
 {
 	if (is_valid_quotes(minidata->currline) == 0)
-		ft_printf("syntax error: unable to locate closing quotation\n");
+		allerrors(0, minidata);
 	if (read_token(minidata) == 0)
 		ft_printf("\n");
 	start_parser(minidata);

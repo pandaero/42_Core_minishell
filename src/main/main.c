@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 21:28:46 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/09 14:50:46 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void	main_loop(t_minidata *minidata)
 		if (minidata->currline[0] == '\0')
 			continue ;
 		parser(minidata);
+		prepare_executor(minidata);
 		loop_reset(minidata);
 	}
 }

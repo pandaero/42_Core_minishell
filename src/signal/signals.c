@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:05:41 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/24 12:36:07 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/09 13:50:24 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <sys/signal.h>
 #include <readline/readline.h>
+#include <readline/history.h>
 
 //Function handles the SIGINT signal. Redisplay prompt, or send SIGINT to child.
 void	sigint(int sig)

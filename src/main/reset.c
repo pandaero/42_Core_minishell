@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 21:16:56 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 21:20:50 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/09 15:10:15 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,7 @@
 void	loop_reset(t_minidata *minidata)
 {
 	free(minidata->currline);
+	if (minidata->pid)
+		free(minidata->pid);
+	free_split(minidata->splitpath);
 }

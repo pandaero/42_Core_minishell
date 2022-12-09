@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 21:59:35 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/09 15:00:35 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,9 @@ int			parser_token_error(t_minidata *minidata, t_word *lexer_l, \
 //Function displays the "parser error" message.
 void		parser_error(int error, t_minidata *minidata, t_word *lexer_l);
 
+// Function for all errors
+int	allerrors(int error, t_minidata *minidata);
+
 // =================================== LEXER ===================================
 // Function to read from string, to divide to tokens
 int			read_token(t_minidata *minidata);
@@ -201,6 +204,8 @@ void		builtin_env(t_minidata *minidata);
 void		builtin_cd(t_minidata *minidata);
 //Function writes a given string to the terminal. With/out newline.
 void		builtin_echo(t_minidata *minidata);
+//Function that check for single or multiple commands
+int prepare_executor(t_minidata *minidata);
 
 // ============================ COMMAND LINE PARSING ===========================
 //Function finds the command within a simple command line.
