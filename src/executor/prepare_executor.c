@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 14:52:27 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/09 15:03:09 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:41:15 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int prepare_executor(t_minidata *minidata)
     }
     else
     {
-        minidata->pid = ft_calloc(sizeof(int), minidata->num_pipes + 2);
+        minidata->pid = ft_calloc(sizeof(int), minidata->num_pipes + 2); // need to think about it 
         if (!minidata->pid)
             return (allerrors(1, minidata));
         ft_printf("DOUBLE\n");
-        // start_executor(minidata);
+        start_executor(minidata);
     }
     return (EXIT_SUCCESS);
 }

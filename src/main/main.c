@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/09 14:50:46 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:18:26 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,23 @@ static void	cleanexit(t_minidata *minidata)
 static void	main_loop(t_minidata *minidata)
 {
 	terminal_setup();
-	minidata->currline = (char *) 1;
-	while (minidata->currline != 0)
+	while (!minidata->exit_prog)
 	{
 		minidata->currline = readline(PROMPT);
 		if (minidata->currline == 0)
+		{
+			ft_printf("ASD\n");
 			cleanexit(minidata);
+		}
 		add_history (minidata->currline);
 		if (minidata->currline[0] == '\0')
-			continue ;
+		{
+			minidata->currline = NULL;
+			continue;
+		}
 		parser(minidata);
 		prepare_executor(minidata);
+		ft_printf("DDDDDDDDDDDDDDDDDDD\n");
 		loop_reset(minidata);
 	}
 }
@@ -67,6 +73,7 @@ int	main(int argc, char **argv, char **env)
 	if (argv && argc == 1)
 	{
 		minidata = init_minidata(env);
+		minidata->exit_prog = 0;
 		main_loop(minidata);
 	}
 	else

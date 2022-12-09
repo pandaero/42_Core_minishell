@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/09 15:00:35 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:05:42 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_minidata
 	int				num_pipes;
 	bool			reset;
 	int				*pid;
+	int				exit_prog;
 }					t_minidata;
 
 // =============================== INITIALISATION ==============================
@@ -174,6 +175,8 @@ void		lexerdelone(t_word **lst, int key);
 // ================================ PARSING ====================================
 //Function checks for redirections.
 void	rm_redirections(t_parser_tools *parser_tools);
+//Function 
+t_simple_cmds	*simple_cmdsfirst(t_simple_cmds *map);
 
 // ========================== MEMORY HANDLING (FREEING) ========================
 //Function frees a 2D char array made from ft_split.
@@ -186,7 +189,8 @@ void		free_env(t_env *list);
 void		free_lexer(t_word **lst);
 //Function performs the clearing of memory that takes place every loop.
 void		loop_reset(t_minidata *minidata);
-
+//Function that frees parsed doubly linked list 
+void	simple_cmdsclear(t_simple_cmds **lst);
 // ============================ EXECUTION - BUILT-INS ==========================
 //Function handles the execution of built-in commands.
 void		builtin_execution(t_minidata *minidata);
@@ -206,6 +210,12 @@ void		builtin_cd(t_minidata *minidata);
 void		builtin_echo(t_minidata *minidata);
 //Function that check for single or multiple commands
 int prepare_executor(t_minidata *minidata);
+//Function starts execution multiple commands
+int start_executor(t_minidata *minidata);
+//Function that dups stdout and stdin
+void dup_cmd(t_simple_cmds *cmd, t_minidata *minidata, int end[2], int fd_in);
+//Function to resplit cmd
+char	**resplit_str(char **double_arr);
 
 // ============================ COMMAND LINE PARSING ===========================
 //Function finds the command within a simple command line.

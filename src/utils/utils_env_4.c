@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_env_4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 19:45:52 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 21:06:08 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:32:36 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	working_path(t_minidata *minidata)
 		{
 			temp = ft_strjoin(minidata->splitpath[i], "/");
 			free(minidata->splitpath[i]);
-			minidata->splitpath[i] = temp;
+			minidata->splitpath[i] = ft_strdup(temp);
 		}
 		i++;
 	}

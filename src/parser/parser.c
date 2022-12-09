@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:27:25 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/09 14:09:59 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:35:43 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ char	*findcommand(const char *line)
 }
 
 //Function acts when the input command line is a valid one.
-static void	execution(t_minidata *minidata)
-{
-	if (is_builtincmd(minidata) > 0)
-		builtin_execution(minidata);
-	//path (check permissions)
-	//direct (check permissions)
-}
+// static void	execution(t_minidata *minidata)
+// {
+// 	if (is_builtincmd(minidata) > 0)
+// 		builtin_execution(minidata);
+// 	//path (check permissions)
+// 	//direct (check permissions)
+// }
 
 //Function performs the parsing of a command line.
 void	parser(t_minidata *minidata)
@@ -51,8 +51,8 @@ void	parser(t_minidata *minidata)
 	if (read_token(minidata) == 0)
 		ft_printf("\n");
 	start_parser(minidata);
-	if (is_validcmdline(minidata) == 1)
-		execution(minidata);
-	else
-		error_cmd_nf(minidata->currline);
+	// if (is_validcmdline(minidata) == 1)
+	// 	execution(minidata);
+	// else
+	// 	error_cmd_nf(minidata->currline);
 }
