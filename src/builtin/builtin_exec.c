@@ -3,30 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:08:57 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/24 12:05:09 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/09 22:16:41 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//Function handles the execution of built-in commands.
-void	builtin_execution(t_minidata *minidata)
+//Function determines whether a command line calls a built-in command.
+int	is_builtincmd(char	*cmd)
 {
-	if (is_builtincmd(minidata) == 1)
+	if (ft_strncmp("exit", cmd, 5) == 0)
+		return (1);
+	if (ft_strncmp("pwd", cmd, 4) == 0)
+		return (2);
+	if (ft_strncmp("export", cmd, 7) == 0)
+		return (3);
+	if (ft_strncmp("unset", cmd, 6) == 0)
+		return (4);
+	if (ft_strncmp("env", cmd, 4) == 0)
+		return (5);
+	if (ft_strncmp("cd", cmd, 3) == 0)
+		return (6);
+	if (ft_strncmp("echo", cmd, 5) == 0)
+		return (7);
+	return (0);
+}
+
+//Function handles the execution of built-in commands.
+void	builtin_execution(t_minidata *minidata, int builtin)
+{
+	if (builtin == 1)
 		builtin_exit(minidata);
-	if (is_builtincmd(minidata) == 2)
+	if (builtin == 2)
 		builtin_pwd(minidata);
-	if (is_builtincmd(minidata) == 3)
+	if (builtin == 3)
 		builtin_export(minidata);
-	if (is_builtincmd(minidata) == 4)
+	if (builtin == 4)
 		builtin_unset(minidata);
-	if (is_builtincmd(minidata) == 5)
+	if (builtin == 5)
 		builtin_env(minidata);
-	if (is_builtincmd(minidata) == 6)
+	if (builtin == 6)
 		builtin_cd(minidata);
-	if (is_builtincmd(minidata) == 7)
+	if (builtin == 7)
 		builtin_echo(minidata);
 }

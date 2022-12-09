@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/09 20:52:07 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/09 22:26:35 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ void		loop_reset(t_minidata *minidata);
 void	simple_cmdsclear(t_simple_cmds **lst);
 // ============================ EXECUTION - BUILT-INS ==========================
 //Function handles the execution of built-in commands.
-void		builtin_execution(t_minidata *minidata);
+void	builtin_execution(t_minidata *minidata, int builtin);
 //Function exits the program cleanly.
 void		builtin_exit(t_minidata *minidata);
 //Function prints the current working directory where the shell is acting.
@@ -225,6 +225,8 @@ int	send_heredoc(t_minidata *minidata, t_simple_cmds *cmd);
 int	check_redirections(t_simple_cmds *cmd);
 //Function that will delete qoutes for heredoc
 char	*delete_quotes(char *str, char c);
+//Function that will execute single cmds
+void	single_cmd(t_simple_cmds *cmd, t_minidata *minidata);
 
 // ============================ COMMAND LINE PARSING ===========================
 //Function finds the command within a simple command line.
@@ -242,7 +244,7 @@ int			is_validcmdline(t_minidata *minidata);
 //Function determines whether a command is found within the path.
 int			is_pathcmd(char *cmd, t_minidata *minidata);
 //Function determines whether a command line calls a built-in command.
-int			is_builtincmd(t_minidata *minidata);
+int	is_builtincmd(char	*cmd);
 // Function handles an "syntax error: while quotes not closed"
 int			is_valid_quotes(char *line);
 
