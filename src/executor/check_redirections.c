@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:38:40 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/09 20:38:43 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/11 14:41:52 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <errno.h>
+#include <string.h>
+
+void red_error(char *m, char *f)
+{
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd(m, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(f, 2);
+	ft_putstr_fd("\n", 2);
+}
 
 static int	check_append_outfile(t_word *redirections)
 {
@@ -35,8 +46,8 @@ static int	handle_infile(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd("minishell: infile: No such file or directory\n",
-			STDERR_FILENO);
+		if (access(file, F_OK | R_OK))
+			red_error(strerror(errno), file);
 		return (EXIT_FAILURE);
 	}
 	if (dup2(fd, STDIN_FILENO) < 0 && fd > 0)
@@ -56,7 +67,7 @@ int	handle_outfile(t_word *redirection)
 	fd = check_append_outfile(redirection);
 	if (fd < 0)
 	{
-		ft_putstr_fd("minishell: outfile: Error\n", STDERR_FILENO);
+		red_error(strerror(errno),	redirection->str);
 		return (EXIT_FAILURE);
 	}
 	if (dup2(fd, STDOUT_FILENO) < 0 && fd > 0)
