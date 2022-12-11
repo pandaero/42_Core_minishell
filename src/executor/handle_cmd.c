@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:31:49 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/09 22:25:56 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:38:19 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ void	single_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 	int	status;
 
 // call expansions;
-    if (is_builtincmd(minidata->simple_cmds->str[0]) > 0)
-    {
-		builtin_execution(minidata, \
-							is_builtincmd(minidata->simple_cmds->str[0]));
-        return ;
-    }
+    // if (is_builtincmd(minidata->simple_cmds->str[0]) > 0)
+    // {
+	// 	builtin_execution(minidata, \
+	// 						is_builtincmd(minidata->simple_cmds->str[0]));
+    //     return ;
+    // }
     send_heredoc(minidata, cmd);
     pid = fork();
 	if (pid < 0)
