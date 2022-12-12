@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:00:33 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/12 11:06:41 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:38:36 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,19 @@ void	single_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 {
     int	pid;
 	int	status;
-    int builtins;
+    int builtins = 0;
 
 	// call_expander(minidata, minidata->simple_cmds);
-    builtins = is_builtincmd(minidata->simple_cmds->str[0]);
+    if (minidata->simple_cmds->str[0])
+        builtins = is_builtincmd(minidata->simple_cmds->str[0]);
 	if (builtins > 0 && builtins <= 4)
     {
 		builtin_execution(minidata, \
 							is_builtincmd(minidata->simple_cmds->str[0]));
         return ;
     }
-	send_heredoc(minidata, cmd);
+    if (send_heredoc(minidata, cmd))
+        return ;
 	pid = fork();
 	if (pid < 0)
 		allerrors(5, minidata);
