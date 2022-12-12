@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:00:33 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/12 13:38:36 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:30:48 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,29 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-static int find_cmd(t_simple_cmds *cmd, t_minidata *minidata)
+static int	find_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 {
-	int i;
-	char *mycmd;
+	int		i;
+	char	*mycmd;
 
 	i = 0;
 	cmd->str = resplit_str(cmd->str);
 	if (!access(cmd->str[0], F_OK))
 		execve(cmd->str[0], cmd->str, minidata->env);
-	while(minidata->splitpath[i])
+	while (minidata->splitpath[i])
 	{
 		mycmd = ft_strjoin(minidata->splitpath[i], cmd->str[0]);
 		if (!access(mycmd, F_OK))
-		{	
 			execve(mycmd, cmd->str, minidata->env);
-		}
 		free(mycmd);
 		i++;
 	}
 	return (error_cmd_nf(cmd->str[0]));
 }
 
-static void handle_cmd(t_simple_cmds *cmd, t_minidata *minidata)
+static void	handle_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 {
-	int exit_code;
+	int	exit_code;
 
 	exit_code = 0;
 	if (cmd->redirections)
@@ -48,7 +46,8 @@ static void handle_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 	}
 	if (is_builtincmd(minidata->simple_cmds->str[0]) > 0)
 	{
-		builtin_execution(minidata, is_builtincmd(minidata->simple_cmds->str[0]));
+		builtin_execution(minidata, \
+						is_builtincmd(minidata->simple_cmds->str[0]));
 		exit(ft_atoi(minidata->last_return));
 	}
 	else if (cmd->str[0][0] != '\0')
@@ -56,7 +55,7 @@ static void handle_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 	exit(exit_code);
 }
 
-void    dup_cmd(t_simple_cmds *cmd, t_minidata *minidata, int end[2], int fd_in)
+void	dup_cmd(t_simple_cmds *cmd, t_minidata *minidata, int end[2], int fd_in)
 {
 	if (cmd->prev && dup2(fd_in, STDIN_FILENO) < 0)
 		allerrors(4, minidata);
@@ -71,21 +70,22 @@ void    dup_cmd(t_simple_cmds *cmd, t_minidata *minidata, int end[2], int fd_in)
 
 void	single_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 {
-    int	pid;
+	int	pid;
 	int	status;
-    int builtins = 0;
+	int	builtins;
 
+	builtins = 0;
 	// call_expander(minidata, minidata->simple_cmds);
-    if (minidata->simple_cmds->str[0])
-        builtins = is_builtincmd(minidata->simple_cmds->str[0]);
+	if (minidata->simple_cmds->str[0])
+		builtins = is_builtincmd(minidata->simple_cmds->str[0]);
 	if (builtins > 0 && builtins <= 4)
-    {
+	{
 		builtin_execution(minidata, \
 							is_builtincmd(minidata->simple_cmds->str[0]));
-        return ;
-    }
-    if (send_heredoc(minidata, cmd))
-        return ;
+		return ;
+	}
+	if (send_heredoc(minidata, cmd))
+		return ;
 	pid = fork();
 	if (pid < 0)
 		allerrors(5, minidata);

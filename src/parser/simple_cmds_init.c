@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 21:22:12 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/09 20:15:13 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:22:57 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,36 +57,17 @@ void	simple_cmdsclear(t_simple_cmds **lst)
 		return ;
 	while (*lst)
 	{
-		// ft_printf("HELLO1\n");
 		temp = (*lst)->next;
 		redirections_temp = (*lst)->redirections;
-		// ft_printf("HELLO2\n");
 		free_lexer(&redirections_temp);
-		// ft_printf("HELLO3\n");
 		if ((*lst)->str)
 		{
-			// int i = 0;
-			// while((*lst)->str[i])
-			// {
-			// 	printf("here:%s\n", (*lst)->str[i]);
-			// 	i++;
-			// }
 			free_split((*lst)->str);
 			(*lst)->str = NULL;
 		}
-		// if (!(*lst)->str)
-		// 	printf("freed:\n");
-		// else
-		// 	printf("not freed: %s\n", (*lst)->str[0]);
-		// ft_printf("HELLO4\n");
 		if ((*lst)->hd_file_name)
-		{
-			// printf("%s\n", (*lst)->hd_file_name);
 			free((*lst)->hd_file_name);
-		}
-		// ft_printf("HELLO5\n");
 		free(*lst);
-		// ft_printf("HELLO6\n");
 		*lst = temp;
 	}
 	*lst = NULL;

@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:27:25 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/09 18:35:43 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:23:32 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,4 @@ void	parser(t_minidata *minidata)
 	if (read_token(minidata) == 0)
 		ft_printf("\n");
 	start_parser(minidata);
-	// if (is_validcmdline(minidata) == 1)
-	// 	execution(minidata);
-	// else
-	// 	error_cmd_nf(minidata->currline);
 }

@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:21:13 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/12 13:31:28 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:34:28 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,45 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-int forking(t_minidata *minidata, int end[2], int fd_in, t_simple_cmds *cmd)
+int	forking(t_minidata *minidata, int end[2], int fd_in, t_simple_cmds *cmd)
 {
-    static int i;
-    
-    if (minidata->reset == true)
-    {
-        i = 0;
-        minidata->reset = false;
-    }
-    minidata->pid[i] = fork();
-    if (minidata->pid[i] < 0)
-        allerrors(3, minidata);
-    if (minidata->pid[i] == 0)
-        dup_cmd(cmd, minidata, end, fd_in);
-    i++;
-    return (EXIT_SUCCESS);
-}
-int pipe_wait(int *pid, int amount, t_minidata *minidata)
-{
-    int i;
-    int status;
+	static int	i;
 
-    i = 0;
-    while (i < amount)
-    {
-        waitpid(pid[i], &status, 0);
-        i++;
-    }
-    waitpid(pid[i], &status, 0);
-    if (WIFEXITED(status))
+	if (minidata->reset == true)
+	{
+		i = 0;
+		minidata->reset = false;
+	}
+	minidata->pid[i] = fork();
+	if (minidata->pid[i] < 0)
+		allerrors(3, minidata);
+	if (minidata->pid[i] == 0)
+		dup_cmd(cmd, minidata, end, fd_in);
+	i++;
+	return (EXIT_SUCCESS);
+}
+
+int	pipe_wait(int *pid, int amount, t_minidata *minidata)
+{
+	int	i;
+	int	status;
+
+	i = 0;
+	while (i < amount)
+	{
+		waitpid(pid[i], &status, 0);
+		i++;
+	}
+	waitpid(pid[i], &status, 0);
+	if (WIFEXITED(status))
 		minidata->last_return = ft_itoa(WEXITSTATUS(status));
-    return (EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
-int check_fd(t_minidata *minidata, int end[2], t_simple_cmds *cmd)
+int	check_fd(t_minidata *minidata, int end[2], t_simple_cmds *cmd)
 {
-    int fd_in;
-	
+	int	fd_in;
+
 	if (minidata->heredoc)
 	{
 		close(end[0]);
@@ -63,30 +64,29 @@ int check_fd(t_minidata *minidata, int end[2], t_simple_cmds *cmd)
 	return (fd_in);
 }
 
-int start_executor(t_minidata *minidata)
+int	start_executor(t_minidata *minidata)
 {
-    int end[2];
-    int fd_in;
+	int	end[2];
+	int	fd_in;
 
-    fd_in = STDIN_FILENO;
-    while (minidata->simple_cmds)
-    {
-        // ft_printf("HERE1\n");
-        if (minidata->simple_cmds->next)
-            pipe(end);
-        if (send_heredoc(minidata, minidata->simple_cmds))
-            return (EXIT_FAILURE);
-        forking(minidata, end, fd_in, minidata->simple_cmds);
-        close(end[1]);
-        if (minidata->simple_cmds->prev)
-            close(fd_in);
-        fd_in = check_fd(minidata, end, minidata->simple_cmds);
-        if (minidata->simple_cmds->next)
-            minidata->simple_cmds = minidata->simple_cmds->next;
-        else
-            break;
-    }
-    pipe_wait(minidata->pid, minidata->num_pipes, minidata);
-    minidata->simple_cmds = simple_cmdsfirst(minidata->simple_cmds);
-    return (0);
+	fd_in = STDIN_FILENO;
+	while (minidata->simple_cmds)
+	{
+		if (minidata->simple_cmds->next)
+			pipe(end);
+		if (send_heredoc(minidata, minidata->simple_cmds))
+			return (EXIT_FAILURE);
+		forking(minidata, end, fd_in, minidata->simple_cmds);
+		close(end[1]);
+		if (minidata->simple_cmds->prev)
+			close(fd_in);
+		fd_in = check_fd(minidata, end, minidata->simple_cmds);
+		if (minidata->simple_cmds->next)
+			minidata->simple_cmds = minidata->simple_cmds->next;
+		else
+			break ;
+	}
+	pipe_wait(minidata->pid, minidata->num_pipes, minidata);
+	minidata->simple_cmds = simple_cmdsfirst(minidata->simple_cmds);
+	return (0);
 }

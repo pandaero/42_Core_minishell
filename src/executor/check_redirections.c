@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:38:40 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/11 14:41:52 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:26:27 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <errno.h>
 #include <string.h>
 
-void red_error(char *m, char *f)
+void	red_error(char *m, char *f)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(m, 2);
@@ -67,7 +67,7 @@ int	handle_outfile(t_word *redirection)
 	fd = check_append_outfile(redirection);
 	if (fd < 0)
 	{
-		red_error(strerror(errno),	redirection->str);
+		red_error(strerror(errno), redirection->str);
 		return (EXIT_FAILURE);
 	}
 	if (dup2(fd, STDOUT_FILENO) < 0 && fd > 0)

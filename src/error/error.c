@@ -6,34 +6,13 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:20:41 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/09 20:52:20 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:25:29 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include <unistd.h>
 #include <stdlib.h>
-
-//Function handles an "command not found" error.
-int	error_cmd_nf(char *line)
-{
-	write(STDERR_FILENO, "minishell: command not found: ", 30);
-	write(STDERR_FILENO, line, ft_strlen(line));
-	write(STDERR_FILENO, "\n", 1);
-	return (127);
-}
-
-//Function handles an "no permission cmd" error.
-void	error_cmd_np(const char *line)
-{
-	char	*cnf;
-
-	write(STDERR_FILENO, "minishell: permission denied: ", 30);
-	cnf = findcommand(line);
-	write(STDERR_FILENO, cnf, ft_strlen(cnf));
-	write(STDERR_FILENO, "\n", 1);
-	free(cnf);
-}
 
 //Function handles an error in signal action setup.
 void	error_sig(void)

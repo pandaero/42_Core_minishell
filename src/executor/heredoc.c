@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:31:42 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/12 13:44:43 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:31:31 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ static int	create_heredoc(t_word *heredoc, bool quotes,
 	line = readline("> ");
 	while (line && !minidata->stop_heredoc)
 	{
-		if (!ft_strncmp(heredoc->str, line, (ft_strlen(heredoc->str) + 1)) 
+		if (!ft_strncmp(heredoc->str, line, (ft_strlen(heredoc->str) + 1))
 			&& (ft_strlen(line)) == ft_strlen(heredoc->str))
 			break ;
 		if (quotes == false)
-			line =  var_expansion(minidata, line);
+			line = var_expansion(minidata, line);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);

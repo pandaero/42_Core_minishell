@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/09 22:26:35 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:21:31 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,21 +142,18 @@ t_parser_tools	init_parser_tools(t_word *lexer_l, t_minidata *minidata);
 //Function to inialise the command list.
 t_simple_cmds	*simple_cmdnew(char **str, int num_elm, \
 								int num_red, t_word *red);
-
 // =============================== ERROR HANDLING ==============================
 //Function handles an "command not found" error.
 int	error_cmd_nf(char *line);
 //Function handles an error in signal action setup.
-void		error_sig(void);
+void	error_sig(void);
 //Function prints out a syntax error message.
 int			parser_token_error(t_minidata *minidata, t_word *lexer_l, \
 								t_token token);
 //Function displays the "parser error" message.
 void		parser_error(int error, t_minidata *minidata, t_word *lexer_l);
-
 // Function for all errors
 int	allerrors(int error, t_minidata *minidata);
-
 // =================================== LEXER ===================================
 // Function to read from string, to divide to tokens
 int			read_token(t_minidata *minidata);
@@ -174,13 +171,11 @@ int			handle_token(int i, char *s, t_word **lexer_l);
 t_word		*newlex(char *s, int token);
 //Function deletes a node in the lexer list according to its i value.
 void		lexerdelone(t_word **lst, int key);
-
 // ================================ PARSING ====================================
 //Function checks for redirections.
 void	rm_redirections(t_parser_tools *parser_tools);
 //Function 
 t_simple_cmds	*simple_cmdsfirst(t_simple_cmds *map);
-
 // ========================== MEMORY HANDLING (FREEING) ========================
 //Function frees a 2D char array made from ft_split.
 void		free_split(char **charr);
@@ -212,11 +207,12 @@ void		builtin_cd(t_minidata *minidata);
 //Function writes a given string to the terminal. With/out newline.
 void		builtin_echo(t_minidata *minidata);
 //Function that check for single or multiple commands
-int prepare_executor(t_minidata *minidata);
+int	prepare_executor(t_minidata *minidata);
 //Function starts execution multiple commands
-int start_executor(t_minidata *minidata);
+int	start_executor(t_minidata *minidata);
 //Function that dups stdout and stdin
-void dup_cmd(t_simple_cmds *cmd, t_minidata *minidata, int end[2], int fd_in);
+void	dup_cmd(t_simple_cmds *cmd, t_minidata *minidata, \
+					int end[2], int fd_in);
 //Function to resplit cmd
 char	**resplit_str(char **double_arr);
 //Function for heredoc
@@ -275,11 +271,9 @@ void		update_return(t_minidata *minidata, int ret);
 int			skip_spaces(char *line, int i);
 //Function to count the number of arguments within a pipe. 
 int			count_args(t_word *lexer_l);
-
 // =============================== UTILS - COMMANDS LIST =======================
 //Function adds a command node to the back of a list.
 void	simple_cmdsadd_back(t_simple_cmds **lst, t_simple_cmds *new);
-
 // =============================== UTILS - BOOLEAN =============================
 //Function checks whether a character is a spacing character.
 int			is_space(char ch);
