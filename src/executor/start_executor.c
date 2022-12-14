@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:21:13 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/12 15:34:28 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/14 12:36:39 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	pipe_wait(int *pid, int amount, t_minidata *minidata)
 	}
 	waitpid(pid[i], &status, 0);
 	if (WIFEXITED(status))
-		minidata->last_return = ft_itoa(WEXITSTATUS(status));
+		update_return(minidata, WEXITSTATUS(status));
 	return (EXIT_SUCCESS);
 }
 
