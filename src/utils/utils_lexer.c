@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lexer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:19:08 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/05 19:53:21 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/14 17:44:40 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

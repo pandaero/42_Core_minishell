@@ -6,7 +6,7 @@
 #    By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:31:50 by pandalaf          #+#    #+#              #
-#    Updated: 2022/12/09 15:00:58 by zyunusov         ###   ########.fr        #
+#    Updated: 2022/12/14 18:20:41 by zyunusov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME := minishell
 # Compiler options
 CC		:= cc
-CFLAGS	:= -Wall -Werror -Wextra
+CFLAGS	:= -Wall -Werror -Wextra 
 COPT	:= -g
 # Sources
 SRC_ROOT		:= src/

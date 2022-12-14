@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:08:57 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/11 19:44:53 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:15:41 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 //Function determines whether a command line calls a built-in command.
 int	is_builtincmd(char	*cmd)
 {
+	if (!cmd)
+		return (0);
 	if (ft_strncmp("exit", cmd, 5) == 0)
 		return (1);
 	if (ft_strncmp("pwd", cmd, 4) == 0)

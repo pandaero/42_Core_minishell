@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   rm_redirections.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:18:06 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/05 21:52:07 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:11:57 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+#include <stdlib.h>
 
 // Function that saves redirection and file name
 static int	add_new_redirection(t_word *tmp, t_parser_tools *parser_tools)
@@ -18,7 +19,7 @@ static int	add_new_redirection(t_word *tmp, t_parser_tools *parser_tools)
 	t_word	*node;
 	int		index_1;
 	int		index_2;
-
+	
 	node = newlex(ft_strdup(tmp->next->str), tmp->token);
 	if (!node)
 		parser_error(1, parser_tools->minidata, parser_tools->lexer_list);
@@ -32,7 +33,7 @@ static int	add_new_redirection(t_word *tmp, t_parser_tools *parser_tools)
 }
 
 //Function checks for redirections.
-void	rm_redirections(t_parser_tools *parser_tools)
+int	rm_redirections(t_parser_tools *parser_tools)
 {
 	t_word	*tmp;
 
@@ -40,13 +41,14 @@ void	rm_redirections(t_parser_tools *parser_tools)
 	while (tmp && tmp->token == 0)
 		tmp = tmp->next;
 	if (!tmp || tmp->token == PIPE)
-		return ;
-	if (!tmp->next)
-		parser_error(2, parser_tools->minidata, parser_tools->lexer_list);
+		return (EXIT_SUCCESS);
+	if (!tmp->next )
+		return (parser_error(2, parser_tools->minidata, parser_tools->lexer_list));
 	if (tmp->next->token)
-		parser_token_error(parser_tools->minidata,
-			parser_tools->lexer_list, tmp->next->token);
+		return (parser_token_error(parser_tools->minidata,
+			parser_tools->lexer_list, tmp->next->token));
 	if ((tmp->token >= GREAT && tmp->token <= LESS_LESS))
 		add_new_redirection(tmp, parser_tools);
 	rm_redirections(parser_tools);
+	return (EXIT_SUCCESS);
 }

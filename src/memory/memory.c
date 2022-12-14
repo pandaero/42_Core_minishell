@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:17:16 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/09 17:43:08 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:13:17 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	free_minidata(t_minidata *minidata)
 	free_env(minidata->env_list);
 	free(minidata->currline);
 	free(minidata->dollar);
-	free(minidata->last_return);
+	// free(minidata->last_return);
 	free(minidata);
 }
 

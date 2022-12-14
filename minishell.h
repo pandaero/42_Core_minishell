@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/12 15:21:31 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:38:07 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void	error_sig(void);
 int			parser_token_error(t_minidata *minidata, t_word *lexer_l, \
 								t_token token);
 //Function displays the "parser error" message.
-void		parser_error(int error, t_minidata *minidata, t_word *lexer_l);
+int		parser_error(int error, t_minidata *minidata, t_word *lexer_l);
 // Function for all errors
 int	allerrors(int error, t_minidata *minidata);
 // =================================== LEXER ===================================
@@ -172,8 +172,7 @@ t_word		*newlex(char *s, int token);
 //Function deletes a node in the lexer list according to its i value.
 void		lexerdelone(t_word **lst, int key);
 // ================================ PARSING ====================================
-//Function checks for redirections.
-void	rm_redirections(t_parser_tools *parser_tools);
+int	rm_redirections(t_parser_tools *parser_tools);
 //Function 
 t_simple_cmds	*simple_cmdsfirst(t_simple_cmds *map);
 // ========================== MEMORY HANDLING (FREEING) ========================
@@ -187,6 +186,8 @@ void		free_env(t_env *list);
 void		free_lexer(t_word **lst);
 //Function performs the clearing of memory that takes place every loop.
 void		loop_reset(t_minidata *minidata);
+//Function performs the clearing of memory that takes place every loop without freeing pid.
+void	loop_reset_err(t_minidata *minidata);
 //Function that frees parsed doubly linked list 
 void	simple_cmdsclear(t_simple_cmds **lst);
 // ============================ EXECUTION - BUILT-INS ==========================

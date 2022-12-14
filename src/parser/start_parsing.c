@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:40:14 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/09 18:35:04 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:12:29 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,15 @@ static t_simple_cmds	*init_cmd(t_parser_tools *parser_tools)
 	t_word	*tmp;
 
 	i = 0;
-	rm_redirections(parser_tools);
+	if (rm_redirections(parser_tools))
+		return (NULL);
 	arg_size = count_args(parser_tools->lexer_list);
 	str = malloc(sizeof(char *) * (arg_size + 1));
 	if (!str)
+	{
 		parser_error(1, parser_tools->minidata, parser_tools->lexer_list);
+		return (NULL);
+	}
 	tmp = parser_tools->lexer_list;
 	while (i < arg_size)
 	{
@@ -49,15 +53,11 @@ static int	handle_pipe_errors(t_minidata *minidata, t_token token)
 {
 	if (token == PIPE)
 	{
-		parser_token_error(minidata, minidata->lexer_list,
-			minidata->lexer_list->token);
-		return (EXIT_FAILURE);
+		return (parser_token_error(minidata, minidata->lexer_list,
+			minidata->lexer_list->token));
 	}
 	if (!minidata->lexer_list)
-	{
-		parser_error(2, minidata, minidata->lexer_list);
-		return (EXIT_FAILURE);
-	}
+		return (parser_error(2, minidata, minidata->lexer_list));
 	return (EXIT_SUCCESS);
 }
 
@@ -75,12 +75,13 @@ int	start_parser(t_minidata *minidata)
 	{
 		if (minidata->lexer_list && minidata->lexer_list->token == PIPE)
 			lexerdelone(&minidata->lexer_list, minidata->lexer_list->i);
-		if (handle_pipe_errors(minidata, minidata->lexer_list->token))
-			return (EXIT_FAILURE);
+		if (minidata->lexer_list)
+			if (handle_pipe_errors(minidata, minidata->lexer_list->token))
+				return (EXIT_FAILURE);
 		parser_tools = init_parser_tools(minidata->lexer_list, minidata);
 		node = init_cmd(&parser_tools);
 		if (!node)
-			parser_error(2, minidata, parser_tools.lexer_list);
+			return (EXIT_FAILURE);
 		if (!minidata->simple_cmds)
 			minidata->simple_cmds = node;
 		else
