@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:39:06 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/30 13:42:50 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:57:05 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <readline/readline.h>
 
 //Function writes out the "too many arguments" error to standard error.
-static int	error_exit(int err, char *arg)
+static int	error_exit(t_minidata *minidata, int err, char *arg)
 {
 	write(STDERR_FILENO, "minishell: exit: ", 17);
 	if (err == 1)
@@ -27,7 +27,10 @@ static int	error_exit(int err, char *arg)
 		write(STDERR_FILENO, ": numeric argument required", 27);
 	}
 	else
+	{
 		write(STDERR_FILENO, "too many arguments", 18);
+		update_return(minidata, 2);
+	}
 	write(STDERR_FILENO, "\n", 1);
 	return (255);
 }
@@ -52,7 +55,7 @@ void	builtin_exit(t_minidata *minidata)
 	{
 		if (split_size(splitline) == 2 && (ft_atol(splitline[1]) == -1 || \
 			is_validnum(splitline[1]) == 0))
-			exitno = error_exit(1, splitline[1]);
+			exitno = error_exit(minidata, 1, splitline[1]);
 		else if (split_size(splitline) == 2)
 		{
 			if (ft_atol(splitline[1]) > 0)
@@ -64,7 +67,7 @@ void	builtin_exit(t_minidata *minidata)
 			exitno = EXIT_SUCCESS;
 		free_exit(exitno, splitline, minidata);
 	}
-	error_exit(2, 0);
+	error_exit(minidata, 2, 0);
 	free_split(splitline);
 	rl_on_new_line();
 }
