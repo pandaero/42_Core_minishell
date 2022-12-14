@@ -6,12 +6,12 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:19:01 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/14 16:52:25 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/14 17:16:13 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-#include <unistd.h>
+#include <stdlib.h>
 
 //Function prints out the environment variables.
 void	builtin_env(t_minidata *minidata)
