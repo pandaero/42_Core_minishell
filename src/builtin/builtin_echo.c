@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:18:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 22:55:56 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:48:42 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 #include <stdlib.h>
 
 //Function prints out the invalid input error to standard error.
-void	error_inv_input(void)
+void	error_inv_input(t_minidata *minidata)
 {
 	ft_putstr_fd("minishell: invalid input\n", STDERR_FILENO);
+	update_return(minidata, 2);
 }
 
 //Function checks what type of expansion to perform and performs it.
@@ -31,7 +32,7 @@ static void	echo_inner(t_minidata *minidata, t_echo *echo, int i)
 			echo->str = clean_dquotes(echo->str);
 		}
 		else
-			error_inv_input();
+			error_inv_input(minidata);
 	}
 	else if (echo->splitline[i][0] == '\'')
 	{
@@ -41,7 +42,7 @@ static void	echo_inner(t_minidata *minidata, t_echo *echo, int i)
 			echo->str = clean_squotes(echo->str);
 		}
 		else
-			error_inv_input();
+			error_inv_input(minidata);
 	}
 	else
 		echo->str = var_expansion(minidata, echo->splitline[i]);
@@ -82,6 +83,7 @@ void	builtin_echo(t_minidata *minidata)
 	func = (t_echo *)malloc(sizeof(t_echo));
 	func->splitline = minidata->simple_cmds->str;
 	func->preout = NULL;
+	update_return(minidata, EXIT_SUCCESS);
 	i = 1;
 	if (split_size(func->splitline) == 1 || \
 		(split_size(func->splitline) == 2 && \
