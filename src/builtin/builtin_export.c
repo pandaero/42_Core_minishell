@@ -6,12 +6,11 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:21:14 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/14 17:00:28 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/14 17:01:28 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-#include <unistd.h>
 #include <stdlib.h>
 
 //Function orders the environment variables in alphabetical order and displays.
