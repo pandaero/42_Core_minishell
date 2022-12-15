@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:18:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/14 16:48:42 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/15 20:36:02 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	builtin_echo(t_minidata *minidata)
 	func = (t_echo *)malloc(sizeof(t_echo));
 	func->splitline = minidata->simple_cmds->str;
 	func->preout = NULL;
-	update_return(minidata, EXIT_SUCCESS);
 	i = 1;
 	if (split_size(func->splitline) == 1 || \
 		(split_size(func->splitline) == 2 && \

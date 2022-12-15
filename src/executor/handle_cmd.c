@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:00:33 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/12 15:30:48 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/15 20:34:15 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,5 @@ void	single_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 		handle_cmd(cmd, minidata);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		minidata->last_return = ft_itoa(WEXITSTATUS(status));
+		update_return(minidata, WEXITSTATUS(status));
 }
