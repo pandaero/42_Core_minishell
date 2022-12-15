@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:15:34 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/30 13:41:55 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:16:47 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,17 @@
 #include <stdio.h>
 
 //Function prints out an error message for when the home variable is not set.
-void	error_cd_home(void)
+void	error_cd_home(t_minidata *minidata)
 {
 	ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
+	update_return(minidata, 2);
+}
+
+//Function prints out the error message corresponding to chdir not working.
+void	chdirerror(t_minidata *minidata)
+{
+	perror("minishell: ");
+	update_return(minidata, EXIT_FAILURE);
 }
 
 //Function changes the environment variables to implement a change of directory.
@@ -29,13 +37,13 @@ void	cd(t_minidata *minidata, char *dirstr)
 
 	dirwd = (char *)malloc(500 * sizeof(char));
 	if (chdir(dirstr) == -1)
-		perror("minishell: ");
+		chdirerror(minidata);
 	else
 	{
 		if (getcwd(dirwd, 500) == 0)
 		{
 			free(dirwd);
-			perror("minishell: ");
+			chdirerror(minidata);
 		}
 		else
 		{
@@ -44,6 +52,7 @@ void	cd(t_minidata *minidata, char *dirstr)
 			set_env_var(minidata, "OLDPWD", temp);
 			free(temp);
 			free(dirwd);
+			update_return(minidata, EXIT_SUCCESS);
 		}
 	}
 }
@@ -55,7 +64,7 @@ static void	cd_home(t_minidata *minidata)
 
 	home = find_env_var_list(minidata, "HOME");
 	if (home == 0)
-		error_cd_home();
+		error_cd_home(minidata);
 	cd(minidata, home->value);
 }
 
