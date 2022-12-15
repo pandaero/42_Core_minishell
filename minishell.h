@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/14 15:38:07 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/15 12:29:19 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,7 @@ char		*findcommand(const char *line);
 // Function that will start parsing
 int			start_parser(t_minidata *minidata);
 //Function performs the parsing of a command line.
-void		parser(t_minidata *minidata);
+int		parser(t_minidata *minidata);
 //Function for counting pipes
 void		count_pipes(t_word *lexer_l, t_minidata *minidata);
 

@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:40:14 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/14 18:12:29 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/15 12:21:33 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,8 @@ int	start_parser(t_minidata *minidata)
 	{
 		if (minidata->lexer_list && minidata->lexer_list->token == PIPE)
 			lexerdelone(&minidata->lexer_list, minidata->lexer_list->i);
-		if (minidata->lexer_list)
-			if (handle_pipe_errors(minidata, minidata->lexer_list->token))
-				return (EXIT_FAILURE);
+		if (minidata->lexer_list && handle_pipe_errors(minidata, minidata->lexer_list->token))
+			return (EXIT_FAILURE);
 		parser_tools = init_parser_tools(minidata->lexer_list, minidata);
 		node = init_cmd(&parser_tools);
 		if (!node)

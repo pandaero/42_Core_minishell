@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/14 18:12:57 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/15 12:28:54 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,8 @@ static void	main_loop(t_minidata *minidata)
 		add_history (minidata->currline);
 		if (minidata->currline[0] == '\0')
 			continue ;
-		if (is_valid_quotes(minidata->currline) == 0)
-		{
-			allerrors(0, minidata);
+		if (parser(minidata))
 			continue ;
-		}
-		parser(minidata);
-		if (start_parser(minidata))
-		{
-			loop_reset_err(minidata);	
-			continue ;
-		}
 		prepare_executor(minidata);
 		loop_reset(minidata);
 	}
