@@ -21,31 +21,40 @@ void	error_inv_input(t_minidata *minidata)
 	update_return(minidata, 2);
 }
 
+//Function
+static void	echo_mini(t_minidata *minidata, t_echo *echo, int i)
+{
+	if (count_dquotes(echo->splitline[i]) % 2 == 0)
+	{
+		echo->str = var_expansion(minidata, echo->splitline[i]);
+		echo->str = clean_dquotes(echo->str);
+		update_return(minidata, EXIT_SUCCESS);
+	}
+	else
+		error_inv_input(minidata);
+}
+
 //Function checks what type of expansion to perform and performs it.
 static void	echo_inner(t_minidata *minidata, t_echo *echo, int i)
 {
 	if (echo->splitline[i][0] == '\"')
-	{
-		if (count_dquotes(echo->splitline[i]) % 2 == 0)
-		{
-			echo->str = var_expansion(minidata, echo->splitline[i]);
-			echo->str = clean_dquotes(echo->str);
-		}
-		else
-			error_inv_input(minidata);
-	}
+		echo_mini(minidata, echo, i);
 	else if (echo->splitline[i][0] == '\'')
 	{
 		if (count_squotes(echo->splitline[i]) % 2 == 0)
 		{
 			echo->str = ft_strdup(echo->splitline[i]);
 			echo->str = clean_squotes(echo->str);
+			update_return(minidata, EXIT_SUCCESS);
 		}
 		else
 			error_inv_input(minidata);
 	}
 	else
+	{
 		echo->str = var_expansion(minidata, echo->splitline[i]);
+		update_return(minidata, EXIT_SUCCESS);
+	}
 }
 
 //Function performs the interpretation for echo.
