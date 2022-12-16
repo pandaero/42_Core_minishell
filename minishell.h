@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/15 12:29:19 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/16 14:58:39 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@ typedef struct s_simple_cmds
 
 // ================================ GLOBAL VARIABLE ============================
 //Typedef is for the global variable of the program: a persistent error number.
-typedef struct s_global
-{
-	int	error_num;
-}		t_global;
+// typedef struct s_global
+// {
+// 	int	error_num;
+// }		t_global;
 
 // =================================== MAIN ====================================
 //Typedef is for a struct containing critical data.
