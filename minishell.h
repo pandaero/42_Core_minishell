@@ -145,6 +145,8 @@ t_simple_cmds	*simple_cmdnew(char **str, int num_elm, \
 // =============================== ERROR HANDLING ==============================
 //Function handles an "command not found" error.
 int	error_cmd_nf(char *line);
+//Function prints out the invalid input error to standard error.
+void	error_inv_input(t_minidata *minidata);
 //Function handles an error in signal action setup.
 void	error_sig(void);
 //Function prints out a syntax error message.
