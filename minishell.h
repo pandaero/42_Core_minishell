@@ -330,5 +330,7 @@ char		*clean_dquotes(char *str);
 int			count_squotes(const char *str);
 //Function cleans single quotes from a string. Frees input string.
 char		*clean_squotes(char *str);
+//Function interprets quotes in a string to give "cleaned" output.
+char		*string_expansion(t_minidata *minidata, char *str);
 
 #endif
