@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/15 12:29:19 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/16 14:58:39 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@ typedef struct s_simple_cmds
 
 // ================================ GLOBAL VARIABLE ============================
 //Typedef is for the global variable of the program: a persistent error number.
-typedef struct s_global
-{
-	int	error_num;
-}		t_global;
+// typedef struct s_global
+// {
+// 	int	error_num;
+// }		t_global;
 
 // =================================== MAIN ====================================
 //Typedef is for a struct containing critical data.
@@ -145,8 +145,6 @@ t_simple_cmds	*simple_cmdnew(char **str, int num_elm, \
 // =============================== ERROR HANDLING ==============================
 //Function handles an "command not found" error.
 int	error_cmd_nf(char *line);
-//Function prints out the invalid input error to standard error.
-void	error_inv_input(t_minidata *minidata);
 //Function handles an error in signal action setup.
 void	error_sig(void);
 //Function prints out a syntax error message.
@@ -330,7 +328,6 @@ char		*clean_dquotes(char *str);
 int			count_squotes(const char *str);
 //Function cleans single quotes from a string. Frees input string.
 char		*clean_squotes(char *str);
-//Function interprets quotes in a string to give "cleaned" output.
-char		*string_expansion(t_minidata *minidata, char *str);
 
 #endif
+
