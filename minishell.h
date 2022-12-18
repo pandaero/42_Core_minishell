@@ -329,5 +329,9 @@ int			count_squotes(const char *str);
 //Function cleans single quotes from a string. Frees input string.
 char		*clean_squotes(char *str);
 
+void	error_inv_input(t_minidata *minidata);
+
+t_simple_cmds *parser_error_in(int error, t_minidata *minidata, t_word *lexer_l);
+
 #endif
 

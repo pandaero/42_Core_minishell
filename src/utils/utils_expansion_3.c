@@ -76,6 +76,8 @@ char	*clean_squotes(char *str)
 char	*string_expansion(t_minidata *minidata, char *str)
 {
 	char	*new;
+
+	new = NULL;
 	if (str[0] == '\"')
 	{
 		if (count_dquotes(str) % 2 == 0)

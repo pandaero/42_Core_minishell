@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:20:41 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/14 14:58:32 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/18 16:57:28 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ int	parser_error(int error, t_minidata *minidata, t_word *lexer_l)
 	free_lexer(&lexer_l);
 	allerrors(error, minidata);
 	return (EXIT_FAILURE);
+}
+
+t_simple_cmds	*parser_error_in(int error, t_minidata *minidata, t_word *lexer_l)
+{
+	free_lexer(&lexer_l);
+	allerrors(error, minidata);
+	return (NULL);
 }
 
 //Function prints out a syntax error message.

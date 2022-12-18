@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:21:13 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/15 20:19:33 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/18 19:15:40 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,29 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+
+// t_simple_cmds	*ft_call_expander(t_minidata *minidata, t_simple_cmds *cmd)
+// {
+// 	t_lexer	*start;
+// 	int i;
+
+// 	i = 0;
+// 	while (cmd->str[i])
+// 	{
+// 		cmd->str[i] = expand_var(minidata, cmd->str[i]);
+// 		i++;
+// 	}
+// 	start = cmd->redirections;
+// 	while (cmd->redirections)
+// 	{
+// 		if (cmd->redirections->token != LESS_LESS)
+// 			cmd->redirections->str
+// 				= string_expansion(minidata, cmd->redirections->str);
+// 		cmd->redirections = cmd->redirections->next;
+// 	}
+// 	cmd->redirections = start;
+// 	return (cmd);
+// }
 
 int	forking(t_minidata *minidata, int end[2], int fd_in, t_simple_cmds *cmd)
 {

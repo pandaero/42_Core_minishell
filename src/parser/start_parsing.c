@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:40:14 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/15 12:21:33 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/18 16:58:42 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,15 @@ static t_simple_cmds	*init_cmd(t_parser_tools *parser_tools)
 	int		arg_size;
 	t_word	*tmp;
 
-	i = 0;
+	i = -1;
 	if (rm_redirections(parser_tools))
 		return (NULL);
 	arg_size = count_args(parser_tools->lexer_list);
 	str = malloc(sizeof(char *) * (arg_size + 1));
 	if (!str)
-	{
-		parser_error(1, parser_tools->minidata, parser_tools->lexer_list);
-		return (NULL);
-	}
+		return (parser_error_in(1, parser_tools->minidata, parser_tools->lexer_list));
 	tmp = parser_tools->lexer_list;
-	while (i < arg_size)
+	while (++i < arg_size)
 	{
 		if (tmp->str)
 		{
@@ -41,7 +38,6 @@ static t_simple_cmds	*init_cmd(t_parser_tools *parser_tools)
 			lexerdelone(&parser_tools->lexer_list, tmp->i);
 			tmp = parser_tools->lexer_list;
 		}
-		i++;
 	}
 	str[i] = NULL;
 	return (simple_cmdnew(str, arg_size, \
