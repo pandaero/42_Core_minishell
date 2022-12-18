@@ -18,29 +18,45 @@
 #include <readline/readline.h>
 
 //Function writes out the "too many arguments" error to standard error.
-static int	error_exit(t_minidata *minidata, int err, char *arg)
+static int	error_exit(int err, char *arg)
 {
-	write(STDERR_FILENO, "minishell: exit: ", 17);
+	ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 	if (err == 1)
 	{
-		write(STDERR_FILENO, arg, ft_strlen(arg));
-		write(STDERR_FILENO, ": numeric argument required", 27);
+		ft_putstr_fd(arg, STDERR_FILENO);
+		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+		return (2);
 	}
 	else
 	{
-		write(STDERR_FILENO, "too many arguments", 18);
-		update_return(minidata, 2);
+		ft_putstr_fd("too many arguments\n", STDERR_FILENO);
+		return (1);
 	}
-	write(STDERR_FILENO, "\n", 1);
-	return (255);
 }
 
 //Function frees elements and exits the program with given number.
-static void	free_exit(int ret, char **splitline, t_minidata *minidata)
+static void	free_exit(t_minidata *minidata, char **splitline, int ret)
 {
-	free_split(splitline);
 	free_minidata(minidata);
 	exit(ret);
+}
+
+//Function handles behaviour of exit for normal (not too many args) condition.
+static void	exit_normal(t_minidata *minidata, char **splitline, int *exitno)
+{
+	if (split_size(splitline) == 2 && (ft_atol(splitline[1]) == -1 || \
+			is_validnum(splitline[1]) == 0))
+			*exitno = error_exit(1, splitline[1]);
+	else if (split_size(splitline) == 2)
+	{
+		if (ft_atol(splitline[1]) > 0)
+			*exitno = ft_atol(splitline[1]) % 256;
+		else
+			*exitno = (ft_atol(splitline[1]) * -1) % 256;
+	}
+	else
+		*exitno = EXIT_SUCCESS;
+	free_exit(*exitno, splitline, minidata);
 }
 
 //Function exits the program cleanly.
@@ -48,26 +64,17 @@ void	builtin_exit(t_minidata *minidata)
 {
 	char	**splitline;
 	int		exitno;
+	int		err;
 
 	exitno = 0;
-	splitline = ft_split(minidata->currline, ' ');
+	splitline = minidata->simple_cmds->str;
+	if (ft_strncmp(find_env_var_list(minidata, "SHLVL")->value, "1", 2) == 0)
+		ft_printf("logout\n");
+	else
+		ft_printf("exit\n");
 	if (split_size(splitline) == 1 || split_size(splitline) == 2)
-	{
-		if (split_size(splitline) == 2 && (ft_atol(splitline[1]) == -1 || \
-			is_validnum(splitline[1]) == 0))
-			exitno = error_exit(minidata, 1, splitline[1]);
-		else if (split_size(splitline) == 2)
-		{
-			if (ft_atol(splitline[1]) > 0)
-				exitno = ft_atol(splitline[1]) % 256;
-			else
-				exitno = (ft_atol(splitline[1]) * -1) % 256;
-		}
-		else
-			exitno = EXIT_SUCCESS;
-		free_exit(exitno, splitline, minidata);
-	}
-	error_exit(minidata, 2, 0);
-	free_split(splitline);
+		exit_normal(minidata, splitline, &exitno);
+	err = error_exit(2, 0);
+	update_return(minidata, err);
 	rl_on_new_line();
 }
