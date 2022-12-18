@@ -14,9 +14,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <errno.h>
 
 //Function prints out an error message for when the home variable is not set.
-void	error_cd_home(t_minidata *minidata)
+static void	error_cd_home(t_minidata *minidata)
 {
 	ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
 	update_return(minidata, 2);
@@ -57,14 +58,17 @@ void	cd(t_minidata *minidata, char *dirstr)
 	}
 }
 
-//Function changed the current directory to home. (default no-arg cd)
+//Function changes the current directory to home. (default no-arg cd)
 static void	cd_home(t_minidata *minidata)
 {
 	t_envvar	*home;
 
 	home = find_env_var_list(minidata, "HOME");
-	if (home == 0)
+	if (home == minidata->env_list->null)
+	{
 		error_cd_home(minidata);
+		return ;
+	}
 	cd(minidata, home->value);
 }
 
@@ -73,10 +77,9 @@ void	builtin_cd(t_minidata *minidata)
 {
 	char	**splitline;
 
-	splitline = ft_split(minidata->currline, ' ');
+	splitline = minidata->simple_cmds->str;
 	if (split_size(splitline) == 2)
 		cd(minidata, var_expansion(minidata, splitline[1]));
 	if (split_size(splitline) == 1)
 		cd_home(minidata);
-	free_split(splitline);
 }
