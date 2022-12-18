@@ -330,3 +330,4 @@ int			count_squotes(const char *str);
 char		*clean_squotes(char *str);
 
 #endif
+
