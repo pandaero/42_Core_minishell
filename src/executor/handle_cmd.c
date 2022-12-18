@@ -13,6 +13,7 @@
 #include "../../minishell.h"
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 
 static int	find_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 {

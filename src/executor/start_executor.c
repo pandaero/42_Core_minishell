@@ -14,6 +14,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 
 int	forking(t_minidata *minidata, int end[2], int fd_in, t_simple_cmds *cmd)
 {
