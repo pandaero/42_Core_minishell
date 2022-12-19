@@ -333,5 +333,8 @@ void	error_inv_input(t_minidata *minidata);
 
 t_simple_cmds *parser_error_in(int error, t_minidata *minidata, t_word *lexer_l);
 
+char	*string_expansion(t_minidata *minidata, char *str);
+
+t_simple_cmds	*call_expander(t_minidata *minidata, t_simple_cmds *cmd);
 #endif
 
