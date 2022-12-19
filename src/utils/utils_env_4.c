@@ -34,6 +34,7 @@ void	working_path(t_minidata *minidata)
 			temp = ft_strjoin(minidata->splitpath[i], "/");
 			free(minidata->splitpath[i]);
 			minidata->splitpath[i] = ft_strdup(temp);
+			free(temp);
 		}
 		i++;
 	}

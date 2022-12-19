@@ -1,0 +1,17 @@
+total 368
+-rw-r--r--   1 zyunusov  2021_wolfsburg   3200 Dec 19 13:49 Makefile
+-rw-r--r--   1 zyunusov  2021_wolfsburg    255 Dec 12 10:56 README.md
+drwxr-xr-x  47 zyunusov  2021_wolfsburg   1598 Dec 19 14:51 build
+drwxr-xr-x   9 zyunusov  2021_wolfsburg    306 Dec 12 10:56 exercises
+-rwxr-xr-x   1 zyunusov  2021_wolfsburg      0 Dec 19 15:00 fi
+-rw-r--r--   1 zyunusov  2021_wolfsburg  13215 Dec 19 14:51 leakafteriter
+-rw-r--r--   1 zyunusov  2021_wolfsburg    277 Dec 19 14:59 leakafteriter2redirection
+-rw-r--r--   1 zyunusov  2021_wolfsburg  12618 Dec 19 14:12 leakctrl_d
+-rw-r--r--   1 zyunusov  2021_wolfsburg  12620 Dec 19 14:28 leakstartparser
+-rw-r--r--   1 zyunusov  2021_wolfsburg  14298 Dec 19 14:21 leakvalidquotes
+drwxr-xr-x  62 zyunusov  2021_wolfsburg   2108 Dec 19 14:51 libft
+-rwxr-xr-x   1 zyunusov  2021_wolfsburg  91848 Dec 19 14:51 minishell
+drwxr-xr-x   3 zyunusov  2021_wolfsburg    102 Dec 12 10:56 minishell.dSYM
+-rw-r--r--   1 zyunusov  2021_wolfsburg  14349 Dec 18 19:44 minishell.h
+drwxr-xr-x  12 zyunusov  2021_wolfsburg    408 Dec 16 16:39 src
+drwxr-xr-x   8 zyunusov  2021_wolfsburg    272 Dec 18 16:05 test

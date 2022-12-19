@@ -1,0 +1,150 @@
+==66889== Memcheck, a memory error detector
+==66889== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==66889== Using Valgrind-3.19.0.GIT-lbmacos and LibVEX; rerun with -h for copyright info
+==66889== Command: ./minishell
+==66889== Parent PID: 49046
+==66889== 
+--66889-- run: /usr/bin/dsymutil "./minishell"
+==66889== Invalid read of size 1
+==66889==    at 0x1000058E1: is_valid_quotes (in ./minishell)
+==66889==    by 0x100005818: parser (in ./minishell)
+==66889==    by 0x1000040F7: main_loop (in ./minishell)
+==66889==    by 0x10000404F: main (in ./minishell)
+==66889==  Address 0x10091037a is 0 bytes after a block of size 10 alloc'd
+==66889==    at 0x10012B545: malloc (in /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==66889==    by 0x10015EC44: xmalloc (in /goinfre/zyunusov/.brew/Cellar/readline/8.2.1/lib/libreadline.8.2.dylib)
+==66889==    by 0x10013C096: readline_internal_teardown (in /goinfre/zyunusov/.brew/Cellar/readline/8.2.1/lib/libreadline.8.2.dylib)
+==66889==    by 0x10013BBB4: readline (in /goinfre/zyunusov/.brew/Cellar/readline/8.2.1/lib/libreadline.8.2.dylib)
+==66889==    by 0x1000040A8: main_loop (in ./minishell)
+==66889==    by 0x10000404F: main (in ./minishell)
+==66889== 
+==66889== 
+==66889== HEAP SUMMARY:
+==66889==     in use at exit: 323,983 bytes in 387 blocks
+==66889==   total heap usage: 862 allocs, 475 frees, 352,076 bytes allocated
+==66889== 
+==66889== 8 bytes in 1 blocks are definitely lost in loss record 3 of 109
+==66889==    at 0x10012B545: malloc (in /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==66889==    by 0x10000A2AD: ft_strdup (in ./minishell)
+==66889==    by 0x100007662: get_env_var_data (in ./minishell)
+==66889==    by 0x1000076D0: fill_env (in ./minishell)
+==66889==    by 0x100003D53: init_minidata (in ./minishell)
+==66889==    by 0x100004037: main (in ./minishell)
+==66889== 
+==66889== 10 bytes in 1 blocks are definitely lost in loss record 7 of 109
+==66889==    at 0x10012B545: malloc (in /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==66889==    by 0x10015EC44: xmalloc (in /goinfre/zyunusov/.brew/Cellar/readline/8.2.1/lib/libreadline.8.2.dylib)
+==66889==    by 0x10013C096: readline_internal_teardown (in /goinfre/zyunusov/.brew/Cellar/readline/8.2.1/lib/libreadline.8.2.dylib)
+==66889==    by 0x10013BBB4: readline (in /goinfre/zyunusov/.brew/Cellar/readline/8.2.1/lib/libreadline.8.2.dylib)
+==66889==    by 0x1000040A8: main_loop (in ./minishell)
+==66889==    by 0x10000404F: main (in ./minishell)
+==66889== 
+==66889== 32 bytes in 1 blocks are definitely lost in loss record 32 of 109
+==66889==    at 0x10012BBA0: calloc (in /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==66889==    by 0x10078B5F3: objc::DenseMap<objc_class*, objc_class*, objc::DenseMapValueInfo<objc_class*>, objc::DenseMapInfo<objc_class*>, objc::detail::DenseMapPair<objc_class*, objc_class*> >::grow(unsigned int) (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x10078B69F: objc_class::mangledName() (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x100777406: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x1007872D0: unmap_image (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x10001D667: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==66889==    by 0x10001D808: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==66889==    by 0x100350AD0: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==66889==    by 0x100775DAF: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x1002D2F38: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==66889==    by 0x1002DF0E7: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==66889==    by 0x10017E790: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==66889== 
+==66889== 32 bytes in 1 blocks are definitely lost in loss record 33 of 109
+==66889==    at 0x10012BBA0: calloc (in /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==66889==    by 0x10078B5F3: objc::DenseMap<objc_class*, objc_class*, objc::DenseMapValueInfo<objc_class*>, objc::DenseMapInfo<objc_class*>, objc::detail::DenseMapPair<objc_class*, objc_class*> >::grow(unsigned int) (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x10078B6C6: objc_class::mangledName() (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x10078B69F: objc_class::mangledName() (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x100777406: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x1007872D0: unmap_image (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x10001D667: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==66889==    by 0x10001D808: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==66889==    by 0x100350AD0: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==66889==    by 0x100775DAF: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x1002D2F38: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==66889==    by 0x1002DF0E7: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==66889== 
+==66889== 128 bytes in 1 blocks are definitely lost in loss record 45 of 109
+==66889==    at 0x10012BBA0: calloc (in /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==66889==    by 0x10077A667: objc_msgSend_stret (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x1002D2FEC: _os_object_alloc_realized (in /usr/lib/system/libdispatch.dylib)
+==66889==    by 0x1002D7BC5: _dispatch_lane_create_with_target (in /usr/lib/system/libdispatch.dylib)
+==66889==    by 0x1006DA5F5: _libtrace_init (in /usr/lib/system/libsystem_trace.dylib)
+==66889==    by 0x10017E7B0: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==66889==    by 0x1000331D2: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==66889==    by 0x1000335DD: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==66889==    by 0x10002DFFA: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==66889==    by 0x10002DF65: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==66889==    by 0x10002C0B3: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==66889==    by 0x10002C153: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==66889== 
+==66889== 356 (96 direct, 260 indirect) bytes in 1 blocks are definitely lost in loss record 54 of 109
+==66889==    at 0x10012BBA0: calloc (in /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==66889==    by 0x10077A667: objc_msgSend_stret (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x1002D2FEC: _os_object_alloc_realized (in /usr/lib/system/libdispatch.dylib)
+==66889==    by 0x1007127D7: xpc_dictionary_create (in /usr/lib/system/libxpc.dylib)
+==66889==    by 0x100712E02: _xpc_dyld_image_callback (in /usr/lib/system/libxpc.dylib)
+==66889==    by 0x10001C99C: dyld::registerBulkLoadCallback(void (*)(unsigned int, mach_header const**, char const**)) (in /usr/lib/dyld)
+==66889==    by 0x100712D1A: _xpc_collect_images (in /usr/lib/system/libxpc.dylib)
+==66889==    by 0x100712297: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==66889==    by 0x10017E7A0: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==66889==    by 0x1000331D2: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==66889==    by 0x1000335DD: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==66889==    by 0x10002DFFA: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==66889== 
+==66889== 896 bytes in 28 blocks are definitely lost in loss record 60 of 109
+==66889==    at 0x10012BBA0: calloc (in /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==66889==    by 0x10078B5F3: objc::DenseMap<objc_class*, objc_class*, objc::DenseMapValueInfo<objc_class*>, objc::DenseMapInfo<objc_class*>, objc::detail::DenseMapPair<objc_class*, objc_class*> >::grow(unsigned int) (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x100777406: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x1007872D0: unmap_image (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x10001D667: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==66889==    by 0x10001D808: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==66889==    by 0x100350AD0: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==66889==    by 0x100775DAF: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x1002D2F38: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==66889==    by 0x1002DF0E7: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==66889==    by 0x10017E790: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==66889==    by 0x1000331D2: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==66889== 
+==66889== 896 bytes in 28 blocks are definitely lost in loss record 61 of 109
+==66889==    at 0x10012BBA0: calloc (in /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==66889==    by 0x10078B5F3: objc::DenseMap<objc_class*, objc_class*, objc::DenseMapValueInfo<objc_class*>, objc::DenseMapInfo<objc_class*>, objc::detail::DenseMapPair<objc_class*, objc_class*> >::grow(unsigned int) (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x10078B6C6: objc_class::mangledName() (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x100777406: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x1007872D0: unmap_image (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x10001D667: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==66889==    by 0x10001D808: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==66889==    by 0x100350AD0: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==66889==    by 0x100775DAF: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x1002D2F38: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==66889==    by 0x1002DF0E7: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==66889==    by 0x10017E790: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==66889== 
+==66889== 1,221 (96 direct, 1,125 indirect) bytes in 1 blocks are definitely lost in loss record 70 of 109
+==66889==    at 0x10012BBA0: calloc (in /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==66889==    by 0x10077A667: objc_msgSend_stret (in /usr/lib/libobjc.A.dylib)
+==66889==    by 0x1002D2FEC: _os_object_alloc_realized (in /usr/lib/system/libdispatch.dylib)
+==66889==    by 0x1007127D7: xpc_dictionary_create (in /usr/lib/system/libxpc.dylib)
+==66889==    by 0x100712659: _xpc_collect_environment (in /usr/lib/system/libxpc.dylib)
+==66889==    by 0x100712292: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==66889==    by 0x10017E7A0: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==66889==    by 0x1000331D2: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==66889==    by 0x1000335DD: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==66889==    by 0x10002DFFA: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==66889==    by 0x10002DF65: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==66889==    by 0x10002C0B3: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==66889== 
+==66889== LEAK SUMMARY:
+==66889==    definitely lost: 2,194 bytes in 63 blocks
+==66889==    indirectly lost: 1,385 bytes in 20 blocks
+==66889==      possibly lost: 0 bytes in 0 blocks
+==66889==    still reachable: 309,822 bytes in 224 blocks
+==66889==         suppressed: 10,582 bytes in 80 blocks
+==66889== Reachable blocks (those to which a pointer was found) are not shown.
+==66889== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==66889== 
+==66889== For lists of detected and suppressed errors, rerun with: -s
+==66889== ERROR SUMMARY: 10 errors from 10 contexts (suppressed: 4 from 4)

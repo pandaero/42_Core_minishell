@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:08:30 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/09 19:06:22 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/19 14:51:05 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_minidata	*init_minidata(char **env)
 	new->lexer_list = NULL;
 	new->reset = false;
 	new->pid = NULL;
+	new->heredoc = false;
 	free(builtin);
 	return (new);
 }

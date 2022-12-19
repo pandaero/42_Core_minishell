@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:21:13 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/18 19:44:41 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:07:40 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	check_fd(t_minidata *minidata, int end[2], t_simple_cmds *cmd)
 {
 	int	fd_in;
 
+	fd_in = 0;
 	if (minidata->heredoc)
 	{
 		close(end[0]);
