@@ -82,7 +82,7 @@ t_envvar	*find_env_var_list(t_minidata *minidata, char *var)
 	t_envvar	*node;
 
 	node = minidata->env_list->first;
-	while (node != 0)
+	while (node != minidata->env_list->null)
 	{
 		if (ft_strcmp(node->var, var) == 0)
 			return (node);
@@ -102,7 +102,7 @@ void	set_env_var(t_minidata *minidata, char *var, char *value)
 	whole = ft_strjoin(declaration, value);
 	free(declaration);
 	curr = find_env_var_list(minidata, var);
-	if (curr == 0)
+	if (curr == minidata->env_list->null)
 	{
 		curr = new_env_var();
 		curr->whole = ft_strdup(whole);
