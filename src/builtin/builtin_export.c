@@ -27,15 +27,6 @@ static void	display_env_alph(t_minidata *minidata)
 	}
 }
 
-//Function works out the value of a variable (performs expansion).
-static char	*expandedvalue(t_minidata *minidata, char *valuepre)
-{
-	char	*value;
-
-	value = var_expansion(minidata, valuepre);
-	return (value);
-}
-
 //Function writes to the current shell environment variables.
 void	builtin_export(t_minidata *minidata)
 {
@@ -51,7 +42,7 @@ void	builtin_export(t_minidata *minidata)
 	{
 		splitassign = ft_split(splitline[1], '=');
 		envvar = ft_strdup(splitassign[0]);
-		value = expandedvalue(minidata, splitassign[1]);
+		value = string_expansion(minidata, splitassign[1]);
 		free_split(splitassign);
 		set_env_var(minidata, envvar, value);
 		free(envvar);
