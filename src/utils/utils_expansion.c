@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 01:05:49 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/30 14:21:53 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/20 13:34:55 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ char	*expand_var(t_minidata *minidata, char *str, int i)
 	else
 		expand.post = ft_substr(str, j, ft_strlen(str));
 	expand.var = ft_substr(str, i + 1, j - i - 1);
-	expand.new = ft_strjoin(expand.pre, \
+	expand.nnew = ft_strjoin(expand.pre, \
 					find_env_var_list(minidata, expand.var)->value);
-	expand.newnew = ft_strjoin(expand.new, expand.post);
-	free_expand_var(expand.post, expand.pre, expand.var, expand.new);
+	expand.newnew = ft_strjoin(expand.nnew, expand.post);
+	free_expand_var(expand.post, expand.pre, expand.var, expand.nnew);
 	return (expand.newnew);
 }
