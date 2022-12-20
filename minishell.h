@@ -142,6 +142,7 @@ t_parser_tools	init_parser_tools(t_word *lexer_l, t_minidata *minidata);
 //Function to inialise the command list.
 t_simple_cmds	*simple_cmdnew(char **str, int num_elm, \
 								int num_red, t_word *red);
+
 // =============================== ERROR HANDLING ==============================
 //Function handles an "command not found" error.
 int	error_cmd_nf(char *line);
@@ -154,6 +155,9 @@ int			parser_token_error(t_minidata *minidata, t_word *lexer_l, \
 int		parser_error(int error, t_minidata *minidata, t_word *lexer_l);
 // Function for all errors
 int	allerrors(int error, t_minidata *minidata);
+//Function prints out the invalid input error to standard error.
+void	error_inv_input(t_minidata *minidata);
+
 // =================================== LEXER ===================================
 // Function to read from string, to divide to tokens
 int			read_token(t_minidata *minidata);
@@ -171,10 +175,12 @@ int			handle_token(int i, char *s, t_word **lexer_l);
 t_word		*newlex(char *s, int token);
 //Function deletes a node in the lexer list according to its i value.
 void		lexerdelone(t_word **lst, int key);
+
 // ================================ PARSING ====================================
 int	rm_redirections(t_parser_tools *parser_tools);
 //Function 
 t_simple_cmds	*simple_cmdsfirst(t_simple_cmds *map);
+
 // ========================== MEMORY HANDLING (FREEING) ========================
 //Function frees a 2D char array made from ft_split.
 void		free_split(char **charr);
@@ -190,6 +196,7 @@ void		loop_reset(t_minidata *minidata);
 void	loop_reset_err(t_minidata *minidata);
 //Function that frees parsed doubly linked list 
 void	simple_cmdsclear(t_simple_cmds **lst);
+
 // ============================ EXECUTION - BUILT-INS ==========================
 //Function handles the execution of built-in commands.
 void	builtin_execution(t_minidata *minidata, int builtin);
@@ -272,9 +279,11 @@ void		update_return(t_minidata *minidata, int ret);
 int			skip_spaces(char *line, int i);
 //Function to count the number of arguments within a pipe. 
 int			count_args(t_word *lexer_l);
+
 // =============================== UTILS - COMMANDS LIST =======================
 //Function adds a command node to the back of a list.
 void	simple_cmdsadd_back(t_simple_cmds **lst, t_simple_cmds *new);
+
 // =============================== UTILS - BOOLEAN =============================
 //Function checks whether a character is a spacing character.
 int			is_space(char ch);
@@ -303,7 +312,7 @@ void		set_env_var(t_minidata *minidata, char *var, char *value);
 //Function fills the environment variable list from the vector.
 void		fill_env(t_env *envlist, char **env);
 //Function copies a node element to a new one.
-t_envvar	*env_var_cpy(t_envvar *var);
+t_envvar	*env_var_cpy(t_env *list, t_envvar *var);
 //Function adds a node to an environment variable linked list.
 void		add_env_var(t_env *envlist, t_envvar *envvar);
 //Function removes a node from an environment variable linked list.
@@ -328,5 +337,7 @@ char		*clean_dquotes(char *str);
 int			count_squotes(const char *str);
 //Function cleans single quotes from a string. Frees input string.
 char		*clean_squotes(char *str);
+//Function interprets quotes in a string to give "cleaned" output.
+char		*string_expansion(t_minidata *minidata, char *str);
 
 #endif
