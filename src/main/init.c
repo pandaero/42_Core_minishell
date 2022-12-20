@@ -50,12 +50,17 @@ t_env	*new_env_list(void)
 
 	new = (t_env *)malloc(sizeof(t_env));
 	new->size = 0;
-	new->first = 0;
-	new->last = 0;
 	new->null = new_env_var();
+	ft_printf("created null: %p\n", new->null);
+	new->first = new->null;
+	new->last = new->null;
+	new->first->prev = new->null;
+	new->last->next = new->null;
 	new->null->var = ft_strdup("");
 	new->null->value = ft_strdup("");
 	new->null->whole = ft_strdup("");
+	new->null->prev = new->null;
+	new->null->next = new->null;
 	return (new);
 }
 
