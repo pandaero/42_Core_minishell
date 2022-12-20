@@ -71,34 +71,3 @@ char	*clean_squotes(char *str)
 	free(str);
 	return (new);
 }
-
-//Function interprets quotes in a string to give "cleaned" output.
-char	*string_expansion(t_minidata *minidata, char *str)
-{
-	char	*new;
-
-	new = NULL;
-	if (str[0] == '\"')
-	{
-		if (count_dquotes(str) % 2 == 0)
-		{
-			new = var_expansion(minidata, str);
-			new = clean_dquotes(str);
-		}
-		else
-			error_inv_input(minidata);
-	}
-	else if (str[0] == '\'')
-	{
-		if (count_squotes(str) % 2 == 0)
-		{
-			new = var_expansion(minidata, str);
-			new = clean_squotes(str);
-		}
-		else
-			error_inv_input(minidata);
-	}
-	else
-		new = var_expansion(minidata, str);
-	return (new);
-}

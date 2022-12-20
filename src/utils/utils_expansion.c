@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 01:05:49 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/20 13:34:55 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:05:42 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,9 @@ char	*expand_var(t_minidata *minidata, char *str, int i)
 {
 	t_expand	expand;
 	int			j;
+	int			k;
 
+	k = 0;
 	if (i == 0)
 		expand.pre = ft_strdup("");
 	else
@@ -90,13 +92,24 @@ char	*expand_var(t_minidata *minidata, char *str, int i)
 	j = i + 1;
 	if (str[j] == '$' || str[j] == '?')
 		return (expand_extra(minidata, str, expand.pre, str[j]));
-	while (str[j] != '\0' && is_var(str[j]) == 1)
+	if (str[j] >= '0' && str[j] <= '9')
+	{
 		j++;
+		k++;
+	}
+	else
+	{
+		while (str[j] != '\0' && is_var(str[j]) == 1)
+		j++;
+	}
 	if (str[j] == '\0')
 		expand.post = ft_strdup("");
 	else
 		expand.post = ft_substr(str, j, ft_strlen(str));
-	expand.var = ft_substr(str, i + 1, j - i - 1);
+	if (k == 0)
+		expand.var = ft_substr(str, i + 1, j - i - 1);
+	else
+		expand.var = ft_strdup("");
 	expand.nnew = ft_strjoin(expand.pre, \
 					find_env_var_list(minidata, expand.var)->value);
 	expand.newnew = ft_strjoin(expand.nnew, expand.post);
