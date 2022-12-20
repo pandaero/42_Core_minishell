@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:21:13 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/15 20:19:33 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/18 19:44:41 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,29 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+
+t_simple_cmds	*call_expander(t_minidata *minidata, t_simple_cmds *cmd)
+{
+	t_word	*start;
+	int i;
+
+	i = 0;
+	while (cmd->str[i])
+	{
+		cmd->str[i] = string_expansion(minidata, cmd->str[i]);
+		i++;
+	}
+	start = cmd->redirections;
+	while (cmd->redirections)
+	{
+		if (cmd->redirections->token != LESS_LESS)
+			cmd->redirections->str
+				= string_expansion(minidata, cmd->redirections->str);
+		cmd->redirections = cmd->redirections->next;
+	}
+	cmd->redirections = start;
+	return (cmd);
+}
 
 int	forking(t_minidata *minidata, int end[2], int fd_in, t_simple_cmds *cmd)
 {
@@ -73,6 +96,7 @@ int	start_executor(t_minidata *minidata)
 	fd_in = STDIN_FILENO;
 	while (minidata->simple_cmds)
 	{
+		minidata->simple_cmds = call_expander(minidata, minidata->simple_cmds);
 		if (minidata->simple_cmds->next)
 			pipe(end);
 		if (send_heredoc(minidata, minidata->simple_cmds))
