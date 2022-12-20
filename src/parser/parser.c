@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:27:25 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/19 14:23:54 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/20 22:37:41 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	parser(t_minidata *minidata)
 	if (start_parser(minidata))
 	{
 		update_return(minidata, 258);
-		loop_reset_err(minidata);
+		loop_reset(minidata);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:40:14 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/19 17:25:34 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/20 23:04:58 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static t_simple_cmds	*init_cmd(t_parser_tools *parser_tools)
 	arg_size = count_args(parser_tools->lexer_list);
 	str = ft_calloc(arg_size + 1, sizeof(char *));
 	if (!str)
-		return (parser_error_in(1, parser_tools->minidata, parser_tools->lexer_list));
+		return (parser_error_in(1, parser_tools->minidata, \
+				parser_tools->lexer_list));
 	tmp = parser_tools->lexer_list;
 	while (++i < arg_size)
 	{
@@ -49,7 +50,7 @@ static int	handle_pipe_errors(t_minidata *minidata, t_token token)
 	if (token == PIPE)
 	{
 		return (parser_token_error(minidata, minidata->lexer_list,
-			minidata->lexer_list->token));
+				minidata->lexer_list->token));
 	}
 	if (!minidata->lexer_list)
 		return (parser_error(2, minidata, minidata->lexer_list));

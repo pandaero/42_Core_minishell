@@ -6,7 +6,7 @@
 #    By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:31:50 by pandalaf          #+#    #+#              #
-#    Updated: 2022/12/19 13:49:39 by zyunusov         ###   ########.fr        #
+#    Updated: 2022/12/20 22:56:59 by zyunusov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME := minishell
 # Compiler options
 CC		:= cc
 CFLAGS	:= -Wall -Werror -Wextra 
-COPT	:= -g
+COPT	:= -g -fsanitize=address
 # Sources
 SRC_ROOT		:= src/
 SRC_SUBDIRS		:= main builtin lexer parser error list memory validation utils executor

@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:21:13 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/19 15:07:40 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/20 23:05:51 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 t_simple_cmds	*call_expander(t_minidata *minidata, t_simple_cmds *cmd)
 {
 	t_word	*start;
-	int i;
+	int		i;
 
 	i = 0;
 	while (cmd->str[i])

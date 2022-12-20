@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 21:22:12 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/12 15:22:57 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/20 22:27:42 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ void	simple_cmdsclear(t_simple_cmds **lst)
 		redirections_temp = (*lst)->redirections;
 		free_lexer(&redirections_temp);
 		if ((*lst)->str)
-		{
 			free_split((*lst)->str);
-			(*lst)->str = NULL;
-		}
 		if ((*lst)->hd_file_name)
 			free((*lst)->hd_file_name);
 		free(*lst);

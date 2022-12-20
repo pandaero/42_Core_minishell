@@ -144,16 +144,16 @@ t_simple_cmds	*simple_cmdnew(char **str, int num_elm, \
 								int num_red, t_word *red);
 // =============================== ERROR HANDLING ==============================
 //Function handles an "command not found" error.
-int	error_cmd_nf(char *line);
+int			error_cmd_nf(char *line);
 //Function handles an error in signal action setup.
-void	error_sig(void);
+void		error_sig(void);
 //Function prints out a syntax error message.
 int			parser_token_error(t_minidata *minidata, t_word *lexer_l, \
 								t_token token);
 //Function displays the "parser error" message.
-int		parser_error(int error, t_minidata *minidata, t_word *lexer_l);
+int			parser_error(int error, t_minidata *minidata, t_word *lexer_l);
 // Function for all errors
-int	allerrors(int error, t_minidata *minidata);
+int			allerrors(int error, t_minidata *minidata);
 // =================================== LEXER ===================================
 // Function to read from string, to divide to tokens
 int			read_token(t_minidata *minidata);
@@ -172,7 +172,7 @@ t_word		*newlex(char *s, int token);
 //Function deletes a node in the lexer list according to its i value.
 void		lexerdelone(t_word **lst, int key);
 // ================================ PARSING ====================================
-int	rm_redirections(t_parser_tools *parser_tools);
+int			rm_redirections(t_parser_tools *parser_tools);
 //Function 
 t_simple_cmds	*simple_cmdsfirst(t_simple_cmds *map);
 // ========================== MEMORY HANDLING (FREEING) ========================
@@ -187,12 +187,12 @@ void		free_lexer(t_word **lst);
 //Function performs the clearing of memory that takes place every loop.
 void		loop_reset(t_minidata *minidata);
 //Function performs the clearing of memory that takes place every loop without freeing pid.
-void	loop_reset_err(t_minidata *minidata);
+void		loop_reset_err(t_minidata *minidata);
 //Function that frees parsed doubly linked list 
-void	simple_cmdsclear(t_simple_cmds **lst);
+void		simple_cmdsclear(t_simple_cmds **lst);
 // ============================ EXECUTION - BUILT-INS ==========================
 //Function handles the execution of built-in commands.
-void	builtin_execution(t_minidata *minidata, int builtin);
+void		builtin_execution(t_minidata *minidata, int builtin);
 //Function exits the program cleanly.
 void		builtin_exit(t_minidata *minidata);
 //Function prints the current working directory where the shell is acting.
@@ -208,22 +208,22 @@ void		builtin_cd(t_minidata *minidata);
 //Function writes a given string to the terminal. With/out newline.
 void		builtin_echo(t_minidata *minidata);
 //Function that check for single or multiple commands
-int	prepare_executor(t_minidata *minidata);
+int			prepare_executor(t_minidata *minidata);
 //Function starts execution multiple commands
-int	start_executor(t_minidata *minidata);
+int			start_executor(t_minidata *minidata);
 //Function that dups stdout and stdin
-void	dup_cmd(t_simple_cmds *cmd, t_minidata *minidata, \
+void		dup_cmd(t_simple_cmds *cmd, t_minidata *minidata, \
 					int end[2], int fd_in);
 //Function to resplit cmd
-char	**resplit_str(char **double_arr);
+char		**resplit_str(char **double_arr);
 //Function for heredoc
-int	send_heredoc(t_minidata *minidata, t_simple_cmds *cmd);
+int			send_heredoc(t_minidata *minidata, t_simple_cmds *cmd);
 //Function that check for redirections
-int	check_redirections(t_simple_cmds *cmd);
+int			check_redirections(t_simple_cmds *cmd);
 //Function that will delete qoutes for heredoc
-char	*delete_quotes(char *str, char c);
+char		*delete_quotes(char *str, char c);
 //Function that will execute single cmds
-void	single_cmd(t_simple_cmds *cmd, t_minidata *minidata);
+void		single_cmd(t_simple_cmds *cmd, t_minidata *minidata);
 
 // ============================ COMMAND LINE PARSING ===========================
 //Function finds the command within a simple command line.
@@ -231,7 +231,7 @@ char		*findcommand(const char *line);
 // Function that will start parsing
 int			start_parser(t_minidata *minidata);
 //Function performs the parsing of a command line.
-int		parser(t_minidata *minidata);
+int			parser(t_minidata *minidata);
 //Function for counting pipes
 void		count_pipes(t_word *lexer_l, t_minidata *minidata);
 
@@ -241,7 +241,7 @@ int			is_validcmdline(t_minidata *minidata);
 //Function determines whether a command is found within the path.
 int			is_pathcmd(char *cmd, t_minidata *minidata);
 //Function determines whether a command line calls a built-in command.
-int	is_builtincmd(char	*cmd);
+int			is_builtincmd(char	*cmd);
 // Function handles an "syntax error: while quotes not closed"
 int			is_valid_quotes(char *line);
 
@@ -274,7 +274,7 @@ int			skip_spaces(char *line, int i);
 int			count_args(t_word *lexer_l);
 // =============================== UTILS - COMMANDS LIST =======================
 //Function adds a command node to the back of a list.
-void	simple_cmdsadd_back(t_simple_cmds **lst, t_simple_cmds *new);
+void		simple_cmdsadd_back(t_simple_cmds **lst, t_simple_cmds *new);
 // =============================== UTILS - BOOLEAN =============================
 //Function checks whether a character is a spacing character.
 int			is_space(char ch);
@@ -329,12 +329,13 @@ int			count_squotes(const char *str);
 //Function cleans single quotes from a string. Frees input string.
 char		*clean_squotes(char *str);
 
-void	error_inv_input(t_minidata *minidata);
+void		error_inv_input(t_minidata *minidata);
 
-t_simple_cmds *parser_error_in(int error, t_minidata *minidata, t_word *lexer_l);
+t_simple_cmds *parser_error_in(int error,
+				t_minidata *minidata, t_word *lexer_l);
 
-char	*string_expansion(t_minidata *minidata, char *str);
+char		*string_expansion(t_minidata *minidata, char *str);
 
-t_simple_cmds	*call_expander(t_minidata *minidata, t_simple_cmds *cmd);
+t_simple_cmds *call_expander(t_minidata *minidata, t_simple_cmds *cmd);
 #endif
 
