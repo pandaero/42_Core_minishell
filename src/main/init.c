@@ -51,7 +51,6 @@ t_env	*new_env_list(void)
 	new = (t_env *)malloc(sizeof(t_env));
 	new->size = 0;
 	new->null = new_env_var();
-	ft_printf("created null: %p\n", new->null);
 	new->first = new->null;
 	new->last = new->null;
 	new->first->prev = new->null;
