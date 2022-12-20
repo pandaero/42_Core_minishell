@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/16 14:58:39 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/20 13:24:45 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_expand
 	char	*pre;
 	char	*post;
 	char	*var;
-	char	*new;
+	char	*nnew;
 	char	*newnew;
 }			t_expand;
 
@@ -164,7 +164,7 @@ int			read_token(t_minidata *minidata);
 // Function to read(skip) quotes
 int			handle_quotes(int i, char *str, char del);
 //Function adds a node to back of the lexer linked list.
-void		add_back_lex(t_word **lst, t_word *new);
+void		add_back_lex(t_word **lst, t_word *nnew);
 // Function to put all tokens in separate container(doubly linked list)
 int			add_lexer_node(char *s, t_token token, t_word **lexer_l);
 // Function that check for pipe and redir only <> returns name of token
@@ -282,7 +282,7 @@ int			count_args(t_word *lexer_l);
 
 // =============================== UTILS - COMMANDS LIST =======================
 //Function adds a command node to the back of a list.
-void	simple_cmdsadd_back(t_simple_cmds **lst, t_simple_cmds *new);
+void	simple_cmdsadd_back(t_simple_cmds **lst, t_simple_cmds *nnew);
 
 // =============================== UTILS - BOOLEAN =============================
 //Function checks whether a character is a spacing character.
