@@ -25,13 +25,10 @@ static int	error_exit(int err, char *arg)
 	{
 		ft_putstr_fd(arg, STDERR_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-		return (2);
 	}
 	else
-	{
 		ft_putstr_fd("too many arguments\n", STDERR_FILENO);
-		return (1);
-	}
+	return (2);
 }
 
 //Function frees elements and exits the program with given number.
