@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:00:33 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/15 20:34:15 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/18 19:44:28 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	single_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 	int	builtins;
 
 	builtins = 0;
-	// call_expander(minidata, minidata->simple_cmds);
+	minidata->simple_cmds = call_expander(minidata, minidata->simple_cmds);
 	if (minidata->simple_cmds->str[0])
 		builtins = is_builtincmd(minidata->simple_cmds->str[0]);
 	if (builtins > 0 && builtins <= 4)
