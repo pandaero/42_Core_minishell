@@ -25,7 +25,7 @@ void	builtin_env(t_minidata *minidata)
 		curr = minidata->env_list->first;
 		while (curr->index != ind)
 		{
-			if (curr->next == 0 && curr->index != ind)
+			if (curr->next == minidata->env_list->null && curr->index != ind)
 			{
 				ind++;
 				curr = minidata->env_list->first;

@@ -14,6 +14,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 
 t_simple_cmds	*call_expander(t_minidata *minidata, t_simple_cmds *cmd)
 {
