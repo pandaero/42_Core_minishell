@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:31:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/20 13:52:41 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/21 16:55:34 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,6 +334,10 @@ void			env_var_swap(t_envvar *var1, t_envvar *var2, t_env *list);
 int				is_env_list_ordered(t_env *list);
 //Function appends a forward slash to the PATH elements to create splitpath.
 void			working_path(t_minidata *minidata);
+//Function finds the highest index present in the environment variable list.
+int				max_env_index(t_minidata *minidata);
+//Function finds an environment variable according to its index in the list.
+t_envvar		*find_env_index(t_minidata *minidata, int ind);
 
 // =========================== UTILS - EXPANSION ===============================
 //Function determines the number of double quotes in a string.

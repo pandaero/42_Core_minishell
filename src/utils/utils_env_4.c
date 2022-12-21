@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_env_4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 19:45:52 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/09 19:32:36 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/21 16:53:58 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,36 @@ void	working_path(t_minidata *minidata)
 		}
 		i++;
 	}
+}
+
+//Function finds the highest index present in the environment variable list.
+int	max_env_index(t_minidata *minidata)
+{
+	int			max;
+	t_envvar	*curr;
+
+	max = 0;
+	curr = minidata->env_list->first;
+	while (curr != minidata->env_list->null)
+	{
+		if (curr->index > max)
+			max = curr->index;
+		curr = curr->next;
+	}
+	return (max);
+}
+
+//Function finds an environment variable according to its index in the list.
+t_envvar	*find_env_index(t_minidata *minidata, int ind)
+{
+	t_envvar	*curr;
+
+	curr = minidata->env_list->first;
+	while (curr != minidata->env_list->null)
+	{
+		if (curr->index == ind)
+			return (curr);
+		curr = curr->next;
+	}
+	return (minidata->env_list->null);
 }
