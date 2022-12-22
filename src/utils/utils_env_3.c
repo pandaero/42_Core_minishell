@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 23:17:28 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/14 12:37:02 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:15:44 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	env_list_order(t_env *list)
 		}
 	}
 }
+
 //Function looks for an environment variable in the linked list.
 t_envvar	*find_env_var_list(t_minidata *minidata, char *var)
 {

@@ -100,5 +100,6 @@ char	*string_expansion(t_minidata *minidata, char *str)
 	}
 	else
 		new = var_expansion(minidata, str);
+	free(str);
 	return (new);
 }

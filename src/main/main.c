@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/20 22:21:35 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:24:21 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	terminal_setup(void)
 //Function exits the program cleanly.
 static void	cleanexit(t_minidata *minidata)
 {
-	simple_cmdsclear(&minidata->simple_cmds);
 	if (minidata)
 		free_minidata(minidata);
 	exit(EXIT_SUCCESS);

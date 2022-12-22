@@ -37,7 +37,6 @@ static int	error_exit(int err, char *arg)
 //Function frees elements and exits the program with given number.
 static void	free_exit(t_minidata *minidata, char **splitline, int ret)
 {
-	simple_cmdsclear(&minidata->simple_cmds);
 	free_split(splitline);
 	free_minidata(minidata);
 	exit(ret);
