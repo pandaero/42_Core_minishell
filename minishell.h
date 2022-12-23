@@ -37,6 +37,14 @@ typedef struct s_echo
 	char	*finalout;
 }			t_echo;
 
+//Typedef declares a struct with a set of three counters.
+typedef struct	s_ii
+{
+	int	i;
+	int	j;
+	int	k;
+}		t_ii;
+
 // =============================== WORD/TOKEN LIST =============================
 //Typedef classifies redirections and pipes.
 typedef enum token
@@ -157,9 +165,9 @@ int				parser_error(int error, t_minidata *minidata, t_word *lexer_l);
 int				allerrors(int error, t_minidata *minidata);
 //Function prints out the invalid input error to standard error.
 void			error_inv_input(t_minidata *minidata);
-//Function
-t_simple_cmds *parser_error_in(int error, t_minidata *minidata, t_word *lexer_l);
-
+//Function that will return NULL if there is an error
+t_simple_cmds	*parser_error_in(int error, \
+		t_minidata *minidata, t_word *lexer_l);
 
 // =================================== LEXER ===================================
 // Function to read from string, to divide to tokens
@@ -187,7 +195,6 @@ t_simple_cmds	*simple_cmdsfirst(t_simple_cmds *map);
 //Function
 t_simple_cmds	*call_expander(t_minidata *minidata, t_simple_cmds *cmd);
 
-
 // ========================== MEMORY HANDLING (FREEING) ========================
 //Function frees a 2D char array made from ft_split.
 void			free_split(char **charr);
@@ -199,8 +206,6 @@ void			free_env(t_env *list);
 void			free_lexer(t_word **lst);
 //Function performs the clearing of memory that takes place every loop.
 void			loop_reset(t_minidata *minidata);
-//Function performs the clearing of memory that takes place every loop without freeing pid.
-void			loop_reset_err(t_minidata *minidata);
 //Function that frees parsed doubly linked list 
 void			simple_cmdsclear(t_simple_cmds **lst);
 

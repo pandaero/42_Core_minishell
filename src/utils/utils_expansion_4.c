@@ -26,6 +26,7 @@ static char	*squote_string_expansion(t_minidata *minidata, char *str)
 	}
 	else
 		error_inv_input(minidata);
+	free(str);
 	return (new);
 }
 
@@ -42,6 +43,7 @@ static char	*dquote_string_expansion(t_minidata *minidata, char *str)
 	}
 	else
 		error_inv_input(minidata);
+	free(str);
 	return (new);
 }
 
@@ -77,6 +79,7 @@ static char	*dollar_string_expansion(t_minidata *minidata, char *str)
 	}
 	else
 		new = var_expansion(minidata, str);
+	free(str);
 	return (new);
 }
 
@@ -94,5 +97,6 @@ char	*string_expansion(t_minidata *minidata, char *str)
 		return (dollar_string_expansion(minidata, str));
 	else
 		new = var_expansion(minidata, str);
+	free(str);
 	return (new);
 }

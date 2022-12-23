@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:19:01 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/21 16:56:24 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/23 13:29:29 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	builtin_env(t_minidata *minidata)
 		else
 		{
 			ind++;
-			continue;
+			continue ;
 		}
 		ind++;
 	}

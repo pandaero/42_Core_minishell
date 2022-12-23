@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_expansion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 01:05:49 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/20 15:05:42 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/23 13:17:554 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,37 +77,15 @@ static void	free_expand_var(char *post, char *pre, char *var, char *new)
 	free(post);
 }
 
-//Function expands a variable within an expression, given a starting point.
-char	*expand_var(t_minidata *minidata, char *str, int i)
+//Function
+char	*expand_var_2(t_minidata *minidata, t_expand expand, char *str, t_ii ii)
 {
-	t_expand	expand;
-	int			j;
-	int			k;
-
-	k = 0;
-	if (i == 0)
-		expand.pre = ft_strdup("");
-	else
-		expand.pre = ft_substr(str, 0, i);
-	j = i + 1;
-	if (str[j] == '$' || str[j] == '?')
-		return (expand_extra(minidata, str, expand.pre, str[j]));
-	if (str[j] >= '0' && str[j] <= '9')
-	{
-		j++;
-		k++;
-	}
-	else
-	{
-		while (str[j] != '\0' && is_var(str[j]) == 1)
-		j++;
-	}
-	if (str[j] == '\0')
+	if (str[ii.j] == '\0')
 		expand.post = ft_strdup("");
 	else
-		expand.post = ft_substr(str, j, ft_strlen(str));
-	if (k == 0)
-		expand.var = ft_substr(str, i + 1, j - i - 1);
+		expand.post = ft_substr(str, ii.j, ft_strlen(str));
+	if (ii.k == 0)
+		expand.var = ft_substr(str, ii.i + 1, ii.j - ii.i - 1);
 	else
 		expand.var = ft_strdup("");
 	expand.nnew = ft_strjoin(expand.pre, \
@@ -115,4 +93,32 @@ char	*expand_var(t_minidata *minidata, char *str, int i)
 	expand.newnew = ft_strjoin(expand.nnew, expand.post);
 	free_expand_var(expand.post, expand.pre, expand.var, expand.nnew);
 	return (expand.newnew);
+}
+
+//Function expands a variable within an expression, given a starting point.
+char	*expand_var(t_minidata *minidata, char *str, int i)
+{
+	t_expand	expand;
+	t_ii		ii;
+
+	ii.k = 0;
+	if (i == 0)
+		expand.pre = ft_strdup("");
+	else
+		expand.pre = ft_substr(str, 0, i);
+	ii.j = i + 1;
+	if (str[ii.j] == '$' || str[ii.j] == '?')
+		return (expand_extra(minidata, str, expand.pre, str[ii.j]));
+	if (str[ii.j] >= '0' && str[ii.j] <= '9')
+	{
+		ii.j++;
+		ii.k++;
+	}
+	else
+	{
+		while (str[ii.j] != '\0' && is_var(str[ii.j]) == 1)
+		ii.j++;
+	}
+	ii.i = i;
+	return (expand_var_2(minidata, expand, str, ii));
 }

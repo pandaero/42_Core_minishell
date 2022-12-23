@@ -14,14 +14,14 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-//Function prints out the invalid input error to standard error.
+// Function prints out the invalid input error to standard error.
 void	error_inv_input(t_minidata *minidata)
 {
 	ft_putstr_fd("minishell: invalid input\n", STDERR_FILENO);
 	update_return(minidata, 2);
 }
 
-//Function peforms the double quote cleaning if necessary.
+// Function peforms the double quote cleaning if necessary.
 static void	echo_mini(t_minidata *minidata, t_echo *echo, int i)
 {
 	if (count_dquotes(echo->splitline[i]) % 2 == 0)
@@ -34,7 +34,7 @@ static void	echo_mini(t_minidata *minidata, t_echo *echo, int i)
 		error_inv_input(minidata);
 }
 
-//Function checks what type of expansion to perform and performs it.
+// Function checks what type of expansion to perform and performs it.
 static void	echo_inner(t_minidata *minidata, t_echo *echo, int i)
 {
 	if (echo->splitline[i][0] == '\"')
@@ -57,7 +57,7 @@ static void	echo_inner(t_minidata *minidata, t_echo *echo, int i)
 	}
 }
 
-//Function performs the interpretation for echo.
+// Function performs the interpretation for echo.
 static void	echo_main(t_minidata *minidata, t_echo *echo, int i)
 {
 	char	*temp;
@@ -83,7 +83,7 @@ static void	echo_main(t_minidata *minidata, t_echo *echo, int i)
 	}
 }
 
-//Function writes a given string to the terminal. With/out newline.
+// Function writes a given string to the terminal. With/out newline.
 void	builtin_echo(t_minidata *minidata)
 {
 	t_echo	*func;
@@ -93,13 +93,13 @@ void	builtin_echo(t_minidata *minidata)
 	func->splitline = minidata->simple_cmds->str;
 	func->preout = NULL;
 	i = 1;
-	if (split_size(func->splitline) == 1 || \
-		(split_size(func->splitline) == 2 && \
-		ft_strncmp(func->splitline[1], "-n", 3) == 0))
+	if (split_size(func->splitline) == 1 ||
+		(split_size(func->splitline) == 2 &&
+			ft_strncmp(func->splitline[1], "-n", 3) == 0))
 		func->preout = ft_strdup("");
 	else
 		echo_main(minidata, func, i);
-	if (split_size(func->splitline) > 1 && \
+	if (split_size(func->splitline) > 1 &&
 		ft_strncmp(func->splitline[1], "-n", 3) == 0)
 		func->finalout = ft_strdup(func->preout);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_env_4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 19:45:52 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/21 16:53:58 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/23 13:29:30 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,21 @@ t_envvar	*find_env_index(t_minidata *minidata, int ind)
 		if (curr->index == ind)
 			return (curr);
 		curr = curr->next;
+	}
+	return (minidata->env_list->null);
+}
+
+//Function looks for an environment variable in the linked list.
+t_envvar	*find_env_var_list(t_minidata *minidata, char *var)
+{
+	t_envvar	*node;
+
+	node = minidata->env_list->first;
+	while (node != minidata->env_list->null)
+	{
+		if (ft_strcmp(node->var, var) == 0)
+			return (node);
+		node = node->next;
 	}
 	return (minidata->env_list->null);
 }

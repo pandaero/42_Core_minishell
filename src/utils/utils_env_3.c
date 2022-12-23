@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 23:17:28 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/23 12:46:15 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/23 13:08:47 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,10 @@ void	env_list_order(t_env *list)
 	}
 }
 
-//Function looks for an environment variable in the linked list.
-t_envvar	*find_env_var_list(t_minidata *minidata, char *var)
+static void	check_path(char *var, t_minidata *minidata)
 {
-	t_envvar	*node;
-
-	node = minidata->env_list->first;
-	while (node != minidata->env_list->null)
-	{
-		if (ft_strcmp(node->var, var) == 0)
-			return (node);
-		node = node->next;
-	}
-	return (minidata->env_list->null);
+	if (ft_strncmp(var, "PATH", 5) == 0)
+		working_path(minidata);
 }
 
 //Function sets an environment variable's value in the env variable list.
@@ -118,6 +109,5 @@ void	set_env_var(t_minidata *minidata, char *var, char *value)
 		curr->whole = ft_strdup(whole);
 	}
 	free(whole);
-	if (ft_strncmp(var, "PATH", 5) == 0)
-		working_path(minidata);
+	check_path(var, minidata);
 }
