@@ -38,7 +38,7 @@ typedef struct s_echo
 }			t_echo;
 
 //Typedef declares a struct with a set of three counters.
-typedef struct	s_ii
+typedef struct s_ii
 {
 	int	i;
 	int	j;
