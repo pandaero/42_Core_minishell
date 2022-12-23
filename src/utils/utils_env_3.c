@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 23:17:28 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/22 14:15:44 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/23 12:46:15 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	is_env_list_ordered(t_env *list)
 	t_envvar	*curr;
 
 	curr = list->first;
-	while (curr != 0)
+	while (curr != envlist->null)
 	{
-		if (curr->next == 0)
+		if (curr->next == envlist->null)
 			break ;
 		if (ft_strcmp(curr->var, curr->next->var) > 0)
 			return (0);
@@ -36,13 +36,13 @@ void	env_var_swap(t_envvar *var1, t_envvar *var2, t_env *list)
 	t_envvar	*temp;
 
 	temp = env_var_cpy(var1);
-	if (var1->prev != 0)
+	if (var1->prev != list->null)
 		var1->prev->next = var2;
 	else
 		list->first = var2;
 	var1->prev = var2;
 	var1->next = var2->next;
-	if (var2->next != 0)
+	if (var2->next != list->null)
 		var2->next->prev = var1;
 	else
 		list->last = var1;
@@ -62,9 +62,9 @@ void	env_list_order(t_env *list)
 	while (is_env_list_ordered(list) == 0)
 	{
 		curr = list->first;
-		while (curr != 0)
+		while (curr != list->null)
 		{
-			if (curr->next == 0)
+			if (curr->next == list->nul)
 				break ;
 			if (ft_strcmp(curr->var, curr->next->var) > 0)
 				env_var_swap(curr, curr->next, list);

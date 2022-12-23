@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 14:57:59 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/15 12:15:41 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/23 11:48:19 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	allerrors(int error, t_minidata *minidata)
 		ft_putstr_fd("Failed to create pipe\n", STDERR_FILENO);
 	else if (error == 6)
 		ft_putstr_fd("minishell: syntax error near unexpected token '|'\n",
-		STDERR_FILENO);
+			STDERR_FILENO);
 	(void) minidata;
 	return (EXIT_FAILURE);
 }

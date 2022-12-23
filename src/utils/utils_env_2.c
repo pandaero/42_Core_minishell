@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_env_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 19:58:30 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/29 03:37:03 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/2312 12:28:399 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ void	fill_env(t_env *envlist, char **env)
 //Function removes a node from an environment variable linked list.
 void	rem_env_var(t_env *envlist, t_envvar *envvar)
 {
-	if (envvar == 0)
+	if (envvar == envlist->null)
 		return ;
-	if (envvar->prev == 0)
+	if (envvar->prev == envlist->null)
 		envlist->first = envvar->next;
 	else
 		envvar->prev->next = envvar->next;
-	if (envvar->next == 0)
+	if (envvar->next == envlist->null)
 		envlist->last = envvar->prev;
 	else
 		envvar->next->prev = envvar->prev;
@@ -86,14 +86,14 @@ void	add_env_var(t_env *envlist, t_envvar *envvar)
 {
 	if (envlist->size == 0)
 	{
-		envvar->prev = 0;
-		envvar->next = 0;
+		envvar->prev = envlist->null;
+		envvar->next = envlist->null;
 		envlist->first = envvar;
 	}
 	else
 	{
 		envvar->prev = envlist->last;
-		envvar->next = 0;
+		envvar->next = envlist->null;
 		envlist->last->next = envvar;
 	}
 	envvar->index = envlist->size;
