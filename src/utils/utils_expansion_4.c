@@ -79,7 +79,6 @@ static char	*dollar_string_expansion(t_minidata *minidata, char *str)
 	}
 	else
 		new = var_expansion(minidata, str);
-	free(str);
 	return (new);
 }
 
@@ -94,7 +93,11 @@ char	*string_expansion(t_minidata *minidata, char *str)
 	else if (str[0] == '\'')
 		return (squote_string_expansion(minidata, str));
 	else if (str[0] == '$')
-		return (dollar_string_expansion(minidata, str));
+	{
+		new = dollar_string_expansion(minidata, str);
+		free(str);
+		return (new);
+	}
 	else
 		new = var_expansion(minidata, str);
 	free(str);

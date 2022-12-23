@@ -93,13 +93,13 @@ void	builtin_echo(t_minidata *minidata)
 	func->splitline = minidata->simple_cmds->str;
 	func->preout = NULL;
 	i = 1;
-	if (split_size(func->splitline) == 1 ||
-		(split_size(func->splitline) == 2 &&
+	if (split_size(func->splitline) == 1 || \
+		(split_size(func->splitline) == 2 && \
 			ft_strncmp(func->splitline[1], "-n", 3) == 0))
 		func->preout = ft_strdup("");
 	else
 		echo_main(minidata, func, i);
-	if (split_size(func->splitline) > 1 &&
+	if (split_size(func->splitline) > 1 && \
 		ft_strncmp(func->splitline[1], "-n", 3) == 0)
 		func->finalout = ft_strdup(func->preout);
 	else
