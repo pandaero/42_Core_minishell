@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:15:34 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/14 16:16:47 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:32:27 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <errno.h>
 
 //Function prints out an error message for when the home variable is not set.
-void	error_cd_home(t_minidata *minidata)
+static void	error_cd_home(t_minidata *minidata)
 {
 	ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
 	update_return(minidata, 2);
@@ -57,26 +58,25 @@ void	cd(t_minidata *minidata, char *dirstr)
 	}
 }
 
-//Function changed the current directory to home. (default no-arg cd)
+//Function changes the current directory to home. (default no-arg cd)
 static void	cd_home(t_minidata *minidata)
 {
 	t_envvar	*home;
 
 	home = find_env_var_list(minidata, "HOME");
-	if (home == 0)
+	if (home == minidata->env_list->null)
+	{
 		error_cd_home(minidata);
+		return ;
+	}
 	cd(minidata, home->value);
 }
 
 //Function changes the current directory where the shell is performing actions.
 void	builtin_cd(t_minidata *minidata)
 {
-	char	**splitline;
-
-	splitline = ft_split(minidata->currline, ' ');
-	if (split_size(splitline) == 2)
-		cd(minidata, var_expansion(minidata, splitline[1]));
-	if (split_size(splitline) == 1)
+	if (split_size(minidata->simple_cmds->str) == 2)
+		cd(minidata, string_expansion(minidata, minidata->simple_cmds->str[1]));
+	if (split_size(minidata->simple_cmds->str) == 1)
 		cd_home(minidata);
-	free_split(splitline);
 }

@@ -21,7 +21,7 @@ void	error_inv_input(t_minidata *minidata)
 	update_return(minidata, 2);
 }
 
-//Function
+//Function peforms the double quote cleaning if necessary.
 static void	echo_mini(t_minidata *minidata, t_echo *echo, int i)
 {
 	if (count_dquotes(echo->splitline[i]) % 2 == 0)

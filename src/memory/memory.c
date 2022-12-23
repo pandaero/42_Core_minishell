@@ -17,11 +17,11 @@
 void	free_minidata(t_minidata *minidata)
 {
 	free_split(minidata->builtincmds);
+	free_split(minidata->splitpath);
 	free_env(minidata->env_list);
+	free(minidata->last_return);
 	free(minidata->currline);
 	free(minidata->dollar);
-	free(minidata->last_return);
-	free_split(minidata->splitpath);
 	free(minidata);
 }
 

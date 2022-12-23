@@ -20,20 +20,11 @@ static void	display_env_alph(t_minidata *minidata)
 
 	env_list_order(minidata->env_list);
 	curr = minidata->env_list->first;
-	while (curr != 0)
+	while (curr != minidata->env_list->null)
 	{
 		ft_printf("declare -x %s=\"%s\"\n", curr->var, curr->value);
 		curr = curr->next;
 	}
-}
-
-//Function works out the value of a variable (performs expansion).
-static char	*expandedvalue(t_minidata *minidata, char *valuepre)
-{
-	char	*value;
-
-	value = var_expansion(minidata, valuepre);
-	return (value);
 }
 
 //Function writes to the current shell environment variables.
@@ -45,14 +36,13 @@ void	builtin_export(t_minidata *minidata)
 	char		*value;
 	int			args;
 
-	splitline = ft_split(minidata->currline, ' ');
+	splitline = minidata->simple_cmds->str;
 	args = split_size(splitline);
 	if (args == 2)
 	{
 		splitassign = ft_split(splitline[1], '=');
-		free_split(splitline);
 		envvar = ft_strdup(splitassign[0]);
-		value = expandedvalue(minidata, splitassign[1]);
+		value = string_expansion(minidata, splitassign[1]);
 		free_split(splitassign);
 		set_env_var(minidata, envvar, value);
 		free(envvar);
