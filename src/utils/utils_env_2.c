@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_env_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 19:58:30 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/29 03:37:03 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/2312 12:28:399 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

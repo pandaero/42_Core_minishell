@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lexer_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:19:08 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/05 21:45:47 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/20 22:53:04 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+#include <stdlib.h>
 #include <stdlib.h>
 
 t_word	*lexerclear_one(t_word **lst)

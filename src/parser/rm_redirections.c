@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:18:06 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/18 16:52:51 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/23 11:47:07 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	add_new_redirection(t_word *tmp, t_parser_tools *parser_tools)
 	t_word	*node;
 	int		index_1;
 	int		index_2;
-	
+
 	node = newlex(ft_strdup(tmp->next->str), tmp->token);
 	if (!node)
 		parser_error(1, parser_tools->minidata, parser_tools->lexer_list);
@@ -36,21 +36,24 @@ static int	add_new_redirection(t_word *tmp, t_parser_tools *parser_tools)
 int	rm_redirections(t_parser_tools *parser_tools)
 {
 	t_word	*tmp;
-	
+
 	tmp = parser_tools->lexer_list;
 	while (tmp && tmp->token == 0)
 		tmp = tmp->next;
 	if (tmp && (tmp->token == PIPE && !tmp->next))
-		return (parser_error(6, parser_tools->minidata, parser_tools->lexer_list));
+		return (parser_error(6, \
+			parser_tools->minidata, parser_tools->lexer_list));
 	if (!tmp || tmp->token == PIPE)
 		return (EXIT_SUCCESS);
 	if (!tmp->next)
-		return (parser_error(2, parser_tools->minidata, parser_tools->lexer_list));
+		return (parser_error(2, \
+			parser_tools->minidata, parser_tools->lexer_list));
 	if (tmp->next->token)
-		return (parser_token_error(parser_tools->minidata,
+		return (parser_token_error(parser_tools->minidata, \
 			parser_tools->lexer_list, tmp->next->token));
 	if (tmp->token == LESS_LESS && tmp->next->str[0] == '\0')
-		return (parser_error(2, parser_tools->minidata, parser_tools->lexer_list));
+		return (parser_error(2, \
+			parser_tools->minidata, parser_tools->lexer_list));
 	if ((tmp->token >= GREAT && tmp->token <= LESS_LESS))
 		add_new_redirection(tmp, parser_tools);
 	rm_redirections(parser_tools);
