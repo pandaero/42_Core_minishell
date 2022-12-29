@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:31:42 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/29 08:43:21 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/29 10:08:30 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	create_heredoc(t_word *heredoc, bool quotes,
 	{
 		if (!ft_strncmp(heredoc->str, line, (ft_strlen(heredoc->str) + 1))
 			&& (ft_strlen(line)) == ft_strlen(heredoc->str))
-			break ;
+				break ;
 		if (quotes == false)
 			line = var_expansion(minidata, line);
 		write(fd, line, ft_strlen(line));
@@ -40,7 +40,10 @@ static int	create_heredoc(t_word *heredoc, bool quotes,
 	}
 	free(line);
 	if (minidata->stop_heredoc || !line)
+	{
+		close(fd);
 		return (EXIT_FAILURE);
+	}
 	close(fd);
 	return (EXIT_SUCCESS);
 }
@@ -97,7 +100,7 @@ int	send_heredoc(t_minidata *minidata, t_simple_cmds *cmd)
 			sl = heredoc(minidata, cmd->redirections, cmd->hd_file_name);
 			if (sl)
 			{
-				minidata->last_return = "1";
+				update_return(minidata, 1);
 				return (EXIT_FAILURE);
 			}
 		}

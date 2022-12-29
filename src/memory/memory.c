@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:17:16 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/23 13:29:31 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/29 10:35:48 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	free_split(char **charr)
 	i = 0;
 	while (charr[i])
 	{
-		free(charr[i]);
+		if (charr[i] != NULL)
+			free(charr[i]);
 		i++;
 	}
 	free(charr);

@@ -99,6 +99,7 @@ char	*string_expansion(t_minidata *minidata, char *str)
 	else if (str[0] == '$')
 	{
 		new = dollar_string_expansion(minidata, str);
+		free(str);
 		return (new);
 	}
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:15:34 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/20 16:32:27 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:02:33 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	cd_home(t_minidata *minidata)
 void	builtin_cd(t_minidata *minidata)
 {
 	if (split_size(minidata->simple_cmds->str) == 2)
-		cd(minidata, string_expansion(minidata, minidata->simple_cmds->str[1]));
+		cd(minidata, minidata->simple_cmds->str[1]);
 	if (split_size(minidata->simple_cmds->str) == 1)
 		cd_home(minidata);
 }
