@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:00:33 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/23 14:15:20 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/29 09:01:04 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static void	handle_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 		if (check_redirections(cmd))
 			exit(1);
 	}
+	if (check_cmds(minidata->simple_cmds->str[0]))
+		exit(0);
 	if (is_builtincmd(minidata->simple_cmds->str[0]) > 0)
 	{
 		builtin_execution(minidata, \
@@ -53,7 +55,9 @@ static void	handle_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 		exit(ft_atoi(minidata->last_return));
 	}
 	else if (cmd->str[0][0] != '\0')
+	{
 		exit_code = find_cmd(cmd, minidata);
+	}
 	exit(exit_code);
 }
 

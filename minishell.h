@@ -355,5 +355,7 @@ int				count_squotes(const char *str);
 char			*clean_squotes(char *str);
 //Function interprets quotes in a string to give "cleaned" output.
 char			*string_expansion(t_minidata *minidata, char *str);
+//Function to check if thereis a cmd 
+int				check_cmds(char *str);
 
 #endif

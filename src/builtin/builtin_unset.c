@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:24:26 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/20 17:08:30 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/29 08:30:35 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,18 @@ void	builtin_unset(t_minidata *minidata)
 	t_envvar	*var;
 	char		**splitline;
 	char		*search;
+	int			i;
 
+	i = 1;
 	splitline = minidata->simple_cmds->str;
-	search = ft_strdup(splitline[1]);
-	var = find_env_var_list(minidata, search);
-	if (var != minidata->env_list->null)
-		rem_env_var(minidata->env_list, var);
-	free(search);
-	update_return(minidata, EXIT_SUCCESS);
+	while (splitline[i])
+	{
+		search = ft_strdup(splitline[i]);
+		var = find_env_var_list(minidata, search);
+		if (var != minidata->env_list->null)
+			rem_env_var(minidata->env_list, var);
+		free(search);
+		i++;
+		update_return(minidata, EXIT_SUCCESS);
+	}
 }
