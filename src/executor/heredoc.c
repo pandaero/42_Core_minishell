@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:31:42 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/29 10:08:30 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/29 13:17:41 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	create_heredoc(t_word *heredoc, bool quotes,
 	{
 		if (!ft_strncmp(heredoc->str, line, (ft_strlen(heredoc->str) + 1))
 			&& (ft_strlen(line)) == ft_strlen(heredoc->str))
-				break ;
+			break ;
 		if (quotes == false)
 			line = var_expansion(minidata, line);
 		write(fd, line, ft_strlen(line));

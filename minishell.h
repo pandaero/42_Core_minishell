@@ -357,5 +357,7 @@ char			*clean_squotes(char *str);
 char			*string_expansion(t_minidata *minidata, char *str);
 //Function to check if thereis a cmd 
 int				check_cmds(char *str);
+//Functions that checks for export var
+char			*check_value(char **splitassign, t_minidata *minidata);
 
 #endif
