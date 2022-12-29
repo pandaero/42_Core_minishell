@@ -47,6 +47,18 @@ static char	*dquote_string_expansion(t_minidata *minidata, char *str)
 	return (new);
 }
 
+//Function removes the corresponding quotes from a string.
+static char	*dollar_clean_quotes(char qt, char *new, char *str, char *temp)
+{
+	if (qt == 's')
+		temp = clean_squotes(str);
+	else
+		temp = clean_dquotes(str);
+	new = ft_substr(temp, 1, ft_strlen(temp));
+	free(temp);
+	return (new);
+}
+
 //Function handles dollar sign expansions.
 static char	*dollar_string_expansion(t_minidata *minidata, char *str)
 {
@@ -58,22 +70,14 @@ static char	*dollar_string_expansion(t_minidata *minidata, char *str)
 	if (str[1] == '\'')
 	{
 		if (count_squotes(str) % 2 == 0)
-		{
-			temp = clean_squotes(str);
-			new = ft_substr(temp, 1, ft_strlen(temp));
-			free(temp);
-		}
+			new = dollar_clean_quotes('s', new, str, temp);
 		else
 			error_inv_input(minidata);
 	}
 	else if (str[1] == '\"')
 	{
 		if (count_dquotes(str) % 2 == 0)
-		{
-			temp = clean_dquotes(str);
-			new = ft_substr(temp, 1, ft_strlen(temp));
-			free(temp);
-		}
+			new = dollar_clean_quotes('d', new, str, temp);
 		else
 			error_inv_input(minidata);
 	}
