@@ -42,7 +42,10 @@ void	builtin_export(t_minidata *minidata)
 	{
 		splitassign = ft_split(splitline[1], '=');
 		envvar = ft_strdup(splitassign[0]);
-		value = string_expansion(minidata, splitassign[1]);
+		if (splitassign[1] != NULL)
+			value = string_expansion(minidata, splitassign[1]);
+		else
+			value = ft_strdup(" ");
 		free(splitassign[0]);
 		free(splitassign);
 		set_env_var(minidata, envvar, value);
