@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:00:33 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/29 09:01:04 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:54:46 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,18 @@ void	dup_cmd(t_simple_cmds *cmd, t_minidata *minidata, int end[2], int fd_in)
 	handle_cmd(cmd, minidata);
 }
 
+static void	single_wait(t_minidata *minidata, int pid)
+{
+	pid_t	ret;
+	int		status;
+
+	setup_parent_signal();
+	ret = waitpid(pid, &status, WUNTRACED);
+	if (ret == -1)
+		error_child();
+	exit_status(minidata, status);
+}
+
 void	single_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 {
 	int	pid;
@@ -93,11 +105,11 @@ void	single_cmd(t_simple_cmds *cmd, t_minidata *minidata)
 	if (send_heredoc(minidata, cmd))
 		return ;
 	pid = fork();
+	if (pid > 0)
+		single_wait(minidata, pid);
 	if (pid < 0)
 		allerrors(5, minidata);
 	if (pid == 0)
 		handle_cmd(cmd, minidata);
 	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		update_return(minidata, WEXITSTATUS(status));
 }

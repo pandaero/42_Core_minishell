@@ -267,6 +267,16 @@ int				is_valid_quotes(char *line);
 // ================================== SIGNALS ==================================
 //Function sets up the sigaction signal handlers.
 void			setup_signal(void);
+//Function sets up the sigaction signal handlers for the parent process.
+void			setup_parent_signal(void);
+//Function sets up the sigaction signal handlers for child processes.
+void			setup_child_signal(void);
+//Function handles the SIGINT signal. Redisplay prompt.
+void			sigint(int sig);
+//Function handles the SIGINT signal for the child. Take SIGINT.
+void			sigint_ch(int sig);
+//Function handles the SIGQUIT signal for the child. Take SIGQUIT.
+void			sigqt_ch(int sig);
 
 // =================================== UTILS ===================================
 //Function returns the size of a ft_split-created array.
@@ -359,5 +369,8 @@ char			*string_expansion(t_minidata *minidata, char *str);
 int				check_cmds(char *str);
 //Functions that checks for export var
 char			*check_value(char **splitassign, t_minidata *minidata);
-
+//Function checks the status of a child process to return appropriate messages.
+void			exit_status(t_minidata *minidata, int status);
+//Function will output a msg if waitpid fails
+void			error_child(void);
 #endif

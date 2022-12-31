@@ -20,13 +20,9 @@ static char	*squote_string_expansion(t_minidata *minidata, char *str)
 
 	new = NULL;
 	if (count_squotes(str) % 2 == 0)
-	{
-		new = var_expansion(minidata, str);
-		new = clean_squotes(new);
-	}
+		new = clean_squotes(str);
 	else
 		error_inv_input(minidata);
-	free(str);
 	return (new);
 }
 

@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:21:13 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/23 13:29:29 by zyunusov         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:54:27 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,18 @@ t_simple_cmds	*call_expander(t_minidata *minidata, t_simple_cmds *cmd)
 	return (cmd);
 }
 
+void	pipe_wait(t_minidata *minidata, int i)
+{
+	pid_t	ret;
+	int		status;
+
+	setup_parent_signal();
+	ret = waitpid(minidata->pid[i], &status, WUNTRACED);
+	if (ret == -1)
+		error_child();
+	exit_status(minidata, status);
+}
+
 int	forking(t_minidata *minidata, int end[2], int fd_in, t_simple_cmds *cmd)
 {
 	static int	i;
@@ -50,28 +62,16 @@ int	forking(t_minidata *minidata, int end[2], int fd_in, t_simple_cmds *cmd)
 		minidata->reset = false;
 	}
 	minidata->pid[i] = fork();
+	if ((int) minidata->pid[i] > 0)
+		pipe_wait(minidata, i);
 	if (minidata->pid[i] < 0)
 		allerrors(3, minidata);
 	if (minidata->pid[i] == 0)
-		dup_cmd(cmd, minidata, end, fd_in);
-	i++;
-	return (EXIT_SUCCESS);
-}
-
-int	pipe_wait(int *pid, int amount, t_minidata *minidata)
-{
-	int	i;
-	int	status;
-
-	i = 0;
-	while (i < amount)
 	{
-		waitpid(pid[i], &status, 0);
-		i++;
+		setup_child_signal();
+		dup_cmd(cmd, minidata, end, fd_in);
 	}
-	waitpid(pid[i], &status, 0);
-	if (WIFEXITED(status))
-		update_return(minidata, WEXITSTATUS(status));
+	i++;
 	return (EXIT_SUCCESS);
 }
 
@@ -113,7 +113,6 @@ int	start_executor(t_minidata *minidata)
 		else
 			break ;
 	}
-	pipe_wait(minidata->pid, minidata->num_pipes, minidata);
 	minidata->simple_cmds = simple_cmdsfirst(minidata->simple_cmds);
 	return (0);
 }
