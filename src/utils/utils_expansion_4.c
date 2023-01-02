@@ -23,6 +23,8 @@ static char	*squote_string_expansion(t_minidata *minidata, char *str)
 		new = clean_squotes(str);
 	else
 		error_inv_input(minidata);
+	if (str != NULL)
+		free(str);
 	return (new);
 }
 
@@ -100,6 +102,7 @@ char	*string_expansion(t_minidata *minidata, char *str)
 	}
 	else
 		new = var_expansion(minidata, str);
-	free(str);
+	if (str != NULL)
+		free(str);
 	return (new);
 }
