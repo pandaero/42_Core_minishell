@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_expansion_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 01:09:09 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/29 23:53:04 by pandalaf         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:25:23 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,13 @@ char	*clean_dquotes(char *str)
 	{
 		while (str[i] == '\"')
 			i++;
+		if (!str[i])
+			break ;
 		new[j] = str[i];
 		i++;
 		j++;
 	}
+	new[j] = '\0';
 	free(str);
 	return (new);
 }
