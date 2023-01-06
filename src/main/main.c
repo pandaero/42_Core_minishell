@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:53:13 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 21:28:46 by pandalaf         ###   ########.fr       */
+/*   Updated: 2023/01/02 13:06:42 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	terminal_setup(void)
 //Function exits the program cleanly.
 static void	cleanexit(t_minidata *minidata)
 {
-	free_minidata(minidata);
+	if (minidata)
+		free_minidata(minidata);
 	exit(EXIT_SUCCESS);
 }
 
@@ -44,8 +45,7 @@ static void	cleanexit(t_minidata *minidata)
 static void	main_loop(t_minidata *minidata)
 {
 	terminal_setup();
-	minidata->currline = (char *) 1;
-	while (minidata->currline != 0)
+	while (!minidata->exit_prog)
 	{
 		minidata->currline = readline(PROMPT);
 		if (minidata->currline == 0)
@@ -53,7 +53,9 @@ static void	main_loop(t_minidata *minidata)
 		add_history (minidata->currline);
 		if (minidata->currline[0] == '\0')
 			continue ;
-		parser(minidata);
+		if (parser(minidata))
+			continue ;
+		prepare_executor(minidata);
 		loop_reset(minidata);
 	}
 }
@@ -66,6 +68,7 @@ int	main(int argc, char **argv, char **env)
 	if (argv && argc == 1)
 	{
 		minidata = init_minidata(env);
+		minidata->exit_prog = 0;
 		main_loop(minidata);
 	}
 	else

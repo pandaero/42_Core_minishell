@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 02:01:05 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/05 21:10:35 by pandalaf         ###   ########.fr       */
+/*   Updated: 2023/01/02 13:09:58 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_token	check_token(char ch)
 	i = 0;
 	while (i < 3)
 	{
-		if (token_arr[i][0] == (int) ch)
+		if (token_arr[i][0] == ch)
 			return (token_arr[i][1]);
 		i++;
 	}

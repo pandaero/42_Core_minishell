@@ -3,40 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:20:41 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 22:59:13 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/12/23 11:48:45 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include <unistd.h>
 #include <stdlib.h>
-
-//Function handles an "command not found" error.
-void	error_cmd_nf(char *line)
-{
-	char	*cnf;
-
-	write(STDERR_FILENO, "minishell: command not found: ", 30);
-	cnf = findcommand(line);
-	write(STDERR_FILENO, cnf, ft_strlen(cnf));
-	write(STDERR_FILENO, "\n", 1);
-	free(cnf);
-}
-
-//Function handles an "no permission cmd" error.
-void	error_cmd_np(const char *line)
-{
-	char	*cnf;
-
-	write(STDERR_FILENO, "minishell: permission denied: ", 30);
-	cnf = findcommand(line);
-	write(STDERR_FILENO, cnf, ft_strlen(cnf));
-	write(STDERR_FILENO, "\n", 1);
-	free(cnf);
-}
 
 //Function handles an error in signal action setup.
 void	error_sig(void)
@@ -57,12 +33,19 @@ void	error_syntax(int type)
 }
 
 //Function displays the "parser error" message.
-void	parser_error(int error, t_minidata *minidata, t_word *lexer_l)
+int	parser_error(int error, t_minidata *minidata, t_word *lexer_l)
 {
 	free_lexer(&lexer_l);
-	ft_printf("Parser error\n");
-	(void) error;
-	(void) minidata;
+	allerrors(error, minidata);
+	return (EXIT_FAILURE);
+}
+
+t_simple_cmds	*parser_error_in(int error, \
+		t_minidata *minidata, t_word *lexer_l)
+{
+	free_lexer(&lexer_l);
+	allerrors(error, minidata);
+	return (NULL);
 }
 
 //Function prints out a syntax error message.

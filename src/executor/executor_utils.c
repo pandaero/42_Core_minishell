@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   executor_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 20:19:58 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/14 17:01:23 by pandalaf         ###   ########.fr       */
+/*   Created: 2022/12/29 09:01:40 by zyunusov          #+#    #+#             */
+/*   Updated: 2022/12/29 09:03:46 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include <stdlib.h>
 
-//Function prints the current working directory where the shell is acting.
-void	builtin_pwd(t_minidata *minidata)
+int	check_cmds(char *str)
 {
-	ft_printf("%s\n", find_env_var_list(minidata, "PWD")->value);
-	update_return(minidata, EXIT_SUCCESS);
+	if (str == NULL)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

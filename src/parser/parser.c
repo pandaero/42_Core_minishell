@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:27:25 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 23:00:07 by pandalaf         ###   ########.fr       */
+/*   Updated: 2023/01/02 13:35:00 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,18 @@ char	*findcommand(const char *line)
 	return (cmd);
 }
 
-//Function acts when the input command line is a valid one.
-static void	execution(t_minidata *minidata)
-{
-	if (is_builtincmd(minidata) > 0)
-		builtin_execution(minidata);
-	//path (check permissions)
-	//direct (check permissions)
-}
-
 //Function performs the parsing of a command line.
-void	parser(t_minidata *minidata)
+int	parser(t_minidata *minidata)
 {
-	if (is_valid_quotes(minidata->currline) == 0)
-		ft_printf("syntax error: unable to locate closing quotation\n");
-	if (read_token(minidata) == 0)
-		ft_printf("\n");
-	start_parser(minidata);
-	if (is_validcmdline(minidata) == 1)
-		execution(minidata);
-	else
-		error_cmd_nf(minidata->currline);
+	if (!is_valid_quotes(minidata->currline))
+		return (allerrors(0, minidata));
+	if (!read_token(minidata))
+		return (allerrors(1, minidata));
+	if (start_parser(minidata))
+	{
+		update_return(minidata, 258);
+		loop_reset(minidata);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }

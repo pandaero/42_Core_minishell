@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_unset.c                                    :+:      :+:    :+:   */
+/*   prepare_executor.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 20:24:26 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/29 08:30:35 by zyunusov         ###   ########.fr       */
+/*   Created: 2022/12/09 14:52:27 by zyunusov          #+#    #+#             */
+/*   Updated: 2022/12/19 15:32:18 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include <stdlib.h>
 
-//Function clears the contents of a local environment variable.
-void	builtin_unset(t_minidata *minidata)
+int	prepare_executor(t_minidata *minidata)
 {
-	t_envvar	*var;
-	char		**splitline;
-	char		*search;
-	int			i;
-
-	i = 1;
-	splitline = minidata->simple_cmds->str;
-	while (splitline[i])
+	if (minidata->num_pipes == 0)
+		single_cmd(minidata->simple_cmds, minidata);
+	else
 	{
-		search = ft_strdup(splitline[i]);
-		var = find_env_var_list(minidata, search);
-		if (var != minidata->env_list->null)
-			rem_env_var(minidata->env_list, var);
-		free(search);
-		i++;
-		update_return(minidata, EXIT_SUCCESS);
+		minidata->pid = ft_calloc(sizeof(int), minidata->num_pipes + 2);
+		if (!minidata->pid)
+			return (allerrors(1, minidata));
+		start_executor(minidata);
 	}
+	return (EXIT_SUCCESS);
 }

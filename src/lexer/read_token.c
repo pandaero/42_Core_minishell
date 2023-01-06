@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   read_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 14:59:09 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/12/05 22:31:31 by pandalaf         ###   ########.fr       */
+/*   Updated: 2023/01/02 13:24:29 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+#include <stdlib.h>
 
 //Function navigates to a closing delimiter (from a starting location).
 int	handle_quotes(int i, char *str, char del)
@@ -21,7 +22,7 @@ int	handle_quotes(int i, char *str, char del)
 	if (str[i + j] == del)
 	{
 		j++;
-		while (str[i + j] != del && str[i + j] != '\0')
+		while (str[i + j] != del && str[i + j])
 			j++;
 		j++;
 	}
@@ -34,10 +35,10 @@ static int	read_simple(int i, char *str, t_word **lexer_l)
 	int	j;
 
 	j = 0;
-	while (str[i + j] && (!check_token(str[i + j])))
+	while (str[i + j] && !(check_token(str[i + j])))
 	{
-		j += handle_quotes(i + j, str, '\"');
-		j += handle_quotes(i + j, str, '\'');
+		j += handle_quotes(i + j, str, 34);
+		j += handle_quotes(i + j, str, 39);
 		if (is_space(str[i + j]))
 			break ;
 		else
@@ -63,7 +64,7 @@ int	read_token(t_minidata *minidata)
 			j = handle_token(i, minidata->currline, &minidata->lexer_list);
 		else
 			j = read_simple(i, minidata->currline, &minidata->lexer_list);
-		if (j == -1)
+		if (j < 0)
 			return (0);
 		i += j;
 	}

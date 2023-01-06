@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   delete_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 20:19:58 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/14 17:01:23 by pandalaf         ###   ########.fr       */
+/*   Created: 2022/12/09 20:44:59 by zyunusov          #+#    #+#             */
+/*   Updated: 2022/12/12 15:22:18 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-#include <stdlib.h>
 
-//Function prints the current working directory where the shell is acting.
-void	builtin_pwd(t_minidata *minidata)
+char	*delete_quotes(char *str, char c)
 {
-	ft_printf("%s\n", find_env_var_list(minidata, "PWD")->value);
-	update_return(minidata, EXIT_SUCCESS);
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+		{
+			j = 0;
+			while (str[i + j] == c)
+				j++;
+			ft_strlcpy(&str[i], &str[i + j], ft_strlen(str) - i);
+		}
+		i++;
+	}
+	return (str);
 }

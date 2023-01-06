@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:53:06 by zyunusov          #+#    #+#             */
-/*   Updated: 2022/11/25 14:35:33 by zyunusov         ###   ########.fr       */
+/*   Updated: 2023/01/02 13:26:59 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int	is_valid_quotes(char *line)
 	i = -1;
 	while (line[++i] != '\0')
 	{
-		if (line[i] == '\"')
-			i += find_matching_quotes(line, i, &d, '\"');
-		if (line[i] == '\'')
-			i += find_matching_quotes(line, i, &s, '\'');
+		if (line[i] == 34)
+			i += find_matching_quotes(line, i, &d, 34);
+		if (line[i] == 39)
+			i += find_matching_quotes(line, i, &s, 39);
 	}
 	if ((d > 0 && d % 2 != 0) || (s > 0 && s % 2 != 0))
 		return (0);

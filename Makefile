@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:31:50 by pandalaf          #+#    #+#              #
-#    Updated: 2022/11/29 03:38:36 by pandalaf         ###   ########.fr        #
+#    Updated: 2023/01/02 12:48:41 by zyunusov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,12 @@
 NAME := minishell
 # Compiler options
 CC		:= cc
-CFLAGS	:= -Wall -Werror -Wextra
-COPT	:= -g
+CFLAGS	:= -Wall -Werror -Wextra 
+COPT	:= -g #-fsanitize=address
 # Sources
 SRC_ROOT		:= src/
-SRC_SUBDIRS		:= main builtin lexer parser error list memory validation utils
-SRC_RL_FILES	:= main/main.c signal/signals.c	builtin/builtin_exit.c		
+SRC_SUBDIRS		:= main builtin lexer parser error list memory validation utils executor signal
+SRC_RL_FILES	:= main/main.c signal/signals_handlers.c builtin/builtin_exit.c		
 SRCS_RL			:= $(addprefix $(SRC_ROOT), $(SRC_RL_FILES))
 SRC_DIR			:= $(addprefix $(SRC_ROOT), $(SRC_SUBDIRS))
 SRCS			:= $(foreach subdir, $(SRC_DIR), $(wildcard $(subdir)/*.c))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 20:53:42 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 22:58:38 by pandalaf         ###   ########.fr       */
+/*   Updated: 2023/01/02 13:12:15 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 //Function checks whether a character is a spacing character.
 int	is_space(char ch)
 {
-	if (ch == ' ' || (ch > 8 && ch < 14))
-		return (1);
-	return (0);
+	return (ch == ' ' || (ch > 8 && ch < 14));
 }
 
 //Function skips spacing characters (within a char string).

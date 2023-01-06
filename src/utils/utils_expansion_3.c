@@ -68,6 +68,5 @@ char	*clean_squotes(char *str)
 		i++;
 		j++;
 	}
-	free(str);
 	return (new);
 }

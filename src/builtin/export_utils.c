@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 20:19:58 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/14 17:01:23 by pandalaf         ###   ########.fr       */
+/*   Created: 2022/12/29 13:20:16 by zyunusov          #+#    #+#             */
+/*   Updated: 2022/12/29 13:21:33 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include <stdlib.h>
 
-//Function prints the current working directory where the shell is acting.
-void	builtin_pwd(t_minidata *minidata)
+char	*check_value(char **splitassign, t_minidata *minidata)
 {
-	ft_printf("%s\n", find_env_var_list(minidata, "PWD")->value);
-	update_return(minidata, EXIT_SUCCESS);
+	char	*value;
+
+	if (splitassign[1] != NULL)
+		value = string_expansion(minidata, splitassign[1]);
+	else
+		value = ft_strdup(" ");
+	return (value);
 }

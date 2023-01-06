@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:08:30 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/12/05 20:34:01 by pandalaf         ###   ########.fr       */
+/*   Updated: 2023/01/02 12:59:34 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_minidata	*init_minidata(char **env)
 	new->lexer_list = NULL;
 	new->reset = false;
 	new->pid = NULL;
+	new->heredoc = false;
 	free(builtin);
 	return (new);
 }
@@ -50,12 +51,16 @@ t_env	*new_env_list(void)
 
 	new = (t_env *)malloc(sizeof(t_env));
 	new->size = 0;
-	new->first = 0;
-	new->last = 0;
 	new->null = new_env_var();
+	new->first = new->null;
+	new->last = new->null;
+	new->first->prev = new->null;
+	new->last->next = new->null;
 	new->null->var = ft_strdup("");
 	new->null->value = ft_strdup("");
 	new->null->whole = ft_strdup("");
+	new->null->prev = new->null;
+	new->null->next = new->null;
 	return (new);
 }
 
