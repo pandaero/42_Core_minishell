@@ -6,7 +6,7 @@
 /*   By: zyunusov <zyunusov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 14:59:09 by zyunusov          #+#    #+#             */
-/*   Updated: 2023/01/02 13:24:29 by zyunusov         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:11:52 by zyunusov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	handle_quotes(int i, char *str, char del)
 	int	j;
 
 	j = 0;
-	if (str[i + j] == del)
+	if (str[i + j] == del && str[i + 1] != '\0')
 	{
 		j++;
 		while (str[i + j] != del && str[i + j])
@@ -39,6 +39,8 @@ static int	read_simple(int i, char *str, t_word **lexer_l)
 	{
 		j += handle_quotes(i + j, str, 34);
 		j += handle_quotes(i + j, str, 39);
+		if (str[i + j] == '\0')
+			break ;
 		if (is_space(str[i + j]))
 			break ;
 		else
