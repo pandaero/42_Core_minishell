@@ -65,7 +65,7 @@ char	*clean_squotes(char *str)
 		while (str[i] == '\'')
 			i++;
 		if (!str[i])
-			break ;	
+			break ;
 		new[j] = str[i];
 		i++;
 		j++;
